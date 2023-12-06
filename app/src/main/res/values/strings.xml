@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">QuanLyThuChi</string>
+    <string name="date">Date</string>
+    <string name="note_entered">Note entered</string>
+    <string name="note">Note</string>
+    <string name="expense">Expense</string>
+    <string name="category">Category</string>
+    <string name="income">Income</string>
+    <string name="submit">Submit</string>
+    <string name="home">Home</string>
+    <string name="calendar">Calendar</string>
+    <string name="report">Report</string>
+    <string name="profile">Profile</string>
+    <string name="no_data">No Date</string>
+    <string name="input">Input</string>
+    <string name="total">Total</string>
+    <string name="balance">Balance</string>
+    <string name="sign_in_with_facebook">Sign in with Facebook</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_in_with_phone">Sign in with Phone</string>
+    <string name="wallet">Wallet</string>
+    <string name="provision">Bằng cách đăng ký, bạn đồng ý với điều khoản dịch vụ và Chính sách Riêng tư của chúng tôi</string>
+    <string name="confirm">Confirm</string>
+    <string name="loading">loading</string>
+    <string name="label_call_sp">Liên hệ bộ phận hỗ trợ</string>
+</resources>
