@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.QuanLyThuChi" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange</item>
+        <item name="colorAccent">@color/teal_200</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.QuanLyThuChi2" parent="Theme.Design.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/orange</item>
+
+        <item name="colorAccent">@color/teal_200</item>
+       <!-- thanh trạng thái màu trắng -->
+        <item name="android:statusBarColor">@color/orange_status_bar</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="textAllCaps">false</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
