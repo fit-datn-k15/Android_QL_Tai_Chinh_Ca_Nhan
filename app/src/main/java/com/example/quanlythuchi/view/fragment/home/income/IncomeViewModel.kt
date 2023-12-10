@@ -1,4 +1,4 @@
-package com.example.quanlythuchi.view.fragment.income
+package com.example.quanlythuchi.view.fragment.home.income
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,7 @@ class IncomeViewModel : BaseViewModel() {
     val categorys = MutableLiveData<MutableList<Category>>()
     fun getCategory(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            val db = AppDatabase.getInstance(context).getCategoryDao()
+            val db = AppDatabase.getInstance(context).categoryDao()
             val it = db.getCategory(Constance.CATEGORY_INCOME)
             withContext(Dispatchers.Main) {
                 categorys.postValue(it)

@@ -7,32 +7,39 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.data.room.entity.Category
 import com.example.quanlythuchi.databinding.ItemCategoryBinding
 
-class AdapterExpense : ListAdapter<Category, AdapterExpense.CategoryViewHolder>(Callback()){
-    private var onClickListener : OnClickListener? = null
+class AdapterExpense(private var onClickListener: OnClickListener) :
+    ListAdapter<Category, AdapterExpense.CategoryViewHolder>(Callback()) {
+    var itemSelect = -1;
     class CategoryViewHolder(val view: ItemCategoryBinding) : RecyclerView.ViewHolder(view.root) {
-        fun bind(item : Category) {
+        fun bind(item: Category) {
             view.data = item
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val viewBinding = DataBindingUtil.inflate<ItemCategoryBinding>(inflater, R.layout.item_category,parent,false)
+        val viewBinding = DataBindingUtil.inflate<ItemCategoryBinding>(
+            inflater,
+            R.layout.item_category,
+            parent,
+            false
+        )
         return CategoryViewHolder(viewBinding)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
-        holder.itemView.setOnClickListener {
-            if(!holder.itemView.isSelected) {
-                holder.itemView.isSelected = true
-            }
+        holder.itemView.setOnClickListener{
+           onClickListener.onClick(position, currentList)
         }
+
     }
 
 
@@ -46,10 +53,9 @@ class AdapterExpense : ListAdapter<Category, AdapterExpense.CategoryViewHolder>(
         }
 
     }
-    interface OnClickListener{
-        fun onClick(position: Int, c: Category)
+
+    interface OnClickListener {
+        fun onClick(position: Int, listCategory : MutableList<Category>)
     }
-    fun setOnClickListener(onClickListener: OnClickListener) {
-        this.onClickListener = onClickListener
-    }
+
 }

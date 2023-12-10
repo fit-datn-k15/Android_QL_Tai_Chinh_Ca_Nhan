@@ -1,0 +1,92 @@
+package com.example.quanlythuchi.view.fragment.home.expense
+
+import android.app.DatePickerDialog
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import com.example.quanlythuchi.R
+import com.example.quanlythuchi.base.BaseFragment
+import com.example.quanlythuchi.base.Constance
+import com.example.quanlythuchi.data.room.entity.Category
+import com.example.quanlythuchi.databinding.FragmentExpenseBinding
+import com.example.quanlythuchi.extension.formatDateTime
+
+import com.example.quanlythuchi.view.adapter.AdapterExpense
+import com.google.android.material.button.MaterialButton
+import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+import java.util.Calendar
+
+@AndroidEntryPoint
+class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(), ExpenseListener,AdapterExpense.OnClickListener {
+    override val viewModel: ExpenseViewModel by viewModels()
+    override val layoutID: Int = R.layout.fragment_expense
+    val adapter by lazy {   AdapterExpense(this) }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.apply {
+            listener = this@FragmentExpense
+        }
+
+        viewBinding.rcvExpense.adapter = adapter
+        viewModel.isCategorySuccess.observe(viewLifecycleOwner) {
+            if(it) {
+                adapter.submitList(viewModel.category)
+            }
+        }
+        setTimeDefault()
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getCategory()
+    }
+
+    override fun openDayPicker() {
+        val picker = DatePickerDialog(
+            requireContext(),
+            { view, year, month, dayOfMonth ->
+                viewModel.apply {
+                    date = LocalDate.of(year, month+1, dayOfMonth)
+                }
+                viewBinding.pickTime.text = formatDateTime(viewModel.date)
+            },
+            viewModel.date.year,
+            viewModel.date.monthValue -1,
+            viewModel.date.dayOfMonth
+        )
+        picker.show()
+
+    }
+
+    override fun submitExpense() {
+        viewModel.submitExpense()
+    }
+
+    private fun setTimeDefault() {
+        val time = formatDateTime(viewModel.date)
+        viewBinding.pickTime.text = time
+    }
+
+    override fun onClick(position: Int, listCategory: MutableList<Category>) {
+        if(position == listCategory.size -1 ) {
+
+        }
+        else {
+            if (viewModel.idCategorySelect != -1) {
+                viewBinding.rcvExpense
+                    .findViewHolderForAdapterPosition(viewModel.idCategorySelect)!!
+                    .itemView.isSelected = false
+            }
+            viewModel.idCategorySelect = position
+            viewBinding.rcvExpense
+                .findViewHolderForAdapterPosition(viewModel.idCategorySelect)!!
+                .itemView.isSelected = true
+        }
+    }
+
+
+}

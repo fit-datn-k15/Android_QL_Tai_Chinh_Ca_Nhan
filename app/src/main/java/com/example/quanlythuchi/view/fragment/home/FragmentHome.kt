@@ -3,19 +3,13 @@ package com.example.quanlythuchi.view.fragment.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
-import com.example.quanlythuchi.data.room.AppDatabase
 import com.example.quanlythuchi.databinding.FagmentHomeBinding
-import com.example.quanlythuchi.view.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentHome : BaseFragment<FagmentHomeBinding, HomeViewModel>(),HomeListener {
     override val layoutID: Int = R.layout.fagment_home
     override val viewModel: HomeViewModel by viewModels()

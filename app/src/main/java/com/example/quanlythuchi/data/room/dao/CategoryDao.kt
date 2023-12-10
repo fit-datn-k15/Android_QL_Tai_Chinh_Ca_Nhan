@@ -1,6 +1,7 @@
 package com.example.quanlythuchi.data.room.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import com.example.quanlythuchi.data.room.entity.Category
 
@@ -8,4 +9,7 @@ import com.example.quanlythuchi.data.room.entity.Category
 interface CategoryDao {
    @Query("SELECT * FROM Category Where type = :type")
     fun getCategory(type:Int): MutableList<Category>
+
+    @Insert()
+    fun insertAll(vararg category: Category) : LongArray
 }

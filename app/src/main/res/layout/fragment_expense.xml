@@ -7,9 +7,11 @@
 
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.fragment.expense.ExpenseListener" />
+            type="com.example.quanlythuchi.view.fragment.home.expense.ExpenseListener" />
     </data>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
 
@@ -72,6 +74,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/bg_submit"
             android:text="@string/submit"
+            android:onClick="@{v->listener.submitExpense()}"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -141,4 +144,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

@@ -6,5 +6,5 @@ object Constance {
     const val NAME_DATABASE = "QLTC"
     const val CATEGORY_EXPENSE = 0
     const val CATEGORY_INCOME = 1
-    const val DATE_FORMAT = "%02d"
+    const val DATE_FORMAT = "dd/MM/yyyy"
 }
