@@ -6,6 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.io.Serializable
+import java.time.LocalDate
 
 @Entity(
     foreignKeys = [ForeignKey(
@@ -16,10 +17,10 @@ import java.io.Serializable
 )
 data class Expense(
     @PrimaryKey(autoGenerate = true)
-    var idExpense: Int,
+    var idExpense: Int?=null,
     @ColumnInfo("idCategory")
-    var idCategory: Int,
-    var date: Long,
-    var expense: Long,
+    var idCategory: Int?=null,
+    var date: Long?=null,
+    var expense: Long?=null,
     var note: String?
 ) : Serializable

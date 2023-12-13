@@ -3,21 +3,17 @@ package com.example.quanlythuchi.view.fragment.home.expense
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
-import com.example.quanlythuchi.base.Constance
 import com.example.quanlythuchi.data.room.entity.Category
 import com.example.quanlythuchi.databinding.FragmentExpenseBinding
 import com.example.quanlythuchi.extension.formatDateTime
 
 import com.example.quanlythuchi.view.adapter.AdapterExpense
-import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
-import java.util.Calendar
 
 @AndroidEntryPoint
 class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(), ExpenseListener,AdapterExpense.OnClickListener {
@@ -28,16 +24,22 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
             listener = this@FragmentExpense
+            viewModel = this@FragmentExpense.viewModel
         }
 
         viewBinding.rcvExpense.adapter = adapter
         viewModel.isCategorySuccess.observe(viewLifecycleOwner) {
             if(it) {
-                adapter.submitList(viewModel.category)
+                adapter.submitList(viewModel.listCategory)
             }
         }
         setTimeDefault()
 
+        viewModel.isAddExpense.observe(viewLifecycleOwner) {
+            if(it) {
+               Toast.makeText(this@FragmentExpense.requireContext(),"Đã thêm khoản chi",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,15 +78,16 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
 
         }
         else {
-            if (viewModel.idCategorySelect != -1) {
+            if (viewModel.idItemRcvCategorySelect != -1) {
                 viewBinding.rcvExpense
-                    .findViewHolderForAdapterPosition(viewModel.idCategorySelect)!!
+                    .findViewHolderForAdapterPosition(viewModel.idItemRcvCategorySelect)!!
                     .itemView.isSelected = false
             }
-            viewModel.idCategorySelect = position
+            viewModel.idItemRcvCategorySelect = position
             viewBinding.rcvExpense
-                .findViewHolderForAdapterPosition(viewModel.idCategorySelect)!!
+                .findViewHolderForAdapterPosition(viewModel.idItemRcvCategorySelect)!!
                 .itemView.isSelected = true
+            viewModel.category = listCategory[position]
         }
     }
 

@@ -62,6 +62,7 @@ fun categoryDefault() = arrayListOf<Category>(
     Category(nameCategory = "Giáo dục", type = Constance.CATEGORY_EXPENSE),
     Category(nameCategory = "Tiền nhà", type = Constance.CATEGORY_EXPENSE),
     Category(nameCategory = "Tiền xe", type = Constance.CATEGORY_EXPENSE),
+
     Category(nameCategory = "Tiền lương", type = Constance.CATEGORY_INCOME),
     Category(nameCategory = "Tiền thưởng", type = Constance.CATEGORY_INCOME),
     Category(nameCategory = "Tiền phụ cấp", type = Constance.CATEGORY_INCOME),

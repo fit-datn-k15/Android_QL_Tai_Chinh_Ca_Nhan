@@ -5,40 +5,55 @@ import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.base.BaseViewModel
 import com.example.quanlythuchi.base.Constance
 import com.example.quanlythuchi.data.repository.category.CategoryRepository
-import com.example.quanlythuchi.data.room.entity.Category
 import com.example.quanlythuchi.data.repository.expense.ExpenseRepository
+import com.example.quanlythuchi.data.room.entity.Category
 import com.example.quanlythuchi.data.room.entity.Expense
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
-import java.util.Calendar
 import javax.inject.Inject
 @HiltViewModel
 class ExpenseViewModel @Inject constructor(
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
+    private val expenseRepository: ExpenseRepository
 ) : BaseViewModel() {
-    var category : MutableList<Category> = mutableListOf()
-    var date = LocalDate.now()
+    var listCategory : MutableList<Category> = mutableListOf()
     var isCategorySuccess = MutableLiveData(false)
-    var idCategorySelect = -1
+    var idItemRcvCategorySelect = -1
+
+
+    var date = LocalDate.now()
+    var category : Category? = null
+    var note : String? = ""
+    var expense : String? = ""
+
+    var isAddExpense = MutableLiveData(false)
     fun getCategory() {
         viewModelScope.launch(Dispatchers.IO) {
             val it = categoryRepository.getCategoryExpense(Constance.CATEGORY_EXPENSE)
             withContext(Dispatchers.Main) {
-                category.clear()
-                category.addAll(it)
+                listCategory.clear()
+                listCategory.addAll(it)
                 isCategorySuccess.postValue(true)
             }
         }
     }
     fun submitExpense() {
-//        val expense = Expense(
-//            idCategory = Constance.CATEGORY_EXPENSE,
-//            date = )
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val it = expenseRepository.insertExpense()
-//        }
+        val expense = Expense(
+            idCategory = category?.idCategory,
+            date = this.date.toEpochDay(),
+            note = this.note,
+            expense = this.expense?.toLong())
+        viewModelScope.launch(Dispatchers.IO) {
+            val it = expenseRepository.insertExpense(expense)
+            withContext(Dispatchers.Main) {
+                isAddExpense.postValue(true)
+            }
+        }
+    }
+    fun clearData() {
+
     }
 }

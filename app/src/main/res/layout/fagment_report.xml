@@ -60,8 +60,8 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/day"
-                app:layout_constraintTop_toTopOf="@+id/day" />
+                app:layout_constraintEnd_toStartOf="@+id/pick_time"
+                app:layout_constraintTop_toTopOf="@+id/pick_time" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_next_day"
@@ -69,16 +69,18 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/ic_next"
-                app:layout_constraintBottom_toBottomOf="@+id/day"
-                app:layout_constraintStart_toEndOf="@+id/day"
-                app:layout_constraintTop_toTopOf="@+id/day" />
+                app:layout_constraintBottom_toBottomOf="@+id/pick_time"
+                app:layout_constraintStart_toEndOf="@+id/pick_time"
+                app:layout_constraintTop_toTopOf="@+id/pick_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/day"
+                android:id="@+id/pick_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_date"
-                android:textSize="25sp"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:onClick="@{v -> listener.openDayPicker()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -216,7 +218,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout2"
+            android:id="@+id/tab_layout_report"
             android:layout_width="300dp"
             android:layout_height="30dp"
             android:layout_marginTop="30dp"
@@ -242,12 +244,13 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpg"
             android:layout_width="match_parent"
             android:layout_height="432dp"
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout_report" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -16,12 +16,17 @@ import javax.inject.Singleton
 class DataBaseModule {
     @Provides
     @Singleton
-    fun provideCategoryDao(@ApplicationContext context : Context): CategoryDao {
-        return AppDatabase.getInstance(context = context).categoryDao()
+    fun provideDatabase(@ApplicationContext context: Context) : AppDatabase {
+        return  AppDatabase.getInstance(context)
     }
     @Provides
     @Singleton
-    fun provideExpenseDao(@ApplicationContext context : Context): ExpenseDao {
-        return AppDatabase.getInstance(context = context).expenseDao()
+    fun provideCategoryDao(db: AppDatabase): CategoryDao {
+        return db.categoryDao()
+    }
+    @Provides
+    @Singleton
+    fun provideExpenseDao(db: AppDatabase): ExpenseDao {
+        return db.expenseDao()
     }
 }

@@ -8,6 +8,9 @@
         <variable
             name="listener"
             type="com.example.quanlythuchi.view.fragment.home.expense.ExpenseListener" />
+        <variable
+            name="viewModel"
+            type="com.example.quanlythuchi.view.fragment.home.expense.ExpenseViewModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -89,6 +92,7 @@
             android:background="@drawable/bg_money_input"
             android:drawableEnd="@drawable/ic_money_expense"
             android:hint="0"
+            android:text="@={viewModel.expense}"
             android:maxLength="12"
             android:inputType="numberDecimal"
             android:paddingStart="10dp"
@@ -115,6 +119,7 @@
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:ems="10"
+            android:text="@={viewModel.note}"
             android:hint="@string/note"
             app:layout_constraintBottom_toBottomOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
