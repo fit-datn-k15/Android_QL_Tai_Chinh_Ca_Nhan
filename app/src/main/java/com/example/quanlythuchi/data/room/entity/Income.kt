@@ -15,9 +15,9 @@ import java.io.Serializable
 )
 data class Income(
     @PrimaryKey(autoGenerate = true)
-    var idIncome: Int,
-    var idCategory: Int,
-    var date: Long,
-    var income: Long,
+    var idIncome: Int?=null,
+    var idCategory: Int? =null,
+    var date: Long?,
+    var income: Long?=null,
     var note: String?
 ) : Serializable

@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.quanlythuchi.base.Constance
 import com.example.quanlythuchi.data.room.dao.CategoryDao
 import com.example.quanlythuchi.data.room.dao.ExpenseDao
+import com.example.quanlythuchi.data.room.dao.IncomeDao
 import com.example.quanlythuchi.data.room.entity.Category
 import com.example.quanlythuchi.data.room.entity.Expense
 import com.example.quanlythuchi.data.room.entity.Income
@@ -50,6 +51,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun expenseDao(): ExpenseDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun incomeDao() : IncomeDao
 }
 
 fun categoryDefault() = arrayListOf<Category>(

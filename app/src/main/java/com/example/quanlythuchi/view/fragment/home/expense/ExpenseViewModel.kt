@@ -32,7 +32,7 @@ class ExpenseViewModel @Inject constructor(
     var isAddExpense = MutableLiveData(false)
     fun getCategory() {
         viewModelScope.launch(Dispatchers.IO) {
-            val it = categoryRepository.getCategoryExpense(Constance.CATEGORY_EXPENSE)
+            val it = categoryRepository.getAllCategory(Constance.CATEGORY_EXPENSE)
             withContext(Dispatchers.Main) {
                 listCategory.clear()
                 listCategory.addAll(it)

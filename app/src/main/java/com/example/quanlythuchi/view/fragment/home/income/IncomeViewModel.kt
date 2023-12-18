@@ -1,24 +1,59 @@
 package com.example.quanlythuchi.view.fragment.home.income
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.base.BaseViewModel
 import com.example.quanlythuchi.base.Constance
-import com.example.quanlythuchi.data.room.AppDatabase
+import com.example.quanlythuchi.data.repository.category.CategoryRepository
+import com.example.quanlythuchi.data.repository.income.InComeRepository
+import com.example.quanlythuchi.data.repository.income.IncomeRepositoryImp
 import com.example.quanlythuchi.data.room.entity.Category
+import com.example.quanlythuchi.data.room.entity.Expense
+import com.example.quanlythuchi.data.room.entity.Income
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
+import javax.inject.Inject
 
-class IncomeViewModel : BaseViewModel() {
-    val categorys = MutableLiveData<MutableList<Category>>()
-    fun getCategory(context: Context) {
+@HiltViewModel
+class IncomeViewModel @Inject constructor(
+    private var categoryRepository: CategoryRepository,
+    private var incomeRepository: InComeRepository
+) : BaseViewModel() {
+    var listCategory : MutableList<Category> = mutableListOf()
+    var isCategorySuccess = MutableLiveData(false)
+    var idItemRcvCategorySelect = -1
+
+
+    var date = LocalDate.now()
+    var category : Category? = null
+    var note : String? = ""
+    var income : String? = ""
+
+    var isAddIncome = MutableLiveData(false)
+    fun getCategory() {
         viewModelScope.launch(Dispatchers.IO) {
-            val db = AppDatabase.getInstance(context).categoryDao()
-            val it = db.getCategory(Constance.CATEGORY_INCOME)
+            val it = categoryRepository.getAllCategory(Constance.CATEGORY_INCOME)
             withContext(Dispatchers.Main) {
-                categorys.postValue(it)
+                listCategory.clear()
+                listCategory.addAll(it)
+                isCategorySuccess.postValue(true)
+            }
+        }
+    }
+    fun submitIncome() {
+        val income = Income(
+            idCategory = category?.idCategory,
+            date = this.date.toEpochDay(),
+            note = this.note,
+            income = this.income?.toLong())
+        viewModelScope.launch(Dispatchers.IO) {
+            val it = incomeRepository.insertExpense(income)
+            withContext(Dispatchers.Main) {
+
+                isAddIncome.postValue(true)
             }
         }
     }

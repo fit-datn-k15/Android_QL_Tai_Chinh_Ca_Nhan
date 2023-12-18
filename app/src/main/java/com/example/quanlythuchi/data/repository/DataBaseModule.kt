@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.quanlythuchi.data.room.AppDatabase
 import com.example.quanlythuchi.data.room.dao.CategoryDao
 import com.example.quanlythuchi.data.room.dao.ExpenseDao
+import com.example.quanlythuchi.data.room.dao.IncomeDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,5 +29,10 @@ class DataBaseModule {
     @Singleton
     fun provideExpenseDao(db: AppDatabase): ExpenseDao {
         return db.expenseDao()
+    }
+    @Provides
+    @Singleton
+    fun provideIncomeDao(db : AppDatabase) : IncomeDao {
+        return db.incomeDao()
     }
 }

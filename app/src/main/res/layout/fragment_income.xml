@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
+            name="viewModel"
+            type="com.example.quanlythuchi.view.fragment.home.income.IncomeViewModel" />
+        <variable
             name="listener"
             type="com.example.quanlythuchi.view.fragment.home.income.IncomeListener" />
     </data>
@@ -20,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="30dp"
-            android:text="@string/expense"
+            android:text="@string/income"
             android:textColor="@color/xam_dam"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +37,7 @@
             android:onClick="@{v->listener.openDayPicker()}"
             android:background="@drawable/bg_money_input"
             android:orientation="horizontal"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="@+id/textView">
@@ -85,6 +89,7 @@
             android:background="@drawable/bg_money_input"
             android:drawableEnd="@drawable/ic_money_expense"
             android:hint="0"
+            android:text="@={viewModel.income}"
             android:inputType="numberDecimal"
             android:paddingStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
@@ -111,6 +116,7 @@
             android:layout_height="45dp"
             android:ems="10"
             android:hint="@string/note"
+            android:text="@={viewModel.note}"
             app:layout_constraintBottom_toBottomOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
             app:layout_constraintHorizontal_bias="0.0"
