@@ -17,7 +17,7 @@ data class Income(
     @PrimaryKey(autoGenerate = true)
     var idIncome: Int?=null,
     var idCategory: Int? =null,
-    var date: Long?,
+    var date: String?,
     var income: Long?=null,
     var note: String?
 ) : Serializable

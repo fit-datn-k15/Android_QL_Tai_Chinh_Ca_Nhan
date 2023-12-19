@@ -54,7 +54,7 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
                 viewModel.apply {
                     date = LocalDate.of(year, month+1, dayOfMonth)
                 }
-                viewBinding.pickTime.text = formatDateTime(viewModel.date)
+                viewBinding.pickTime.text = viewModel.date.formatDateTime()
             },
             viewModel.date.year,
             viewModel.date.monthValue -1,
@@ -69,7 +69,7 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
     }
 
     private fun setTimeDefault() {
-        val time = formatDateTime(viewModel.date)
+        val time = viewModel.date.formatDateTime();
         viewBinding.pickTime.text = time
     }
 

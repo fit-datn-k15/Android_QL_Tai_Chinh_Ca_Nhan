@@ -5,7 +5,7 @@ import com.example.quanlythuchi.data.repository.category.CategoryRepositoryImp
 import com.example.quanlythuchi.data.repository.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.expense.ExpenseRepositoryImp
 import com.example.quanlythuchi.data.repository.income.InComeRepository
-import com.example.quanlythuchi.data.repository.income.IncomeRepositoryImp
+import com.example.quanlythuchi.data.repository.income.InComeRepositoryImp
 import dagger.Binds
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
@@ -18,5 +18,5 @@ abstract class RepositoryModule {
     @Binds
     abstract fun provideCategoryRepository(categoryRepositoryImp: CategoryRepositoryImp) : CategoryRepository
     @Binds
-    abstract fun provideIncome(incomeRepositoryImp: IncomeRepositoryImp) : InComeRepository
+    abstract fun provideIncome(incomeRepositoryImp: InComeRepositoryImp) : InComeRepository
 }

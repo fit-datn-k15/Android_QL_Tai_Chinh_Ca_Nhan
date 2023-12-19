@@ -14,6 +14,6 @@ interface ExpenseDao {
     @Query("Select * From Expense")
     fun getAllExpense() : List<Expense>
     @Query ("Select * From Expense WHERE date = :date")
-    fun getExpenseByDate(date: Long) : List<Expense>
+    fun getExpenseByDate(date: String) : List<Expense>
 
 }

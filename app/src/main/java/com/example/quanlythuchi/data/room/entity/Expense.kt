@@ -20,7 +20,7 @@ data class Expense(
     var idExpense: Int?=null,
     @ColumnInfo("idCategory")
     var idCategory: Int?=null,
-    var date: Long?=null,
+    var date: String?=null,
     var expense: Long?=null,
     var note: String?
 ) : Serializable

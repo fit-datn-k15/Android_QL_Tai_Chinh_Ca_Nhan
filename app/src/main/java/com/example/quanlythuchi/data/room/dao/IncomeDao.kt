@@ -13,4 +13,7 @@ interface IncomeDao {
     fun insertIncome(income: Income) : Long
     @Query("SELECT * From Income")
     fun getAllIncome() : List<Income>
+
+    @Query("SELECT * From Income WHERE date =:date")
+    fun getAllIncomeByDate(date : String) : List<Income>
 }

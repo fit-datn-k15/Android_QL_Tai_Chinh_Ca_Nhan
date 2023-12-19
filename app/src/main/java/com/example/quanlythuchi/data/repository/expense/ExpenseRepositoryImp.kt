@@ -19,7 +19,7 @@ class ExpenseRepositoryImp @Inject constructor(
         return expenseDao.insertExpense(expense)
     }
 
-    override suspend fun getExpenseByDate(date: Long): List<Expense> {
+    override suspend fun getExpenseByDate(date: String): List<Expense> {
        return expenseDao.getExpenseByDate(date)
     }
 }

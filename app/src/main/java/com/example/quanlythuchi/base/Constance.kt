@@ -9,4 +9,5 @@ object Constance {
     const val DATE_FORMAT = "dd/MM/yyyy"
     const val EXPENSE = "Expense"
     const val INCOME = "InCome"
+    const val VND =" đ"
 }

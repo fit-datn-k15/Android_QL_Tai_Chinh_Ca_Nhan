@@ -22,7 +22,7 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
             listener = this@IncomeFragment
-            viewModel = this.viewModel
+            viewModel = this@IncomeFragment.viewModel
         }
 
         viewModel.isCategorySuccess.observe(viewLifecycleOwner) {
@@ -51,7 +51,7 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
                     viewModel.apply {
                         date = LocalDate.of(year, month+1, dayOfMonth)
                     }
-                    viewBinding.pickTime.text = formatDateTime(viewModel.date)
+                    viewBinding.pickTime.text = viewModel.date.formatDateTime()
                 },
                 viewModel.date.year,
                 viewModel.date.monthValue -1,
@@ -83,7 +83,7 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
         }
     }
     private fun setTimeDefault() {
-        val time = formatDateTime(viewModel.date)
+        val time = viewModel.date.formatDateTime()
         viewBinding.pickTime.text = time
     }
 

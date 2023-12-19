@@ -42,7 +42,7 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
                 viewModel.apply {
                     date = LocalDate.of(year, month+1, dayOfMonth)
                 }
-                viewBinding.pickTime.text = formatDateTime(viewModel.date)
+                viewBinding.pickTime.text = viewModel.date.formatDateTime()
             },
             viewModel.date.year,
             viewModel.date.monthValue -1,
@@ -52,7 +52,7 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
 
     }
     private fun setTimeDefault() {
-        val time = formatDateTime(viewModel.date)
+        val time = viewModel.date.formatDateTime()
         viewBinding.pickTime.text = time
     }
 }
