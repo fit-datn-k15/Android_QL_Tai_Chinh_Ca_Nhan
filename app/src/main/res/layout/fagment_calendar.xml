@@ -97,7 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@{String.valueOf(viewModel.incomeTotal)}"
+                        app:setTextFormat="@{viewModel.incomeTotal}"
                         android:autoSizeStepGranularity="1sp"
                         android:autoSizeMaxTextSize="16sp"
                         android:autoSizeMinTextSize="10sp"
@@ -124,7 +124,7 @@
                         android:autoSizeStepGranularity="1sp"
                         android:autoSizeMaxTextSize="16sp"
                         android:autoSizeMinTextSize="10sp"
-                        android:text="@{String.valueOf(viewModel.expenseTotal)}"
+                        setTextFormat="@{viewModel.expenseTotal}"
                         android:textSize="16sp" />
                 </LinearLayout>
                 <LinearLayout
@@ -144,7 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@{String.valueOf(viewModel.total)}"
+                        setTextFormat="@{viewModel.total}"
                         android:autoSizeStepGranularity="1sp"
                         android:autoSizeMaxTextSize="16sp"
                         android:autoSizeMinTextSize="10sp"

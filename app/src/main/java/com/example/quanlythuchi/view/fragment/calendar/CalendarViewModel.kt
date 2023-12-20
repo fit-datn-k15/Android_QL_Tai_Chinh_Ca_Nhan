@@ -27,11 +27,11 @@ class CalendarViewModel @Inject constructor(
     private val incomeRepository: InComeRepository
 ): BaseViewModel() {
     var date =LocalDate.now();
-    var total = "";
-    var incomeTotal ="";
-    var expenseTotal ="";
-    var listExpense = ArrayList<Expense>()
-    var listIncome = ArrayList<Income>()
+    var total = 0L;
+    var incomeTotal =0L;
+    var expenseTotal =0L;
+    private var listExpense = ArrayList<Expense>()
+    private var listIncome = ArrayList<Income>()
     var isGetDataByDate = SingleLiveData(false)
     fun getDataByDate() {
         resetData()
@@ -45,22 +45,17 @@ class CalendarViewModel @Inject constructor(
         }
     }
     private fun calculator() {
-        var i = 0L;
-        var e = 0L;
-        var sum = 0L
         for (income in listIncome) {
-            income.income?.let { i += it }
+            income.income?.let { incomeTotal += it }
         }
         for (expense in listExpense)
-            expense.expense?.let { e += it }
-        total =(i+e).formatMoney()
-        incomeTotal = i.formatMoney()
-        expenseTotal = e.formatMoney()
+            expense.expense?.let { expenseTotal += it }
+        total =  expenseTotal +  incomeTotal
     }
      fun resetData() {
-        incomeTotal = ""
-        expenseTotal =""
-        total = ""
+        incomeTotal = 0L
+        expenseTotal =0L
+        total = 0L
         listExpense.clear()
         listIncome.clear()
     }

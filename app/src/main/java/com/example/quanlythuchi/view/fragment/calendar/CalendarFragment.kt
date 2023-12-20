@@ -32,7 +32,6 @@ class CalendarFragment : BaseFragment<FagmentCalendarBinding,CalendarViewModel>(
         viewModel.isGetDataByDate.observe(viewLifecycleOwner) {
             if(it) {
                 viewBinding.viewModel = this.viewModel
-                view
             }
         }
     }
