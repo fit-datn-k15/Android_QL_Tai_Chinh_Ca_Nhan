@@ -52,9 +52,9 @@ class CalendarViewModel @Inject constructor(
             expense.expense?.let { expenseTotal += it }
         total =  expenseTotal +  incomeTotal
     }
-     fun resetData() {
+    fun resetData() {
         incomeTotal = 0L
-        expenseTotal =0L
+        expenseTotal = 0L
         total = 0L
         listExpense.clear()
         listIncome.clear()

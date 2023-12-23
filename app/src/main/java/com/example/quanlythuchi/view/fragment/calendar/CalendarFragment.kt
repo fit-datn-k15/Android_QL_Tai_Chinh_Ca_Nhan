@@ -38,7 +38,10 @@ class CalendarFragment : BaseFragment<FagmentCalendarBinding,CalendarViewModel>(
 
     override fun onStop() {
         super.onStop()
-        viewModel.resetData()
+        viewModel.apply {
+            resetData()
+            date = LocalDate.now()
+        }
     }
 
 }
