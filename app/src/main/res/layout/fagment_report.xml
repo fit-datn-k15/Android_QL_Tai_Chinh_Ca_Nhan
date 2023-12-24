@@ -15,7 +15,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/materialToolbar2"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="30dp"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
@@ -78,9 +78,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_date"
-                android:textSize="22sp"
                 android:gravity="center"
                 android:onClick="@{v -> listener.openDayPicker()}"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -100,7 +100,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/group_expense"
                 android:layout_width="0dp"
-                android:layout_height="44dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_expense_income_balance">
@@ -140,7 +140,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/group_income"
                 android:layout_width="0dp"
-                android:layout_height="44dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_expense_income_balance">
@@ -177,7 +177,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/textView14"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
@@ -221,7 +221,7 @@
             android:id="@+id/tab_layout_report"
             android:layout_width="300dp"
             android:layout_height="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="@+id/textView14"
             app:layout_constraintStart_toStartOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/textView14"
