@@ -4,14 +4,11 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.viewpager2.widget.ViewPager2
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.base.Constance
 import com.example.quanlythuchi.databinding.FagmentReportBinding
 import com.example.quanlythuchi.extension.formatDateTime
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import java.time.LocalDate
 
@@ -51,8 +48,18 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
         picker.show()
 
     }
+
+    override fun btnBackDay() {
+
+    }
+
+    override fun btnNextDay() {
+
+    }
+
     private fun setTimeDefault() {
         val time = viewModel.date.formatDateTime()
         viewBinding.pickTime.text = time
+
     }
 }
