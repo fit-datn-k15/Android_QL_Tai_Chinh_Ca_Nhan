@@ -5,4 +5,5 @@ interface SignInListener {
     fun openSignInGoogle()
     fun openSignInFacebook()
     fun openApp()
+    fun openSignUp()
 }

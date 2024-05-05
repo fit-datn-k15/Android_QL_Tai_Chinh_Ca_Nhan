@@ -21,5 +21,7 @@
     <fragment
         android:id="@+id/fag_otp"
         android:name="com.example.quanlythuchi.view.authentication.otp.OtpFragment"/>
-
+    <fragment
+        android:id="@+id/fag_sign_up"
+        android:name="com.example.quanlythuchi.view.authentication.sign_up.SignUpFragment"/>
 </navigation>
