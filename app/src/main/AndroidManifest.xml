@@ -23,6 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.MainAppActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"/>
     </application>
 
 </manifest>

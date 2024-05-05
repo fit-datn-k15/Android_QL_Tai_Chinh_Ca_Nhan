@@ -5,7 +5,7 @@
     <data>
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.fragment.profile.ProfileListener" />
+            type="com.example.quanlythuchi.view.main.profile.ProfileListener" />
         <variable
             name="user"
             type="com.example.quanlythuchi.data.room.entity.User" />

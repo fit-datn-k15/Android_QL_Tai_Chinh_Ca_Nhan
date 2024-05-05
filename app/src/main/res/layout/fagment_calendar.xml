@@ -5,10 +5,10 @@
     <data>
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.fragment.calendar.CalendarListener" />
+            type="com.example.quanlythuchi.view.main.calendar.CalendarListener" />
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.fragment.calendar.CalendarViewModel" />
+            type="com.example.quanlythuchi.view.main.calendar.CalendarViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

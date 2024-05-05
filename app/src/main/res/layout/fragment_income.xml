@@ -5,10 +5,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.fragment.home.income.IncomeViewModel" />
+            type="com.example.quanlythuchi.view.main.home.income.IncomeViewModel" />
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.fragment.home.income.IncomeListener" />
+            type="com.example.quanlythuchi.view.main.home.income.IncomeListener" />
     </data>
     <ScrollView
         android:layout_width="match_parent"

@@ -8,8 +8,6 @@
         android:name="com.example.quanlythuchi.view.authentication.sign_in.SignInFragment">
         <action android:id="@+id/sign_in_to_login_phone"
             app:destination="@+id/fag_login_phone"/>
-        <action android:id="@+id/test"
-            app:destination="@+id/fag_home"/>
     </fragment>
     <fragment
         android:id="@+id/fag_login_phone"
@@ -19,35 +17,9 @@
             app:destination="@id/fag_otp"/>
 
     </fragment>
-    <action android:id="@+id/open_home"
-        app:destination="@id/fag_home"/>
-    <fragment
-        android:id="@+id/fag_home"
-        android:name="com.example.quanlythuchi.view.main.home.FragmentHome">
-    </fragment>
 
-    <fragment
-        android:id="@+id/fag_calender"
-        android:name="com.example.quanlythuchi.view.main.calendar.CalendarFragment">
-
-    </fragment>
-    <fragment
-        android:id="@+id/fag_profile"
-        android:name="com.example.quanlythuchi.view.main.profile.FragmentProfile"
-        android:label="FragmentProfile">
-    </fragment>
-
-    <fragment
-        android:id="@+id/fag_report"
-        android:name="com.example.quanlythuchi.view.main.report.FragmentReport">
-    </fragment>
     <fragment
         android:id="@+id/fag_otp"
-        android:name="com.example.quanlythuchi.view.authentication.otp.OtpFragment">
-
-        <action
-            android:id="@+id/otp_to_home"
-            app:destination="@id/fag_home" />
-    </fragment>
+        android:name="com.example.quanlythuchi.view.authentication.otp.OtpFragment"/>
 
 </navigation>

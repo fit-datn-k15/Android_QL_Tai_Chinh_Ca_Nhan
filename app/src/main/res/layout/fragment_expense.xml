@@ -7,10 +7,10 @@
 
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.fragment.home.expense.ExpenseListener" />
+            type="com.example.quanlythuchi.view.main.home.expense.ExpenseListener" />
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.fragment.home.expense.ExpenseViewModel" />
+            type="com.example.quanlythuchi.view.main.home.expense.ExpenseViewModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"

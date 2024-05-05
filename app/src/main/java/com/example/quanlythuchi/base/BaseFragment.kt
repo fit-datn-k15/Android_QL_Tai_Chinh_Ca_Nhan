@@ -25,6 +25,6 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, viewModel : BaseViewM
         viewBinding.lifecycleOwner = this
         return viewBinding.root
     }
-
+    protected fun <T : BaseActivity<*, *>> getOwnerActivity() = activity as? T
 
 }

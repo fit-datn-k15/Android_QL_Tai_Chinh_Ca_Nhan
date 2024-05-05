@@ -2,5 +2,25 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_main_app">
+    <fragment
+        android:id="@+id/fag_calender"
+        android:name="com.example.quanlythuchi.view.main.calendar.CalendarFragment">
 
+    </fragment>
+    <fragment
+        android:id="@+id/fag_report"
+        android:name="com.example.quanlythuchi.view.main.report.FragmentReport">
+
+    </fragment>
+    <fragment
+        android:id="@+id/fag_profile"
+        android:name="com.example.quanlythuchi.view.main.profile.FragmentProfile"
+        android:label="FragmentProfile">
+
+    </fragment>
+    <fragment
+        android:id="@+id/fag_home"
+        android:name="com.example.quanlythuchi.view.main.home.FragmentHome">
+
+    </fragment>
 </navigation>

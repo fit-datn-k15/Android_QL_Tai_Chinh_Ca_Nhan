@@ -5,7 +5,7 @@
     <data>
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.fragment.report.ReportListener" />
+            type="com.example.quanlythuchi.view.main.report.ReportListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

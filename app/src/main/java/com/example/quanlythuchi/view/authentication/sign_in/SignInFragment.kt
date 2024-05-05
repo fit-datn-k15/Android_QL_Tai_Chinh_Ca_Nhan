@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FragmentSignInBinding
+import com.example.quanlythuchi.view.activity.MainAppActivity
 
 class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),SignInListener{
     override val viewModel: SignInViewModel by viewModels()
@@ -32,6 +33,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
     }
 
     override fun openApp() {
-        findNavController().navigate(R.id.open_home)
+       // getOwnerActivity<MainAppActivity>().startActivity()
     }
 }
