@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_main_app">
+    android:id="@+id/nav_main_app"
+    app:startDestination="@id/fag_home">
     <fragment
         android:id="@+id/fag_calender"
         android:name="com.example.quanlythuchi.view.main.calendar.CalendarFragment">

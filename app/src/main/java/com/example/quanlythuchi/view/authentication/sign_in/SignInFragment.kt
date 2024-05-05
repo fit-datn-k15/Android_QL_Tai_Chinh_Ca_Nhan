@@ -1,14 +1,15 @@
 package com.example.quanlythuchi.view.authentication.sign_in
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FragmentSignInBinding
-import com.example.quanlythuchi.view.activity.MainAppActivity
+import com.example.quanlythuchi.view.activity.AuthenticationActivity
+import com.example.quanlythuchi.view.activity.HomeActivity
 
 class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),SignInListener{
     override val viewModel: SignInViewModel by viewModels()
@@ -33,6 +34,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
     }
 
     override fun openApp() {
-       // getOwnerActivity<MainAppActivity>().startActivity()
+        val intent = Intent(getOwnerActivity<AuthenticationActivity>(), HomeActivity::class.java)
+        getOwnerActivity<AuthenticationActivity>()?.startActivity(intent)
     }
 }

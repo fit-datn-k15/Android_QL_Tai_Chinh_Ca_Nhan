@@ -5,5 +5,5 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthenticationViewModel @Inject constructor() : BaseViewModel() {
+class HomeActivityViewModel @Inject constructor() : BaseViewModel() {
 }

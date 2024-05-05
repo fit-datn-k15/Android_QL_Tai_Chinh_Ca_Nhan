@@ -1,19 +1,19 @@
 package com.example.quanlythuchi.view.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseActivity
 import com.example.quanlythuchi.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainAppActivity : BaseActivity<ActivityMainBinding, MainAppViewModel>() {
-    override val viewModel: MainAppViewModel by viewModels()
+@AndroidEntryPoint
+class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() {
+    override val viewModel: HomeActivityViewModel by viewModels()
     override val layoutId: Int = R.layout.activity_main
 
     private var navHostFragment : NavHostFragment?= null
