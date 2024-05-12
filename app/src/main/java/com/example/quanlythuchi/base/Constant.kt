@@ -1,6 +1,6 @@
 package com.example.quanlythuchi.base
 
-object Constance {
+object Constant {
     const val PHONE = "PHONE"
     const val OTP = "OTP"
     const val NAME_DATABASE = "QLTC"
@@ -10,4 +10,5 @@ object Constance {
     const val EXPENSE = "Expense"
     const val INCOME = "InCome"
     const val VND =" đ"
+    const val CODE_SIGN_IN_GOOGLE = 100
 }

@@ -1,4 +1,5 @@
 <resources>
+    <string name="client_id" translatable="false">853324556328-lnj0mf9bftcm4dpqh9la28ims2oioh4d.apps.googleusercontent.com</string>-->
     <string name="app_name">QuanLyThuChi</string>
     <string name="date">Date</string>
     <string name="note_entered">Note entered</string>

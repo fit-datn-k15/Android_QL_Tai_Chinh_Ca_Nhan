@@ -1,9 +1,6 @@
 package com.example.quanlythuchi.data.repository.expense
 
-import com.example.quanlythuchi.base.Constance
-import com.example.quanlythuchi.data.room.dao.CategoryDao
 import com.example.quanlythuchi.data.room.dao.ExpenseDao
-import com.example.quanlythuchi.data.room.entity.Category
 import com.example.quanlythuchi.data.room.entity.Expense
 import javax.inject.Inject
 

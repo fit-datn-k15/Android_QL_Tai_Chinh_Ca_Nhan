@@ -108,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@={viewModel.passwordInput}"
-                    android:drawableStart="@drawable/ic_password"
+                    android:drawableStart="@drawable/ic_pass"
                     android:drawablePadding="@dimen/dp5"
                     android:hint="@string/label_password" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -135,7 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@={viewModel.confirmPassword}"
-                    android:drawableStart="@drawable/ic_password"
+                    android:drawableStart="@drawable/ic_pass"
                     android:drawablePadding="@dimen/dp5"
                     android:hint="@string/label_re_password" />
             </com.google.android.material.textfield.TextInputLayout>

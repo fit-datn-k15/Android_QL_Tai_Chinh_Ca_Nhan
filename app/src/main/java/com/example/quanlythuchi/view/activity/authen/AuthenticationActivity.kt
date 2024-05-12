@@ -1,4 +1,4 @@
-package com.example.quanlythuchi.view.activity
+package com.example.quanlythuchi.view.activity.authen
 
 import android.os.Bundle
 import androidx.activity.viewModels

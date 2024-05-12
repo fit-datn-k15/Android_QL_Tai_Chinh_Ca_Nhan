@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
-import com.example.quanlythuchi.base.Constance
+import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.databinding.FagmentReportBinding
 import com.example.quanlythuchi.extension.formatDateTime
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,9 +24,9 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
             vpg.adapter = this@FragmentReport.adapterViewpager
             TabLayoutMediator(tabLayoutReport, vpg) { tab, position ->
                 if (position == 0)
-                    tab.text = Constance.EXPENSE
+                    tab.text = Constant.EXPENSE
                 else
-                    tab.text = Constance.INCOME
+                    tab.text = Constant.INCOME
             }.attach()
         }
 

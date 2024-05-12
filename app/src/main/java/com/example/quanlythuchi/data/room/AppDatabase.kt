@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.quanlythuchi.base.Constance
+import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.data.room.dao.CategoryDao
 import com.example.quanlythuchi.data.room.dao.ExpenseDao
 import com.example.quanlythuchi.data.room.dao.IncomeDao
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 )
 abstract class AppDatabase : RoomDatabase() {
     companion object {
-        private val name: String = Constance.NAME_DATABASE
+        private val name: String = Constant.NAME_DATABASE
         private var instance: AppDatabase? = null
         private var isDataBaseCreateApp = false
 
@@ -32,7 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
             if (instance == null) {
                 CoroutineScope(Dispatchers.IO).launch {
                     for (dataBaseName in context.databaseList())
-                        if (dataBaseName == Constance.NAME_DATABASE)
+                        if (dataBaseName == Constant.NAME_DATABASE)
                             isDataBaseCreateApp = true
                     if (!isDataBaseCreateApp) {
                         Room.databaseBuilder(context, AppDatabase::class.java, name)
@@ -55,19 +55,19 @@ abstract class AppDatabase : RoomDatabase() {
 }
 
 fun categoryDefault() = arrayListOf<Category>(
-    Category(nameCategory = "Ăn uống", type = Constance.CATEGORY_EXPENSE),
-    Category(nameCategory = "Quần áo", type = Constance.CATEGORY_EXPENSE),
-    Category(nameCategory = "Mỹ Phẩm", type = Constance.CATEGORY_EXPENSE),
-    Category(nameCategory = "Tiêu hàng ngày", type = Constance.CATEGORY_EXPENSE),
-    Category(nameCategory = "Phí giao lưu", type = Constance.CATEGORY_EXPENSE),
-    Category(nameCategory = "Y tế", type = Constance.CATEGORY_EXPENSE),
-    Category(nameCategory = "Giáo dục", type = Constance.CATEGORY_EXPENSE),
-    Category(nameCategory = "Tiền nhà", type = Constance.CATEGORY_EXPENSE),
-    Category(nameCategory = "Tiền xe", type = Constance.CATEGORY_EXPENSE),
+    Category(nameCategory = "Ăn uống", type = Constant.CATEGORY_EXPENSE),
+    Category(nameCategory = "Quần áo", type = Constant.CATEGORY_EXPENSE),
+    Category(nameCategory = "Mỹ Phẩm", type = Constant.CATEGORY_EXPENSE),
+    Category(nameCategory = "Tiêu hàng ngày", type = Constant.CATEGORY_EXPENSE),
+    Category(nameCategory = "Phí giao lưu", type = Constant.CATEGORY_EXPENSE),
+    Category(nameCategory = "Y tế", type = Constant.CATEGORY_EXPENSE),
+    Category(nameCategory = "Giáo dục", type = Constant.CATEGORY_EXPENSE),
+    Category(nameCategory = "Tiền nhà", type = Constant.CATEGORY_EXPENSE),
+    Category(nameCategory = "Tiền xe", type = Constant.CATEGORY_EXPENSE),
 
-    Category(nameCategory = "Tiền lương", type = Constance.CATEGORY_INCOME),
-    Category(nameCategory = "Tiền thưởng", type = Constance.CATEGORY_INCOME),
-    Category(nameCategory = "Tiền phụ cấp", type = Constance.CATEGORY_INCOME),
-    Category(nameCategory = "Tiền Đầu tư", type = Constance.CATEGORY_INCOME),
-    Category(nameCategory = "Thu nhập khác", type = Constance.CATEGORY_INCOME),
+    Category(nameCategory = "Tiền lương", type = Constant.CATEGORY_INCOME),
+    Category(nameCategory = "Tiền thưởng", type = Constant.CATEGORY_INCOME),
+    Category(nameCategory = "Tiền phụ cấp", type = Constant.CATEGORY_INCOME),
+    Category(nameCategory = "Tiền Đầu tư", type = Constant.CATEGORY_INCOME),
+    Category(nameCategory = "Thu nhập khác", type = Constant.CATEGORY_INCOME),
 )

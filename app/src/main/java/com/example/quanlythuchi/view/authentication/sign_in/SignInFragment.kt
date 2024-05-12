@@ -1,10 +1,14 @@
 package com.example.quanlythuchi.view.authentication.sign_in
 
+import android.app.Activity
 import android.content.Intent
-import android.database.Observable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,13 +16,35 @@ import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.base.KeyboardManager
+import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.databinding.FragmentSignInBinding
-import com.example.quanlythuchi.view.activity.AuthenticationActivity
-import com.example.quanlythuchi.view.activity.HomeActivity
+import com.example.quanlythuchi.view.activity.authen.AuthenticationActivity
+import com.example.quanlythuchi.view.activity.home.HomeActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
-class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),SignInListener, Observer<KeyboardManager.KeyboardStatus>{
+@AndroidEntryPoint
+class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),SignInListener,
+    Observer<KeyboardManager.KeyboardStatus>{
     override val viewModel: SignInViewModel by viewModels()
     override val layoutID: Int = R.layout.fragment_sign_in
+
+    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    lateinit var googleSignInClient : GoogleSignInClient
+    private var signInLauncher: ActivityResultLauncher<Intent>? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
@@ -27,14 +53,63 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
         }
         this.getOwnerActivity<AuthenticationActivity>()
             ?.let { KeyboardManager.init(it).status()?.observeForever(this) }
+
+        checkSignIn()
     }
-    override fun openLoginPhone() {
-        Toast.makeText(requireContext(), "Chức năng đang phát triển", Toast.LENGTH_SHORT).show()
+
+    private fun checkSignIn() {
+        context?.let {
+            var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(it.getString(R.string.client_id))
+                .requestEmail().build()
+            googleSignInClient = GoogleSignIn.getClient(it, gso)
+        }
+        signInLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                val signInAccountTask: Task<GoogleSignInAccount> =
+                    GoogleSignIn.getSignedInAccountFromIntent(data)
+                if (signInAccountTask.isSuccessful) {
+                    val s = "Google sign in successful"
+                    displayToast(s)
+                    // Initialize sign in account
+                    try {
+                        // Initialize sign in account
+                        val googleSignInAccount = signInAccountTask.getResult(ApiException::class.java)
+                        if (googleSignInAccount != null) {
+                            val authCredential: AuthCredential = GoogleAuthProvider.getCredential(
+                                googleSignInAccount.idToken, null
+                            )
+                            firebaseAuth.signInWithCredential(authCredential)
+                                .addOnCompleteListener(this.requireActivity()) { task ->
+                                    // Check condition
+                                    if (task.isSuccessful)
+                                        displayToast("Firebase authentication successful")
+                                    else
+                                        displayToast("Authentication Failed :" + task.exception?.message)
+                                    navigateActivityHome()
+                                }
+                        }
+                    } catch (e: ApiException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        }
+    }
+    private fun navigateActivityHome() {
+        val intent = Intent(this.requireActivity(), HomeActivity::class.java)
+        startActivity(intent)
+    }
+    private fun displayToast(s: String) {
+        Toast.makeText(this.requireContext().applicationContext, s, Toast.LENGTH_SHORT).show()
     }
 
     override fun openSignInGoogle() {
-        Toast.makeText(requireContext(), "Chức năng đang phát triển", Toast.LENGTH_SHORT).show()
-
+        val intent = googleSignInClient.signInIntent
+        signInLauncher?.launch(intent)
     }
 
     override fun openSignInFacebook() {

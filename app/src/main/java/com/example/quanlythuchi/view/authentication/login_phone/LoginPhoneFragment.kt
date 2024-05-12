@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.quanlythuchi.base.Constance
+import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FragmentLoginPhoneBinding
@@ -73,7 +73,7 @@ class LoginPhoneFragment() : BaseFragment<FragmentLoginPhoneBinding, LoginPhoneV
             mPhone = viewBinding.phone.text.toString()
             findNavController().navigate(
                 R.id.login_phone_to_otp,
-                bundleOf(Constance.PHONE to mPhone, Constance.OTP to p0
+                bundleOf(Constant.PHONE to mPhone, Constant.OTP to p0
                 )
             )
         }

@@ -1,4 +1,4 @@
-package com.example.quanlythuchi.view.activity
+package com.example.quanlythuchi.view.activity.home
 
 import android.os.Bundle
 import android.view.View

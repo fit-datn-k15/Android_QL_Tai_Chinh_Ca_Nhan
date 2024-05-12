@@ -3,7 +3,7 @@ package com.example.quanlythuchi.view.main.home.expense
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.base.BaseViewModel
-import com.example.quanlythuchi.base.Constance
+import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.base.SingleLiveData
 import com.example.quanlythuchi.data.repository.category.CategoryRepository
 import com.example.quanlythuchi.data.repository.expense.ExpenseRepository
@@ -37,7 +37,7 @@ class ExpenseViewModel @Inject constructor(
         }
     fun getCategory() {
         viewModelScope.launch(Dispatchers.IO) {
-            val it = categoryRepository.getAllCategory(Constance.CATEGORY_EXPENSE)
+            val it = categoryRepository.getAllCategory(Constant.CATEGORY_EXPENSE)
             withContext(Dispatchers.Main) {
                 listCategory.clear()
                 listCategory.addAll(it)

@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FragmentSignUpBinding
-import com.example.quanlythuchi.view.activity.AuthenticationActivity
-import com.example.quanlythuchi.view.activity.HomeActivity
+import com.example.quanlythuchi.view.activity.authen.AuthenticationActivity
+import com.example.quanlythuchi.view.activity.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

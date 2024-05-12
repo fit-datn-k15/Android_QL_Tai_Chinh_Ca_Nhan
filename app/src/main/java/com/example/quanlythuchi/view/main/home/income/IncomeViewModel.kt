@@ -3,7 +3,7 @@ package com.example.quanlythuchi.view.main.home.income
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.base.BaseViewModel
-import com.example.quanlythuchi.base.Constance
+import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.base.SingleLiveData
 import com.example.quanlythuchi.data.repository.category.CategoryRepository
 import com.example.quanlythuchi.data.repository.income.InComeRepository
@@ -35,7 +35,7 @@ class IncomeViewModel @Inject constructor(
     var isAddIncome = SingleLiveData(false)
     fun getCategory() {
         viewModelScope.launch(Dispatchers.IO) {
-            val it = categoryRepository.getAllCategory(Constance.CATEGORY_INCOME)
+            val it = categoryRepository.getAllCategory(Constant.CATEGORY_INCOME)
             withContext(Dispatchers.Main) {
                 listCategory.clear()
                 listCategory.addAll(it)

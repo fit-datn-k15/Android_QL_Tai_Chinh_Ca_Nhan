@@ -8,3 +8,4 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 @HiltAndroidApp
 class App : Application() {
 }
+var TAG = "TAG"
