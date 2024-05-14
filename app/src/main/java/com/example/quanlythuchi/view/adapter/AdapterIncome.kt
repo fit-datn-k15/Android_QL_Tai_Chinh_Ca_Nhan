@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.data.entity.Category
-import com.example.quanlythuchi.databinding.ItemCategoryIncomeBinding
+import com.example.quanlythuchi.databinding.ItemCategoryBinding
 
 class AdapterIncome(private var onClickListener: AdapterIncome.OnClickListener) :
     ListAdapter<Category, AdapterIncome.CategoryViewHolder>(Callback()) {
-    class CategoryViewHolder(var view: ItemCategoryIncomeBinding) :
+    class CategoryViewHolder(var view: ItemCategoryBinding) :
         RecyclerView.ViewHolder(view.root) {
         fun bind(item: Category) {
             view.data = item
@@ -21,8 +21,8 @@ class AdapterIncome(private var onClickListener: AdapterIncome.OnClickListener) 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val viewBinding = DataBindingUtil.inflate<ItemCategoryIncomeBinding>(
-            inflater, R.layout.item_category_income, parent, false
+        val viewBinding = DataBindingUtil.inflate<ItemCategoryBinding>(
+            inflater, R.layout.item_category, parent, false
         )
         return CategoryViewHolder(viewBinding)
     }

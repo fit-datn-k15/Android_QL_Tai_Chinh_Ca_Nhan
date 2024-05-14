@@ -4,9 +4,9 @@ import android.util.Log
 import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
+import com.example.quanlythuchi.data.entity.Icon
 import com.example.quanlythuchi.data.entity.MapperCategory
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -50,14 +50,14 @@ class CategoryRepositoryImp @Inject constructor(
         if (user == null) {return }
         val batch = db.batch()
         categoryExpense().forEach{
-            val docRef =db.collection(Fb.User)
+            val docRef = db.collection(Fb.User)
                             .document(user!!.uid)
                             .collection(Fb.CategoryExpense)
                             .document()
             batch.set(docRef, it);
         }
         categoryIncome().forEach{
-            val docRef =db.collection(Fb.User)
+            val docRef = db.collection(Fb.User)
                 .document(user!!.uid)
                 .collection(Fb.CategoryIncome)
                 .document()
@@ -74,20 +74,20 @@ class CategoryRepositoryImp @Inject constructor(
 
 
 fun categoryExpense() = arrayListOf(
-    Category(title = "Ăn uống", type = Fb.CategoryExpense),
-    Category(title = "Quần áo", type = Fb.CategoryExpense),
-    Category(title = "Mỹ Phẩm", type = Fb.CategoryExpense),
-    Category(title = "Tiêu hàng ngày", type = Fb.CategoryExpense),
-    Category(title = "Phí giao lưu", type = Fb.CategoryExpense),
-    Category(title = "Y tế", type = Fb.CategoryExpense),
-    Category(title = "Giáo dục", type = Fb.CategoryExpense),
-    Category(title = "Tiền nhà", type = Fb.CategoryExpense),
-    Category(title = "Tiền xe", type = Fb.CategoryExpense),
+    Category(title = "Ăn uống", type = Fb.CategoryExpense, icon = Icon.ic_1),
+    Category(title = "Quần áo", type = Fb.CategoryExpense, icon = Icon.ic_2),
+    Category(title = "Mỹ Phẩm", type = Fb.CategoryExpense, icon = Icon.ic_3),
+    Category(title = "Tiêu hàng ngày", type = Fb.CategoryExpense, icon = Icon.ic_4),
+    Category(title = "Phí giao lưu", type = Fb.CategoryExpense, icon = Icon.ic_6),
+    Category(title = "Y tế", type = Fb.CategoryExpense, icon = Icon.ic_5),
+    Category(title = "Giáo dục", type = Fb.CategoryExpense, icon = Icon.ic_12),
+    Category(title = "Tiền nhà", type = Fb.CategoryExpense, icon = Icon.ic_9),
+    Category(title = "Tiền xe", type = Fb.CategoryExpense, icon = Icon.ic_8),
 )
 fun categoryIncome() = arrayListOf(
-    Category(title = "Tiền lương", type =Fb.CategoryIncome),
-    Category(title = "Tiền thưởng", type = Fb.CategoryIncome),
-    Category(title = "Tiền phụ cấp", type =Fb.CategoryIncome),
-    Category(title = "Tiền Đầu tư", type =Fb.CategoryIncome),
-    Category(title = "Thu nhập khác", type =Fb.CategoryIncome),
+    Category(title = "Tiền lương", type = Fb.CategoryIncome, icon = Icon.ic_12),
+    Category(title = "Tiền thưởng", type = Fb.CategoryIncome, icon = Icon.ic_22),
+    Category(title = "Tiền phụ cấp", type = Fb.CategoryIncome, icon = Icon.ic_23),
+    Category(title = "Tiền Đầu tư", type = Fb.CategoryIncome, icon = Icon.ic_16),
+    Category(title = "Thu nhập khác", type = Fb.CategoryIncome, icon = Icon.ic_25),
 )

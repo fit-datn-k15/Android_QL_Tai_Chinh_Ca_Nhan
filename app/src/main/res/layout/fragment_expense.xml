@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
 
         android:layout_height="match_parent">
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/pick_time"
             android:layout_width="210dp"
             android:layout_height="40dp"
@@ -45,9 +45,9 @@
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="@+id/textView">
 
-        </TextView>
+        </com.google.android.material.textview.MaterialTextView>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,11 +55,11 @@
             android:layout_marginTop="25dp"
             android:text="@string/date"
             android:textColor="@color/xam_dam"
-            android:textSize="18dp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,13 +85,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_expense" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/linearLayout"
             android:layout_width="250dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_money_input"
             android:drawableEnd="@drawable/ic_money_expense"
             android:hint="0"
+            android:gravity="start|center"
             android:text="@={viewModel.expense}"
             android:maxLength="12"
             android:inputType="numberDecimal"
@@ -101,7 +102,7 @@
             app:layout_constraintStart_toEndOf="@+id/textView3"
             app:layout_constraintTop_toTopOf="@+id/textView3">
 
-        </androidx.appcompat.widget.AppCompatEditText>
+        </com.google.android.material.textview.MaterialTextView>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textView10"
@@ -114,7 +115,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTextPersonName"
             android:layout_width="250dp"
             android:layout_height="45dp"
@@ -138,10 +139,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imageView2"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:onClick="@{v->listener.openDayPicker()}"
+            android:background="@color/transfer"
             app:layout_constraintBottom_toBottomOf="@+id/pick_time"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="@+id/pick_time"

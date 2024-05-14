@@ -9,6 +9,7 @@
     <color name="red">#FF970707</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="toolbar_EDEDED">#EDEDED</color>
     <color name="orange">#049FB1</color>
     <color name="orange_status_bar">#fdb500</color> <!--  thanh trạng thái màu-->
     <color name="orange_text">#718d6e</color>

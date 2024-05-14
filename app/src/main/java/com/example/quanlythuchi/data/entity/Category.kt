@@ -13,8 +13,9 @@ data class Category (
 fun DocumentSnapshot.MapperCategory(typeCategory: String) : Category{
     return Category(
         idCategory = this.id,
-        icon = this["icon"] as? String,
+        icon = this["icon"] as? String?,
         title = this["title"] as? String,
         type = this["type"] as? String ?: typeCategory
     )
 }
+
