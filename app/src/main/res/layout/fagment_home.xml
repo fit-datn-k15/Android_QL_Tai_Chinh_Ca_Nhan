@@ -67,7 +67,7 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp30"
+                android:layout_marginStart="@dimen/dp20"
                 android:background="@color/transfer"
                 android:elevation="@dimen/dp12"
                 android:src="@drawable/ic_input_data" />

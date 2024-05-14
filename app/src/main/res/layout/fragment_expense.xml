@@ -85,7 +85,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_expense" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/linearLayout"
             android:layout_width="250dp"
             android:layout_height="40dp"
@@ -102,7 +102,7 @@
             app:layout_constraintStart_toEndOf="@+id/textView3"
             app:layout_constraintTop_toTopOf="@+id/textView3">
 
-        </com.google.android.material.textview.MaterialTextView>
+        </com.google.android.material.textfield.TextInputEditText>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textView10"

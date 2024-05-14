@@ -17,7 +17,6 @@ class AdapterExpense(private var onClickListener: OnClickListener) :
         fun bind(item: Category) {
             view.data = item
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -39,7 +38,6 @@ class AdapterExpense(private var onClickListener: OnClickListener) :
         }
 
     }
-
 
     class Callback : DiffUtil.ItemCallback<Category>() {
         override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
