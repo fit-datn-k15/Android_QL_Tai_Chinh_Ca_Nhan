@@ -28,6 +28,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -59,7 +60,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
 
     private fun checkSignIn() {
         context?.let {
-            var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(it.getString(R.string.client_id))
                 .requestEmail().build()
             googleSignInClient = GoogleSignIn.getClient(it, gso)
@@ -89,7 +90,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
                                         displayToast("Firebase authentication successful")
                                     else
                                         displayToast("Authentication Failed :" + task.exception?.message)
-                                    navigateActivityHome()
+                                    val isNewsUser = task.result.additionalUserInfo?.isNewUser ?: false
+                                    task.result.user?.uid
+                                    var user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
+                                    navigateActivityHome(isNewsUser)
                                 }
                         }
                     } catch (e: ApiException) {
@@ -99,9 +103,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
             }
         }
     }
-    private fun navigateActivityHome() {
-        val intent = Intent(this.requireActivity(), HomeActivity::class.java)
-        startActivity(intent)
+    private fun navigateActivityHome(isNewsUser : Boolean) {
+        viewModel.insertDefaultCategory(isNewsUser) {
+            val intent = Intent(this.requireActivity(), HomeActivity::class.java)
+            startActivity(intent)
+        }
     }
     private fun displayToast(s: String) {
         Toast.makeText(this.requireContext().applicationContext, s, Toast.LENGTH_SHORT).show()

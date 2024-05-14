@@ -1,10 +1,8 @@
-package com.example.quanlythuchi.data.room.entity
+package com.example.quanlythuchi.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.Index
-import androidx.room.PrimaryKey
 
 @Entity(
     primaryKeys = ["idUser", "idCategory"],

@@ -1,4 +1,4 @@
-package com.example.quanlythuchi.data.room.entity
+package com.example.quanlythuchi.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

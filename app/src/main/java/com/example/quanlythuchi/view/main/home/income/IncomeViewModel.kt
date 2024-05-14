@@ -5,10 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.base.BaseViewModel
 import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.base.SingleLiveData
-import com.example.quanlythuchi.data.repository.category.CategoryRepository
-import com.example.quanlythuchi.data.repository.income.InComeRepository
-import com.example.quanlythuchi.data.room.entity.Category
-import com.example.quanlythuchi.data.room.entity.Income
+import com.example.quanlythuchi.data.Fb
+import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
+import com.example.quanlythuchi.data.repository.local.income.InComeRepository
+import com.example.quanlythuchi.data.entity.Category
+import com.example.quanlythuchi.data.entity.Income
 import com.example.quanlythuchi.extension.formatDateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +36,7 @@ class IncomeViewModel @Inject constructor(
     var isAddIncome = SingleLiveData(false)
     fun getCategory() {
         viewModelScope.launch(Dispatchers.IO) {
-            val it = categoryRepository.getAllCategory(Constant.CATEGORY_INCOME)
+            val it = categoryRepository.getAllCategory(Fb.CategoryIncome)
             withContext(Dispatchers.Main) {
                 listCategory.clear()
                 listCategory.addAll(it)

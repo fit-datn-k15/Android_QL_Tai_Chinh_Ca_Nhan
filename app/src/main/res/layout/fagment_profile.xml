@@ -8,7 +8,7 @@
             type="com.example.quanlythuchi.view.main.profile.ProfileListener" />
         <variable
             name="user"
-            type="com.example.quanlythuchi.data.room.entity.User" />
+            type="com.example.quanlythuchi.data.entity.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,6 +1,6 @@
-package com.example.quanlythuchi.data.repository.income
+package com.example.quanlythuchi.data.repository.local.income
 
-import com.example.quanlythuchi.data.room.entity.Income
+import com.example.quanlythuchi.data.entity.Income
 
 interface InComeRepository {
     suspend fun getAllIncome() : List<Income>

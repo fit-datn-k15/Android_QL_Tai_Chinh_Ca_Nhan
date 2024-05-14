@@ -1,15 +1,13 @@
 package com.example.quanlythuchi.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.quanlythuchi.R
-import com.example.quanlythuchi.data.room.entity.Category
+import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.ItemCategoryBinding
 
 class AdapterExpense(private var onClickListener: OnClickListener) :

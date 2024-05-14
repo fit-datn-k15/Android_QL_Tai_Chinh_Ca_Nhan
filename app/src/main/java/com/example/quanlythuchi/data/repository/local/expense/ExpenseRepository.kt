@@ -1,7 +1,6 @@
-package com.example.quanlythuchi.data.repository.expense
+package com.example.quanlythuchi.data.repository.local.expense
 
-import com.example.quanlythuchi.data.room.entity.Category
-import com.example.quanlythuchi.data.room.entity.Expense
+import com.example.quanlythuchi.data.entity.Expense
 
 interface ExpenseRepository {
     suspend fun getAllExpense() : List<Expense>

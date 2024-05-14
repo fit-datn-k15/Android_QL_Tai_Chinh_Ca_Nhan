@@ -1,10 +1,10 @@
 package com.example.quanlythuchi.view.main.report
 
 import com.example.quanlythuchi.base.BaseViewModel
-import com.example.quanlythuchi.data.repository.expense.ExpenseRepository
-import com.example.quanlythuchi.data.repository.income.InComeRepository
-import com.example.quanlythuchi.data.room.entity.Expense
-import com.example.quanlythuchi.data.room.entity.Income
+import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
+import com.example.quanlythuchi.data.repository.local.income.InComeRepository
+import com.example.quanlythuchi.data.entity.Expense
+import com.example.quanlythuchi.data.entity.Income
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
 import javax.inject.Inject

@@ -1,11 +1,11 @@
 package com.example.quanlythuchi.data.repository
 
-import com.example.quanlythuchi.data.repository.category.CategoryRepository
-import com.example.quanlythuchi.data.repository.category.CategoryRepositoryImp
-import com.example.quanlythuchi.data.repository.expense.ExpenseRepository
-import com.example.quanlythuchi.data.repository.expense.ExpenseRepositoryImp
-import com.example.quanlythuchi.data.repository.income.InComeRepository
-import com.example.quanlythuchi.data.repository.income.InComeRepositoryImp
+import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
+import com.example.quanlythuchi.data.repository.local.category.CategoryRepositoryImp
+import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
+import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepositoryImp
+import com.example.quanlythuchi.data.repository.local.income.InComeRepository
+import com.example.quanlythuchi.data.repository.local.income.InComeRepositoryImp
 import dagger.Binds
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent

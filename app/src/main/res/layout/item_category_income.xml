@@ -3,7 +3,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.quanlythuchi.data.room.entity.Category" />
+            type="com.example.quanlythuchi.data.entity.Category" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/xam_dam"
             android:textSize="14sp"
-            android:text="@{data.nameCategory}"
+            android:text="@{data.title}"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
