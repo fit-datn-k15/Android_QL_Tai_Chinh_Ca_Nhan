@@ -15,15 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/materialToolbar3"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+            android:layout_height="@dimen/dp60"
+            android:background="@drawable/bg_toolbar"
+            android:elevation="@dimen/dp3"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            android:translationZ="@dimen/dp2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <TextView
             android:id="@+id/textView6"
@@ -31,12 +34,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/calendar"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:elevation="@dimen/dp12"
+            android:textColor="@color/black80"
+            android:textStyle="bold"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/materialToolbar3"
             app:layout_constraintStart_toStartOf="@+id/materialToolbar3"
             app:layout_constraintTop_toTopOf="@+id/materialToolbar3" />
-
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
@@ -45,6 +49,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialToolbar3" />
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transfer"
+            android:elevation="@dimen/dp12"
+            android:src="@drawable/ic_search"
+            android:layout_marginEnd="@dimen/dp20"
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier3"
             android:layout_width="wrap_content"
@@ -75,14 +89,15 @@
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textView18"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:textStyle="bold"
                         android:text="@string/income"
                         android:textSize="16sp" />
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -100,13 +115,14 @@
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:textStyle="bold"
                         android:text="@string/expense"
                         android:textSize="16sp" />
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -123,13 +139,14 @@
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:textStyle="bold"
                         android:text="@string/total"
                         android:textSize="16sp" />
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"

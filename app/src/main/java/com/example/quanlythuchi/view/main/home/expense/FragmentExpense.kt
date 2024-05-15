@@ -10,7 +10,6 @@ import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentExpenseBinding
 import com.example.quanlythuchi.extension.formatDateTime
-
 import com.example.quanlythuchi.view.adapter.AdapterExpense
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
@@ -61,6 +60,7 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
             viewModel.date.dayOfMonth
         )
         picker.show()
+
 
     }
 

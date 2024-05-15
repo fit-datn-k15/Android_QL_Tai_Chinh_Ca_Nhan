@@ -68,17 +68,20 @@
             app:layout_constraintStart_toStartOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/bg_submit"
-            android:text="@string/submit"
+            android:text="Nhập khoản thu"
+            app:icon="@drawable/ic_input_data"
+            app:iconGravity="textStart"
+            android:paddingHorizontal="@dimen/dp20"
             android:onClick="@{v-> listener.submitIncome()}"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_income" />

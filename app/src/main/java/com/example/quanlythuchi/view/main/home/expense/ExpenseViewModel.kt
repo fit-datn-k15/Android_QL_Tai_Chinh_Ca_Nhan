@@ -45,6 +45,7 @@ class ExpenseViewModel @Inject constructor(
                 isCategorySuccess.postValue(true)
             }
         }
+
     }
     fun submitExpense() {
         val expense = Expense(

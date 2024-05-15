@@ -21,6 +21,10 @@
     <color name="green_text">#76B33B</color>
     <color name="grayish">#AFB0B6</color>
     <color name="line_D2FAAB">#D2FAAB</color>
+    <color name="green_background_incomeDBE5E6">#DBE5E6</color>
+    <color name="green_B8D8C1">#B8D8C1</color>
+    <color name="red_E1B9BB">#E1B9BB</color>
+    <color name="red_back_expense">#E3D5D6</color>
     <color name="blue">#0099FF</color>
     <color name="grayish_nhat">#EFEFEF</color>
     <color name="brown_orange">#D9B89D</color>
