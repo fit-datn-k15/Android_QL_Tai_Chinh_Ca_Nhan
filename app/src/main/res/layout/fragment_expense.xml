@@ -83,7 +83,7 @@
             android:onClick="@{v->listener.submitExpense()}"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp30"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_expense" />

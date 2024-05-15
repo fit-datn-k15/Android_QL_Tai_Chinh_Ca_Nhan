@@ -70,18 +70,17 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/bg_submit"
-            android:text="Nhập khoản thu"
-            app:icon="@drawable/ic_input_data"
+            android:text="Thêm"
             app:iconGravity="textStart"
-            android:paddingHorizontal="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp30"
             android:onClick="@{v-> listener.submitIncome()}"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_income" />
