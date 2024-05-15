@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="start"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/dp10"
+    android:paddingVertical="@dimen/dp10"
+    android:background="@drawable/bg_border_top_right"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transfer"
+        android:padding="@dimen/dp5"
+        android:src="@drawable/ic_draw"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp20"
+        android:layout_marginStart="@dimen/dp5"
+        android:layout_gravity="start|center"
+        android:text="Cường Nguyễn"
+        android:textColor="@color/black80"
+        android:textStyle="bold"
+        />
+</LinearLayout>

@@ -3,7 +3,9 @@ package com.example.quanlythuchi.view.activity.home
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.quanlythuchi.R
@@ -41,6 +43,27 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
                     }
                     else -> {
                         viewBinding.bottomNav.visibility = View.GONE
+                    }
+                }
+            }
+            setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.fag_home -> {
+                        navController?.navigate(R.id.fag_home)
+                        true
+                    }
+
+                    R.id.fag_calender -> {
+                        navController?.navigate(R.id.fag_calender)
+                        true
+                    }
+                    R.id.fag_report -> {
+                        navController?.navigate(R.id.fag_report)
+                        true
+                    }
+                    else -> {
+                        viewBinding.drawer.openDrawer(GravityCompat.END)
+                        false
                     }
                 }
             }

@@ -11,11 +11,11 @@
     <string name="home">Home</string>
     <string name="calendar">Lịch</string>
     <string name="report">Báo cáo</string>
-    <string name="profile">Thông tin</string>
+    <string name="profile">Cá nhân</string>
     <string name="no_data">No Date</string>
     <string name="input">Nhập</string>
     <string name="total">Còn lại</string>
-    <string name="balance">Balance</string>
+    <string name="balance">Ví của bạn</string>
     <string name="sign_in_with_facebook">Sign in with Facebook</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_in_with_phone">Sign in with Phone</string>

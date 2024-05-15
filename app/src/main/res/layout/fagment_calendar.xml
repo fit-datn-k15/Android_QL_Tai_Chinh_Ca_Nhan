@@ -15,18 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
+        <include
             android:id="@+id/materialToolbar3"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp60"
-            android:background="@drawable/bg_toolbar"
-            android:elevation="@dimen/dp3"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            android:translationZ="@dimen/dp2"
+            android:layout_height="wrap_content"
+            layout="@layout/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/textView6"
@@ -37,7 +33,7 @@
             android:elevation="@dimen/dp12"
             android:textColor="@color/black80"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp22"
             app:layout_constraintBottom_toBottomOf="@+id/materialToolbar3"
             app:layout_constraintStart_toStartOf="@+id/materialToolbar3"
             app:layout_constraintTop_toTopOf="@+id/materialToolbar3" />

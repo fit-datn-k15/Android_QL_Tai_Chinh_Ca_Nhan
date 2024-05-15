@@ -1,11 +1,7 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="369dp"
-    android:height="48dp"
-    android:viewportWidth="369"
-    android:viewportHeight="48">
-  <path
-      android:pathData="M8,0.25L361,0.25A7.75,7.75 0,0 1,368.75 8L368.75,40A7.75,7.75 0,0 1,361 47.75L8,47.75A7.75,7.75 0,0 1,0.25 40L0.25,8A7.75,7.75 0,0 1,8 0.25z"
-      android:strokeWidth="0.5"
-      android:fillColor="#FEFEFE"
-      android:strokeColor="#848484"/>
-</vector>
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+  <solid android:color="@color/green_background_incomeDBE5E6"/>
+  <corners android:radius="@dimen/dp15"/>
+  <stroke android:color="#8E8E8D" android:width="@dimen/dp2"/>
+
+</shape>

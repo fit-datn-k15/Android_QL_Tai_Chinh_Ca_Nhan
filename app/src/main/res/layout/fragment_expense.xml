@@ -72,18 +72,18 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/bg_submit"
-            android:text="Nhập khoản chi"
-            app:icon="@drawable/ic_input_data"
+            android:text="Thêm"
+            android:textStyle="bold"
             app:iconGravity="textStart"
-            android:paddingHorizontal="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp30"
             android:onClick="@{v->listener.submitExpense()}"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rcv_expense" />
