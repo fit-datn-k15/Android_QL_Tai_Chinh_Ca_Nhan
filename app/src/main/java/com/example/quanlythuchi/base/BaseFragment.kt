@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import dagger.hilt.android.HiltAndroidApp
 
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, viewModel : BaseViewModel> : Fragment() {

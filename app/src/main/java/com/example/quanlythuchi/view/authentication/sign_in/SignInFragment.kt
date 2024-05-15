@@ -3,7 +3,6 @@ package com.example.quanlythuchi.view.authentication.sign_in
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -16,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.base.KeyboardManager
-import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.databinding.FragmentSignInBinding
 import com.example.quanlythuchi.view.activity.authen.AuthenticationActivity
 import com.example.quanlythuchi.view.activity.home.HomeActivity
@@ -30,11 +28,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
 
 @AndroidEntryPoint
 class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),SignInListener,
