@@ -33,6 +33,8 @@ object Icon{
         "ic_28" to R.drawable.ic_28,
         "ic_29" to R.drawable.ic_29,
         "ic_30" to R.drawable.ic_30,
+        "ic_31" to R.drawable.ic_31,
+        "ic_32" to R.drawable.ic_32,
     )
     fun getIcon(iconName: String): Int {
         return iconMap[iconName] ?: R.drawable.ic_1
@@ -67,5 +69,7 @@ object Icon{
     const val ic_28 = "ic_28"
     const val ic_29 = "ic_29"
     const val ic_30 = "ic_30"
+    const val ic_31 = "ic_31"
+    const val ic_32 = "ic_32"
 }
 

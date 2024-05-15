@@ -42,6 +42,7 @@ class ExpenseViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 listCategory.clear()
                 listCategory.addAll(it)
+                listCategory.add(Category.categoryAdded())
                 isCategorySuccess.postValue(true)
             }
         }

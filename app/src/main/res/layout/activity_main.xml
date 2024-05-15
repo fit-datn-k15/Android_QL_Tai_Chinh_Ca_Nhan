@@ -18,11 +18,11 @@
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp70"
+                android:layout_height="@dimen/dp64"
                 android:background="@color/toolbar_EDEDED"
                 android:elevation="@dimen/dp3"
                 android:translationZ="@dimen/dp3"
-                app:itemIconSize="@dimen/dp32"
+                app:itemIconSize="@dimen/dp28"
                 app:itemTextColor="@color/orange"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -7,9 +7,12 @@ data class Category (
     var idCategory: String? = null,
     var icon: String? = null,
     var title: String? = null,
-    var type : String
-)
-
+    var type : String? = null
+) {
+    companion object {
+        fun categoryAdded() = Category(icon = Icon.ic_30, title = "Thêm")
+    }
+}
 fun DocumentSnapshot.MapperCategory(typeCategory: String) : Category{
     return Category(
         idCategory = this.id,
