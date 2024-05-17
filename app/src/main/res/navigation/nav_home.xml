@@ -24,4 +24,9 @@
         android:name="com.example.quanlythuchi.view.main.home.FragmentHome">
 
     </fragment>
+    <fragment
+        android:id="@+id/frg_category_detail"
+        android:name="com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail">
+
+    </fragment>
 </navigation>
