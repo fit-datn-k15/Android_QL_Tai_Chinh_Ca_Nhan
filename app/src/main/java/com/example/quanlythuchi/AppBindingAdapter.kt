@@ -1,5 +1,6 @@
 package com.example.quanlythuchi
 
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.quanlythuchi.data.entity.Icon
@@ -20,5 +21,15 @@ object AppBindingAdapter {
         }
         this.setImageResource(Icon.getIcon(name))
     }
-
+    @JvmStatic
+    @BindingAdapter("setIconEnableInputData")
+    fun ImageButton.setIconEnableInputData(flag : Boolean) {
+        this.isEnabled = flag
+        if (flag) {
+            this.setImageResource(R.drawable.ic_input_data_enable)
+        }
+        else {
+            this.setImageResource(R.drawable.ic_input_data_disable)
+        }
+    }
 }

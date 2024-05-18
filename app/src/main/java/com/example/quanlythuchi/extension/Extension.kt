@@ -1,6 +1,8 @@
 package com.example.quanlythuchi.extension
 
 import android.util.Patterns
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.base.Constant
 import java.text.NumberFormat
 import java.time.LocalDate
@@ -20,4 +22,8 @@ fun String.isPasswordValid() : Boolean {
 }
 fun String.isValidEmail() : Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(this).matches();
+}
+fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.updateList(list: List<T>?) {
+
+    this.submitList(if (list === this.currentList) list.toMutableList() else list)
 }

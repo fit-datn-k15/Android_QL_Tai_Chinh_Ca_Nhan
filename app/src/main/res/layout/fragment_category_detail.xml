@@ -30,19 +30,19 @@
         app:layout_constraintStart_toStartOf="@id/toolbar"
         app:layout_constraintTop_toTopOf="@id/toolbar"
         android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_back"
-            android:onClick="@{v -> listener.backPress()}"
             android:background="@color/transfer"
+            android:onClick="@{v -> listener.backPress()}"
             android:padding="@dimen/dp8"
-            app:layout_constraintHorizontal_bias="0.08"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/dp10"
+            android:src="@drawable/ic_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -63,6 +63,7 @@
             android:layout_gravity="center|end"
             android:elevation="@dimen/dp12"
             android:padding="@dimen/dp8"
+            android:onClick="@{v -> listener.addCategory()}"
             android:src="@drawable/ic_30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

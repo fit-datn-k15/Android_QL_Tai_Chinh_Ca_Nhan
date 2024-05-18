@@ -8,12 +8,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
+import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentExpenseBinding
 import com.example.quanlythuchi.extension.formatDateTime
+import com.example.quanlythuchi.extension.updateList
 import com.example.quanlythuchi.view.adapter.AdapterExpense
 import com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail
 import dagger.hilt.android.AndroidEntryPoint
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.time.LocalDate
 
 @AndroidEntryPoint
@@ -23,16 +28,15 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
     val adapter by lazy {   AdapterExpense(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getCategory()
         viewBinding.apply {
             listener = this@FragmentExpense
             viewModel = this@FragmentExpense.viewModel
             viewBinding.rcvExpense.adapter = this@FragmentExpense.adapter
         }
 
-        viewModel.isCategorySuccess.observe(viewLifecycleOwner) {
-            if(it) {
-                adapter.submitList(viewModel.listCategory)
-            }
+        viewModel.listCategory.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
         setTimeDefault()
 
@@ -41,11 +45,6 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
                Toast.makeText(this@FragmentExpense.requireContext(),"Đã thêm khoản chi",Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.getCategory()
     }
 
     override fun openDayPicker() {
@@ -62,7 +61,6 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
             viewModel.date.dayOfMonth
         )
         picker.show()
-
 
     }
 
@@ -82,7 +80,7 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
                 Bundle().apply {
                     putString(
                         FragmentCategoryDetail.KEY_CATEGORY,
-                        FragmentCategoryDetail.EXPENSE
+                        Fb.CategoryExpense
                     )
                 }
             )
@@ -100,6 +98,5 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
             viewModel.category = listCategory[position]
         }
     }
-
 
 }

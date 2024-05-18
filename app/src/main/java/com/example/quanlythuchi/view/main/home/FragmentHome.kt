@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentHome : BaseFragment<FagmentHomeBinding, HomeViewModel>(),HomeListener {
     override val layoutID: Int = R.layout.fagment_home
     override val viewModel: HomeViewModel by viewModels()
-    private val viewPagerAdapter by lazy { ViewPagerAdapter(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.lifecycleOwner = this
@@ -28,8 +27,5 @@ class FragmentHome : BaseFragment<FagmentHomeBinding, HomeViewModel>(),HomeListe
                 1 -> tab.text = getString(R.string.income)
             }
         }.attach()
-
-
-
     }
 }

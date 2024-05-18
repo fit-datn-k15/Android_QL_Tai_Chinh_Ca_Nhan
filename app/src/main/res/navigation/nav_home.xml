@@ -29,4 +29,10 @@
         android:name="com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail">
 
     </fragment>
+    <fragment
+        android:id="@+id/frg_add_category"
+        android:name="com.example.quanlythuchi.view.main.home.add_category.FragmentAddCategory">
+
+    </fragment>
+
 </navigation>

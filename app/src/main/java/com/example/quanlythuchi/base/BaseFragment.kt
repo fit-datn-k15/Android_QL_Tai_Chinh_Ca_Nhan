@@ -12,7 +12,8 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, viewModel : BaseViewModel> : Fragment() {
 
-    protected lateinit var viewBinding : ViewBinding
+    protected var _binding : ViewBinding? = null
+    protected val viewBinding get() = _binding!!
     protected abstract val viewModel: viewModel
     protected abstract val layoutID : Int
     override fun onCreateView(
@@ -20,10 +21,14 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, viewModel : BaseViewM
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = DataBindingUtil.inflate(inflater,layoutID,container,false)
-        viewBinding.lifecycleOwner = this
+        _binding = DataBindingUtil.inflate(inflater,layoutID,container,false)
+        _binding?.lifecycleOwner = this.viewLifecycleOwner
         return viewBinding.root
     }
     protected fun <T : BaseActivity<*, *>> getOwnerActivity() = activity as? T
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

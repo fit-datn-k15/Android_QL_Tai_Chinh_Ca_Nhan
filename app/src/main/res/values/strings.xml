@@ -34,4 +34,6 @@
     <string name="error_email">Email sai định dạng</string>
     <string name="label_email">Email</string>
     <string name="ok">ok</string>
+    <string name="add_category">Thêm danh mục</string>
+    <string name="da_them_danh_muc">Đã thêm danh muc</string>
 </resources>

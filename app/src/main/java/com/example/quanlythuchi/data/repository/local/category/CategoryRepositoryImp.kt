@@ -39,11 +39,15 @@ class CategoryRepositoryImp @Inject constructor(
 
     override suspend fun addCategory(category: Category, typeCategory: String) {
         if (user == null) return
-        db.collection(Fb.User).document(user!!.uid).collection(typeCategory).add(category).addOnSuccessListener { documentReference ->
-            Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
-        }.addOnFailureListener { e ->
-            Log.w(TAG, "Error adding document", e)
-        }
+        db.collection(Fb.User)
+            .document(user!!.uid)
+            .collection(typeCategory)
+            .add(category)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+            }.addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }.await()
     }
 
     override suspend fun importCategoryDefault() {

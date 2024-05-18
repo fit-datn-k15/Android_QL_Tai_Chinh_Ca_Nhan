@@ -15,17 +15,14 @@ import javax.inject.Inject
 class CategoryDetailViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) : BaseViewModel() {
-    var listCategory : MutableList<Category> = mutableListOf()
-    var isCategorySuccess = MutableLiveData(false)
+    var listCategory : MutableLiveData<MutableList<Category>> = MutableLiveData()
 
     var nameCategory : String? = null
     fun getCategory(typeCategory: String = Fb.CategoryExpense) {
         viewModelScope.launch(Dispatchers.IO) {
             val it = categoryRepository.getAllCategory(typeCategory = typeCategory)
             withContext(Dispatchers.Main) {
-                listCategory.clear()
-                listCategory.addAll(it)
-                isCategorySuccess.postValue(true)
+                listCategory.postValue(it)
             }
         }
 

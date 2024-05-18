@@ -9,13 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
+import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentIncomeBinding
 import com.example.quanlythuchi.extension.formatDateTime
+import com.example.quanlythuchi.extension.updateList
 
 import com.example.quanlythuchi.view.adapter.AdapterIncome
 import com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail
 import dagger.hilt.android.AndroidEntryPoint
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.time.LocalDate
 @AndroidEntryPoint
 class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),IncomeListener,AdapterIncome.OnClickListener {
@@ -25,16 +30,15 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
     val adapter by lazy {  AdapterIncome(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getCategory()
         viewBinding.apply {
             listener = this@IncomeFragment
             viewModel = this@IncomeFragment.viewModel
             viewBinding.rcvIncome.adapter = this@IncomeFragment.adapter
         }
 
-        viewModel.isCategorySuccess.observe(viewLifecycleOwner) {
-            if (it) {
-                adapter.submitList(viewModel.listCategory)
-            }
+        viewModel.listCategory.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
         viewModel.isAddIncome.observe(viewLifecycleOwner) {
             if(it) {
@@ -44,12 +48,6 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
         setTimeDefault()
 
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.getCategory()
-    }
-
     override fun openDayPicker() {
             val picker = DatePickerDialog(
                 requireContext(),
@@ -78,7 +76,7 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
                 Bundle().apply {
                     putString(
                         FragmentCategoryDetail.KEY_CATEGORY,
-                        FragmentCategoryDetail.INCOME
+                        Fb.CategoryIncome
                     )
                 }
             )

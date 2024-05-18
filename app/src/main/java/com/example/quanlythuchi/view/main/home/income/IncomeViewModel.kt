@@ -23,8 +23,7 @@ class IncomeViewModel @Inject constructor(
     private var categoryRepository: CategoryRepository,
     private var incomeRepository: InComeRepository
 ) : BaseViewModel() {
-    var listCategory : MutableList<Category> = mutableListOf()
-    var isCategorySuccess = MutableLiveData(false)
+    var listCategory = MutableLiveData<MutableList<Category>>()
     var idItemRcvCategorySelect = -1
 
 
@@ -38,10 +37,8 @@ class IncomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val it = categoryRepository.getAllCategory(Fb.CategoryIncome)
             withContext(Dispatchers.Main) {
-                listCategory.clear()
-                listCategory.addAll(it)
-                listCategory.add(Category.categoryAdded())
-                isCategorySuccess.postValue(true)
+                it.add(Category.categoryAdded())
+                listCategory.postValue(it)
             }
         }
     }

@@ -23,8 +23,7 @@ class ExpenseViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val expenseRepository: ExpenseRepository
 ) : BaseViewModel() {
-    var listCategory : MutableList<Category> = mutableListOf()
-    var isCategorySuccess = MutableLiveData(false)
+    var listCategory = MutableLiveData<MutableList<Category>>()
     var idItemRcvCategorySelect = -1
 
     var date = LocalDate.now()
@@ -40,10 +39,8 @@ class ExpenseViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val it = categoryRepository.getAllCategory(Fb.CategoryExpense)
             withContext(Dispatchers.Main) {
-                listCategory.clear()
-                listCategory.addAll(it)
-                listCategory.add(Category.categoryAdded())
-                isCategorySuccess.postValue(true)
+                it.add(Category.categoryAdded())
+                listCategory.postValue(it)
             }
         }
 

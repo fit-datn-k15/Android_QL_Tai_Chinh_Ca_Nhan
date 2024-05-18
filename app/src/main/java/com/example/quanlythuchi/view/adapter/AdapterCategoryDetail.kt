@@ -13,9 +13,9 @@ import com.example.quanlythuchi.databinding.ItemCategoryDetailBinding
 class AdapterCategoryDetail(private var onClickListener: OnClickListener) :
     ListAdapter<Category, AdapterCategoryDetail.CategoryDetailViewHolder>(Callback()) {
     var itemSelect = -1;
-    class CategoryDetailViewHolder(val view: ItemCategoryDetailBinding) : RecyclerView.ViewHolder(view.root) {
+    class CategoryDetailViewHolder(val viewBinding: ItemCategoryDetailBinding) : RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(item: Category) {
-            view.data = item
+            viewBinding.data = item
         }
     }
 
