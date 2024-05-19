@@ -12,7 +12,6 @@ import com.example.quanlythuchi.databinding.ItemCategoryBinding
 
 class AdapterExpense(private var onClickListener: OnClickListener) :
     ListAdapter<Category, AdapterExpense.CategoryViewHolder>(Callback()) {
-    var itemSelect = -1;
     class CategoryViewHolder(val view: ItemCategoryBinding) : RecyclerView.ViewHolder(view.root) {
         fun bind(item: Category) {
             view.data = item
@@ -34,14 +33,18 @@ class AdapterExpense(private var onClickListener: OnClickListener) :
         val item = getItem(position)
         holder.bind(item)
         holder.itemView.setOnClickListener{
-           onClickListener.onClick(position, currentList)
+           onClickListener.onClick(holder.absoluteAdapterPosition, currentList)
         }
 
     }
 
+    override fun getItemCount(): Int {
+        val a = super.getItemCount()
+        return super.getItemCount()
+    }
     class Callback : DiffUtil.ItemCallback<Category>() {
         override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
-            return oldItem.idCategory == newItem.idCategory
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {

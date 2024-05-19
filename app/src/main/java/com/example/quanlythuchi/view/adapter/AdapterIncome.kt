@@ -31,7 +31,7 @@ class AdapterIncome(private var onClickListener: AdapterIncome.OnClickListener) 
         val item = getItem(position)
         holder.bind(item)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(position, currentList)
+            onClickListener.onClick(holder.absoluteAdapterPosition, currentList)
         }
     }
 

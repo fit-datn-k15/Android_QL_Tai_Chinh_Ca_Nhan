@@ -23,7 +23,7 @@ class ExpenseViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val expenseRepository: ExpenseRepository
 ) : BaseViewModel() {
-    var listCategory = MutableLiveData<MutableList<Category>>()
+    var listCategory = SingleLiveData<MutableList<Category>>(mutableListOf())
     var idItemRcvCategorySelect = -1
 
     var date = LocalDate.now()
