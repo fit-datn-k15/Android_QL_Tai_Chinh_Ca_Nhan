@@ -12,9 +12,6 @@ import com.example.quanlythuchi.databinding.AddCategoryBinding
 import com.example.quanlythuchi.view.adapter.AdapterIcon
 import com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail
 import dagger.hilt.android.AndroidEntryPoint
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 @AndroidEntryPoint
 class FragmentAddCategory(
@@ -56,7 +53,7 @@ class FragmentAddCategory(
     override fun onClickAddNewCategory() {
         viewModel.addNewCategory(typeCategory = this.typeCategory,
             callback = {
-                EventBus.getDefault().post("OKE")
+                viewBinding.inputTitle.setText("")
                 showToast()
             }
         )

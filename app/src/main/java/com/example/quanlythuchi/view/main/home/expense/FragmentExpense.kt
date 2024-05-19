@@ -12,13 +12,9 @@ import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentExpenseBinding
 import com.example.quanlythuchi.extension.formatDateTime
-import com.example.quanlythuchi.extension.updateList
 import com.example.quanlythuchi.view.adapter.AdapterExpense
 import com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail
 import dagger.hilt.android.AndroidEntryPoint
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import java.time.LocalDate
 
 @AndroidEntryPoint

@@ -35,7 +35,8 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/transfer"
+            android:background="?android:attr/selectableItemBackground"
+
             android:onClick="@{v -> listener.backPress()}"
             android:padding="@dimen/dp8"
             android:layout_marginStart="@dimen/dp10"
@@ -59,9 +60,10 @@
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/transfer"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_gravity="center|end"
             android:elevation="@dimen/dp12"
+
             android:padding="@dimen/dp8"
             android:onClick="@{v -> listener.addCategory()}"
             android:src="@drawable/ic_30"

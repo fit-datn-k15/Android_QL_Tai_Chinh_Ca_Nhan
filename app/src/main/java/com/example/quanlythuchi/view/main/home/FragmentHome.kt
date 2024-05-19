@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FagmentHomeBinding
+import com.example.quanlythuchi.view.main.home.income.IncomeFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,5 +28,19 @@ class FragmentHome : BaseFragment<FagmentHomeBinding, HomeViewModel>(),HomeListe
                 1 -> tab.text = getString(R.string.income)
             }
         }.attach()
+        clickAdd()
+    }
+    fun clickAdd() {
+        if (viewBinding.vpgHome.currentItem == 0) {
+
+        }
+        else {
+
+        }
+    }
+    companion object {
+        const val FRAGMENT_INCOME = 0
+        const val FRAGMENT_EXPENSE = 1
     }
 }
+

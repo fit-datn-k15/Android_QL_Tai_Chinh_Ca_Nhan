@@ -75,7 +75,7 @@ class FragmentCategoryDetail :
         if(category != null) {
             viewModel.removeCategory(typeCategory = this.typeCategory, category = category) {
                 adapter.notifyItemRemoved(viewHolder.absoluteAdapterPosition)
-                Toast.makeText(this.context, "Bạn đã xóa danh mục " + category.title , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Bạn đã xóa danh mục ${category.title}" , Toast.LENGTH_SHORT).show()
             }
         }
     }

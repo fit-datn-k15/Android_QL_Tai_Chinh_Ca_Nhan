@@ -145,6 +145,8 @@
             android:id="@+id/imageView3"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:onClick="@{v -> listener.openDayPicker()}"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="@+id/pick_time"
             app:layout_constraintEnd_toStartOf="@+id/pick_time"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
