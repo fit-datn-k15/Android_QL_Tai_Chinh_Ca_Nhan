@@ -38,6 +38,7 @@ class OnSwipeAdapterCategoryDetail(
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: ViewHolder) {
+        super.clearView(recyclerView, viewHolder)
         val foregroundView = (viewHolder as AdapterCategoryDetail.CategoryDetailViewHolder)
             .viewBinding.foreground
         getDefaultUIUtil().clearView(foregroundView)

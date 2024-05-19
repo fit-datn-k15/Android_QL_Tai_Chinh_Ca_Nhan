@@ -1,8 +1,10 @@
 package com.example.quanlythuchi.view.main.home.category
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.base.BaseViewModel
+import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
@@ -26,5 +28,19 @@ class CategoryDetailViewModel @Inject constructor(
             }
         }
 
+    }
+    fun removeCategory(typeCategory: String,category: Category, callback : () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO){
+            val it = categoryRepository.removeCategory(category = category, typeCategory = typeCategory)
+            withContext(Dispatchers.Main){
+                Log.d(TAG, "removeCategory____________________________: $it")
+                if(it) {
+                    val newList : MutableList<Category>? = listCategory.value
+                    newList?.removeIf{it.idCategory == category.idCategory}
+                    listCategory.postValue(newList ?: mutableListOf())
+                    callback()
+                }
+            }
+        }
     }
 }

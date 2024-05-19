@@ -3,15 +3,18 @@ package com.example.quanlythuchi.data.repository.local.category
 import android.util.Log
 import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.data.Fb
+import com.example.quanlythuchi.data.MapperCategory
 import com.example.quanlythuchi.data.entity.Category
-import com.example.quanlythuchi.data.entity.Icon
-import com.example.quanlythuchi.data.entity.MapperCategory
+import com.example.quanlythuchi.data.entity.categoryExpense
+import com.example.quanlythuchi.data.entity.categoryIncome
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import kotlin.math.log
 
 class CategoryRepositoryImp @Inject constructor(
 
@@ -21,11 +24,12 @@ class CategoryRepositoryImp @Inject constructor(
     private val user by lazy {  FirebaseAuth.getInstance().currentUser}
     override suspend fun getAllCategory(typeCategory: String): MutableList<Category> {
         if (user == null) {return  mutableListOf() }
-        val categoryList = db.collection(Fb.User)
+
+        val listCate = mutableListOf<Category>()
+        db.collection(Fb.User)
             .document(user!!.uid)
             .collection(typeCategory)
-        val listCate = mutableListOf<Category>()
-        categoryList.get()
+            .get()
             .addOnSuccessListener { querySnapShot ->
                 querySnapShot?.documents?.forEach {
                     listCate.add(it.MapperCategory(typeCategory))
@@ -33,7 +37,6 @@ class CategoryRepositoryImp @Inject constructor(
             }
             .addOnFailureListener { ex -> Log.e(TAG, "getAllCategory: $ex") }
             .await()
-
         return listCate
     }
 
@@ -74,24 +77,24 @@ class CategoryRepositoryImp @Inject constructor(
         }.await()
     }
 
+    override suspend fun removeCategory(category: Category, typeCategory: String): Boolean {
+        if (user == null) return false
+        var deferredResult = false
+        category.idCategory?.let {
+            db.collection(Fb.User).document(user!!.uid)
+                .collection(typeCategory)
+                .document(it)
+                .delete()
+                .addOnSuccessListener {
+                    Log.d(TAG, "removeCategory: Success ${category.idCategory}")
+                    deferredResult = true
+                }
+                .addOnFailureListener {
+                    Log.d(TAG, "removeCategory: Fail ${category.idCategory}")
+                    deferredResult = false
+                }.await()
+        }
+        return deferredResult
+    }
+
 }
-
-
-fun categoryExpense() = arrayListOf(
-    Category(title = "Ăn uống", type = Fb.CategoryExpense, icon = Icon.ic_26),
-    Category(title = "Quần áo", type = Fb.CategoryExpense, icon = Icon.ic_13),
-    Category(title = "Mỹ Phẩm", type = Fb.CategoryExpense, icon = Icon.ic_4),
-    Category(title = "Tiêu hàng ngày", type = Fb.CategoryExpense, icon = Icon.ic_23),
-    Category(title = "Phí giao lưu", type = Fb.CategoryExpense, icon = Icon.ic_15),
-    Category(title = "Y tế", type = Fb.CategoryExpense, icon = Icon.ic_12),
-    Category(title = "Giáo dục", type = Fb.CategoryExpense, icon = Icon.ic_7),
-    Category(title = "Tiền nhà", type = Fb.CategoryExpense, icon = Icon.ic_27),
-    Category(title = "Tiền xe", type = Fb.CategoryExpense, icon = Icon.ic_17),
-)
-fun categoryIncome() = arrayListOf(
-    Category(title = "Tiền lương", type = Fb.CategoryIncome, icon = Icon.ic_25),
-    Category(title = "Tiền thưởng", type = Fb.CategoryIncome, icon = Icon.ic_2),
-    Category(title = "Tiền phụ cấp", type = Fb.CategoryIncome, icon = Icon.ic_2),
-    Category(title = "Tiền Đầu tư", type = Fb.CategoryIncome, icon = Icon.ic_6),
-    Category(title = "Thu nhập khác", type = Fb.CategoryIncome, icon = Icon.ic_1),
-)

@@ -2,24 +2,18 @@ package com.example.quanlythuchi.view.main.home.category
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
-import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentCategoryDetailBinding
-import com.example.quanlythuchi.extension.updateList
 import com.example.quanlythuchi.view.adapter.AdapterCategoryDetail
-import com.example.quanlythuchi.view.adapter.AdapterExpense
-import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 @AndroidEntryPoint
 class FragmentCategoryDetail :
@@ -46,11 +40,12 @@ class FragmentCategoryDetail :
 
         viewModel.getCategory(typeCategory = typeCategory)
         viewBinding.rcv.adapter = this.adapter
+
         val itemDeclaration = DividerItemDecoration(this.context,DividerItemDecoration.VERTICAL)
         viewBinding.rcv.addItemDecoration(itemDeclaration)
+
         val itemTouchHelperSimpleCallback = OnSwipeAdapterCategoryDetail(0,ItemTouchHelper.LEFT, this)
         ItemTouchHelper(itemTouchHelperSimpleCallback).attachToRecyclerView(viewBinding.rcv)
-
         viewModel.listCategory.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -76,6 +71,12 @@ class FragmentCategoryDetail :
     }
 
     override fun onSwipe(viewHolder: AdapterCategoryDetail.CategoryDetailViewHolder) {
-
+        val category = adapter.currentList[viewHolder.absoluteAdapterPosition]
+        if(category != null) {
+            viewModel.removeCategory(typeCategory = this.typeCategory, category = category) {
+                adapter.notifyItemRemoved(viewHolder.absoluteAdapterPosition)
+                Toast.makeText(this.context, "Bạn đã xóa danh mục " + category.title , Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

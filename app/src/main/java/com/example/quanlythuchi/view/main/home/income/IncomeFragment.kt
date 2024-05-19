@@ -70,7 +70,7 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
     }
 
     override fun onClick(position: Int, listCategory: MutableList<Category>) {
-        if(position == listCategory.size -1 ) {
+        if(listCategory[position].idCategory == Fb.ItemAddedCategory) {
             findNavController().navigate(
                 R.id.frg_category_detail,
                 Bundle().apply {

@@ -7,4 +7,6 @@ object Fb{
     const val User = "User"
     const val CategoryExpense = "CategoryExpense"
     const val CategoryIncome = "CategoryIncome"
+
+    const val ItemAddedCategory = "Item_Added_At_Last_List_Category"
 }

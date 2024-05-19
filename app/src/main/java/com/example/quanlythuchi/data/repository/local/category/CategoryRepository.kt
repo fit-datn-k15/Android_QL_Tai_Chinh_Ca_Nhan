@@ -8,4 +8,6 @@ interface CategoryRepository {
     suspend fun addCategory(category: Category, typeCategory: String)
 
     suspend fun importCategoryDefault()
+
+    suspend fun removeCategory(category: Category,typeCategory: String) : Boolean
 }
