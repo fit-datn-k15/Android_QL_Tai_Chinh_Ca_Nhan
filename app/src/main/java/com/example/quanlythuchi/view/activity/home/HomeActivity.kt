@@ -19,7 +19,6 @@ import androidx.transition.TransitionManager
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseActivity
 import com.example.quanlythuchi.databinding.ActivityMainBinding
-import com.example.quanlythuchi.databinding.NavHeaderMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -33,13 +32,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
 
     private var navHostFragment : NavHostFragment?= null
     private var navController : NavController?=null
-    val headerDrawer : NavHeaderMainBinding by lazy {  NavHeaderMainBinding.bind(viewBinding.navigationViewDrawer.getHeaderView(0))}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_home_container) as NavHostFragment
         navController = navHostFragment?.navController
-        setUpDrawerLayout()
         navigationBottom()
             viewBinding.root.viewTreeObserver.addOnGlobalLayoutListener {
                 val rect = Rect()
@@ -117,7 +114,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
         viewBinding.navigationViewDrawer.setNavigationItemSelectedListener {menuItem->
             when(menuItem.itemId) {
                 R.id.item_drawer_home -> {
-
+                    true
                 }
                 R.id.item_drawer_calendar -> {
 
@@ -142,6 +139,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
                 }
                 else ->{}
             }
+            viewBinding.drawer.closeDrawers()
             true
         }
     }
