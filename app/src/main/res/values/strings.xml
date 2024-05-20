@@ -28,7 +28,8 @@
     <string name="label_re_password">Nhập lại mật khẩu</string>
     <string name="label_da_co_tai_khoan">Đã có tài khoản</string>
     <string name="label_chua_co_tai_khoan">Bạn chưa có tài khoản</string>
-    
+    <string name="when_not_name_user">Ví của bạn</string>
+
     <string name="error_confirm_password">Mật khẩu sai định dạng hoặc không trùng khớp</string>
     <string name="error_password">Mật khẩu sai định dạng</string>
     <string name="error_email">Email sai định dạng</string>
