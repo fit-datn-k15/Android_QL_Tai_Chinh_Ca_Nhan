@@ -37,4 +37,13 @@
     <string name="ok">ok</string>
     <string name="add_category">Thêm danh mục</string>
     <string name="da_them_danh_muc">Đã thêm danh muc</string>
+    <string name="drawer_logout">Đăng xuất</string>
+    <string name="drawer_account">Tài khoản</string>
+    <string name="drawer_remove_ad">Loại bỏ quảng cáo</string>
+    <string name="drawer_infor_app">Thông tin ứng dụng</string>
+    <string name="drawer_share">Chia sẻ</string>
+    <string name="drawer_export_excel">Xuất dữ liệu excel</string>
+    <string name="drawer_export_pdf">Xuất dữ liệu Pdf</string>
+    <string name="drawer_export">Xuất dữ liệu</string>
+    <string name="drawer_other">Khác</string>
 </resources>

@@ -19,37 +19,48 @@
         android:iconTint="@color/orange"
         android:title="@string/report" />
     <group>
-       <item android:title="Xuất dữ liệu">
+       <item android:title="@string/drawer_export">
            <menu>
                <item
                    android:id="@+id/item_drawer_pdf"
                    android:icon="@drawable/ic_pdf"
                    android:iconTint="@color/orange"
-                   android:title="Xuất dữ liệu Pdf" />
+                   android:title="@string/drawer_export_pdf" />
                <item
                    android:id="@+id/item_drawer_excel"
                    android:icon="@drawable/ic_excel"
                    android:iconTint="@color/orange"
-                   android:title="Xuất dữ liệu excel" />
+                   android:title="@string/drawer_export_excel" />
            </menu>
        </item>
     </group>
     <group>
-        <item android:title="Khác">
+        <item android:title="@string/drawer_other">
             <menu>
                 <item
                     android:id="@+id/item_drawer_share"
                     android:icon="@drawable/ic_share"
                     android:iconTint="@color/orange"
-                    android:title="Chia sẻ" />
+                    android:title="@string/drawer_share" />
                 <item
                     android:id="@+id/item_drawer_infor"
                     android:icon="@drawable/ic_information"
                     android:iconTint="@color/orange"
-                    android:title="Thông tin ứng dụng" />
+                    android:title="@string/drawer_infor_app" />
                 <item android:id="@+id/item_drawer_buy"
                     android:icon="@drawable/ic_premium"
-                    android:title="Loại bỏ quảng cáo"/>
+                    android:title="@string/drawer_remove_ad"/>
+            </menu>
+        </item>
+    </group>
+    <group>
+        <item android:title="@string/drawer_account">
+            <menu>
+                <item
+                    android:id="@+id/log_out"
+                    android:icon="@drawable/ic_log_out"
+                    android:iconTint="@color/orange"
+                    android:title="@string/drawer_logout" />
             </menu>
         </item>
     </group>
