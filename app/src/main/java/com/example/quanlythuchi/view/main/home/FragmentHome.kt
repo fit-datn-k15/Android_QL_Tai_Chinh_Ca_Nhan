@@ -22,9 +22,9 @@ class FragmentHome : BaseFragment<FagmentHomeBinding, BaseHomeViewModel>(),HomeL
     override val viewModel: ShareHomeViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.lifecycleOwner = this
         viewBinding.apply {
             listener = this@FragmentHome
+            viewModel = this@FragmentHome.viewModel
         }
         viewBinding.vpgHome.adapter = ViewPagerAdapter(this)
 

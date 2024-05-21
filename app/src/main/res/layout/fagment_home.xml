@@ -68,8 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp20"
                 setIconEnableInputData="@{viewModel.isEnableButtonAddAtToolbar()}"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_input_data" />
+                android:background="?android:attr/selectableItemBackground" />
         </LinearLayout>
 
         <androidx.viewpager2.widget.ViewPager2

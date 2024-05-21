@@ -9,6 +9,15 @@ import java.time.LocalDate
 
 abstract class BaseHomeViewModel : BaseViewModel() {
     var typeCurrentFragment : Int = FragmentHome.FRAGMENT_EXPENSE
+        set(value) {
+            field = value
+            if (field == FragmentHome.FRAGMENT_EXPENSE) {
+                checkValidDataExpense()
+            }
+            else {
+                checkValidDataIncome()
+            }
+        }
     var isEnableButtonAddAtToolbar = MutableLiveData(false)
 
     var isEnableButtonAddExpense = MutableLiveData(false)
@@ -24,24 +33,24 @@ abstract class BaseHomeViewModel : BaseViewModel() {
         set(value) {
             field = value
             checkValidDataExpense()
-            checkValidDataIncome()
         }
     var moneyExpense : String = ""
         set(value) {
             field = value
             checkValidDataExpense()
-            checkValidDataIncome()
         }
     fun checkValidDataExpense() {
         try {
             val numberExpense = moneyExpense.toLong()
             if (categoryExpenseSelected != null && noteExpense.isNotNullAndNotEmpty()  && numberExpense > 0) {
                 isEnableButtonAddExpense.postValue(true)
+                isEnableButtonAddAtToolbar.postValue(true)
                 return
             }
         }
         catch (_ : Exception) {}
         isEnableButtonAddExpense.postValue(false)
+        isEnableButtonAddAtToolbar.postValue(false)
     }
 
 
@@ -53,13 +62,11 @@ abstract class BaseHomeViewModel : BaseViewModel() {
     var noteIncome : String = ""
         set(value) {
             field = value
-            checkValidDataExpense()
             checkValidDataIncome()
         }
     var moneyIncome : String = ""
         set(value) {
             field = value
-            checkValidDataExpense()
             checkValidDataIncome()
         }
     var categoryIncomeSelected : Category? = null
@@ -72,11 +79,13 @@ abstract class BaseHomeViewModel : BaseViewModel() {
             val numberIncome = moneyIncome.toLong()
             if (categoryIncomeSelected != null && noteIncome.isNotNullAndNotEmpty()  && numberIncome > 0) {
                 isEnableButtonAddIncome.postValue(true)
+                isEnableButtonAddAtToolbar.postValue(true)
                 return
             }
         }
         catch (_ : Exception) {}
         isEnableButtonAddIncome.postValue(false)
+        isEnableButtonAddAtToolbar.postValue(false)
     }
 
 }
