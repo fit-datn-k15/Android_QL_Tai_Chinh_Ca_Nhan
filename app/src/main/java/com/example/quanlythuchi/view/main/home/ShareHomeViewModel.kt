@@ -1,56 +1,53 @@
-package com.example.quanlythuchi.view.main.home.expense
+package com.example.quanlythuchi.view.main.home
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.quanlythuchi.base.BaseViewModel
-import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.base.SingleLiveData
 import com.example.quanlythuchi.data.Fb
-import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
-import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.entity.Expense
+import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
+import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.extension.formatDateTime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
-import java.time.LocalDate
 import javax.inject.Inject
+
 @HiltViewModel
-class ExpenseViewModel @Inject constructor(
+class ShareHomeViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val expenseRepository: ExpenseRepository
-) : BaseViewModel() {
-    var listCategory = SingleLiveData<MutableList<Category>>(mutableListOf())
-    var idItemRcvCategorySelect = -1
-
-    var date = LocalDate.now()
-    var category : Category? = null
-    var note : String? = ""
-    var expense : String? = ""
+) : BaseHomeViewModel() {
 
     var isAddExpense = SingleLiveData(false)
-        set(value) {
-            field = value
-        }
-    fun getCategory() {
+    var isAddIncome = SingleLiveData(false)
+    fun getCategoryExpense() {
         viewModelScope.launch(Dispatchers.IO) {
             val it = categoryRepository.getAllCategory(Fb.CategoryExpense)
             withContext(Dispatchers.Main) {
                 it.add(Category.categoryAdded())
-                listCategory.postValue(it)
+                listCategoryExpense.postValue(it)
             }
         }
 
     }
+    fun getCategoryIncome() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val it = categoryRepository.getAllCategory(Fb.CategoryIncome)
+            withContext(Dispatchers.Main) {
+                it.add(Category.categoryAdded())
+                listCategoryIncome.postValue(it)
+            }
+        }
+    }
     fun submitExpense() {
         val expense = Expense(
-            idCategory = category?.idCategory,
-            date = this.date.formatDateTime(),
-            note = this.note,
-            expense = this.expense?.toLong())
+            idCategory = categoryExpenseSelected?.idCategory,
+            date = this.dateExpense.formatDateTime(),
+            note = this.noteExpense,
+            expense = this.moneyExpense.toLong()
+        )
         viewModelScope.launch(Dispatchers.IO) {
             val it = expenseRepository.insertExpense(expense)
             withContext(Dispatchers.Main) {
@@ -58,7 +55,5 @@ class ExpenseViewModel @Inject constructor(
             }
         }
     }
-    fun clearData() {
 
-    }
 }

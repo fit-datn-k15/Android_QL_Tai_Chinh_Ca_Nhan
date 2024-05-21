@@ -23,29 +23,29 @@ class IncomeViewModel @Inject constructor(
     private var categoryRepository: CategoryRepository,
     private var incomeRepository: InComeRepository
 ) : BaseViewModel() {
-    var listCategory = MutableLiveData<MutableList<Category>>()
+    var listCategoryIncome = MutableLiveData<MutableList<Category>>()
     var idItemRcvCategorySelect = -1
 
 
     var date = LocalDate.now()
-    var category : Category? = null
+    var categoryIncomeSelected : Category? = null
     var note: String? =""
     var income : String?= ""
 
     var isAddIncome = SingleLiveData(false)
-    fun getCategory() {
+    fun getCategoryIncome() {
         viewModelScope.launch(Dispatchers.IO) {
             val it = categoryRepository.getAllCategory(Fb.CategoryIncome)
             withContext(Dispatchers.Main) {
                 it.add(Category.categoryAdded())
-                listCategory.postValue(it)
+                listCategoryIncome.postValue(it)
             }
         }
     }
     fun submitIncome() {
         val a = income
         val income = Income(
-            idCategory = category?.idCategory,
+            idCategory = categoryIncomeSelected?.idCategory,
             date = this.date.formatDateTime(),
             note = this.note,
             income = this.income?.toLong())

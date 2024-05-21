@@ -4,7 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
@@ -13,25 +13,26 @@ import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentExpenseBinding
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.view.adapter.AdapterExpense
+import com.example.quanlythuchi.view.main.home.ShareHomeViewModel
 import com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
 @AndroidEntryPoint
-class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(), ExpenseListener,AdapterExpense.OnClickListener {
-    override val viewModel: ExpenseViewModel by viewModels()
+class FragmentExpense : BaseFragment<FragmentExpenseBinding,ShareHomeViewModel>(), ExpenseListener,AdapterExpense.OnClickListener {
+    override val viewModel: ShareHomeViewModel by activityViewModels()
     override val layoutID: Int = R.layout.fragment_expense
     val adapter by lazy {   AdapterExpense(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getCategory()
+        viewModel.getCategoryExpense()
         viewBinding.apply {
             listener = this@FragmentExpense
             viewModel = this@FragmentExpense.viewModel
             viewBinding.rcvExpense.adapter = this@FragmentExpense.adapter
         }
 
-        viewModel.listCategory.observe(viewLifecycleOwner) {
+        viewModel.listCategoryExpense.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
         setTimeDefault()
@@ -48,13 +49,13 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
             requireContext(),
             { view, year, month, dayOfMonth ->
                 viewModel.apply {
-                    date = LocalDate.of(year, month+1, dayOfMonth)
+                    dateExpense = LocalDate.of(year, month+1, dayOfMonth)
                 }
-                viewBinding.pickTime.text = viewModel.date.formatDateTime()
+                viewBinding.pickTime.text = viewModel.dateExpense.formatDateTime()
             },
-            viewModel.date.year,
-            viewModel.date.monthValue -1,
-            viewModel.date.dayOfMonth
+            viewModel.dateExpense.year,
+            viewModel.dateExpense.monthValue -1,
+            viewModel.dateExpense.dayOfMonth
         )
         picker.show()
 
@@ -65,7 +66,7 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
     }
 
     private fun setTimeDefault() {
-        val time = viewModel.date.formatDateTime();
+        val time = viewModel.dateExpense.formatDateTime();
         viewBinding.pickTime.text = time
     }
 
@@ -82,16 +83,16 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ExpenseViewModel>(),
             )
         }
         else {
-            if (viewModel.idItemRcvCategorySelect != -1) {
+            if (viewModel.itemCategoryExpenseSelected != -1) {
                 viewBinding.rcvExpense
-                    .findViewHolderForAdapterPosition(viewModel.idItemRcvCategorySelect)!!
+                    .findViewHolderForAdapterPosition(viewModel.itemCategoryExpenseSelected)!!
                     .itemView.isSelected = false
             }
-            viewModel.idItemRcvCategorySelect = position
+            viewModel.itemCategoryExpenseSelected = position
             viewBinding.rcvExpense
-                .findViewHolderForAdapterPosition(viewModel.idItemRcvCategorySelect)!!
+                .findViewHolderForAdapterPosition(viewModel.itemCategoryExpenseSelected)!!
                 .itemView.isSelected = true
-            viewModel.category = listCategory[position]
+            viewModel.categoryExpenseSelected = listCategory[position]
         }
     }
 

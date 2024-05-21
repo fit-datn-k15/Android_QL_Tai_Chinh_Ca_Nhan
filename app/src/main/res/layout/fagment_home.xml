@@ -8,6 +8,9 @@
         <variable
             name="listener"
             type="com.example.quanlythuchi.view.main.home.HomeListener" />
+        <variable
+            name="viewModel"
+            type="com.example.quanlythuchi.view.main.home.ShareHomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp20"
+                setIconEnableInputData="@{viewModel.isEnableButtonAddAtToolbar()}"
                 android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_input_data" />
         </LinearLayout>

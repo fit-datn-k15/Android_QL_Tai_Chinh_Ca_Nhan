@@ -4,8 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
@@ -13,31 +12,28 @@ import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentIncomeBinding
 import com.example.quanlythuchi.extension.formatDateTime
-import com.example.quanlythuchi.extension.updateList
 
 import com.example.quanlythuchi.view.adapter.AdapterIncome
+import com.example.quanlythuchi.view.main.home.ShareHomeViewModel
 import com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail
 import dagger.hilt.android.AndroidEntryPoint
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import java.time.LocalDate
 @AndroidEntryPoint
-class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),IncomeListener,AdapterIncome.OnClickListener {
-    override val viewModel: IncomeViewModel by viewModels()
+class IncomeFragment : BaseFragment<FragmentIncomeBinding,ShareHomeViewModel>(),IncomeListener,AdapterIncome.OnClickListener {
+    override val viewModel: ShareHomeViewModel by activityViewModels()
     override val layoutID: Int = R.layout.fragment_income
 
     val adapter by lazy {  AdapterIncome(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getCategory()
+        viewModel.getCategoryIncome()
         viewBinding.apply {
             listener = this@IncomeFragment
             viewModel = this@IncomeFragment.viewModel
             viewBinding.rcvIncome.adapter = this@IncomeFragment.adapter
         }
 
-        viewModel.listCategory.observe(viewLifecycleOwner) {
+        viewModel.listCategoryIncome.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
         viewModel.isAddIncome.observe(viewLifecycleOwner) {
@@ -53,20 +49,20 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
                 requireContext(),
                 { view, year, month, dayOfMonth ->
                     viewModel.apply {
-                        date = LocalDate.of(year, month+1, dayOfMonth)
+                        dateIncome = LocalDate.of(year, month+1, dayOfMonth)
                     }
-                    viewBinding.pickTime.text = viewModel.date.formatDateTime()
+                    viewBinding.pickTime.text = viewModel.dateIncome.formatDateTime()
                 },
-                viewModel.date.year,
-                viewModel.date.monthValue -1,
-                viewModel.date.dayOfMonth
+                viewModel.dateIncome.year,
+                viewModel.dateIncome.monthValue -1,
+                viewModel.dateIncome.dayOfMonth
             )
             picker.show()
 
     }
 
     override fun submitIncome() {
-        viewModel.submitIncome();
+       // viewModel.submitIncome();
     }
 
     override fun onClick(position: Int, listCategory: MutableList<Category>) {
@@ -82,20 +78,20 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,IncomeViewModel>(),Inc
             )
         }
         else {
-            if (viewModel.idItemRcvCategorySelect != -1) {
+            if (viewModel.itemCategoryIncomeSelected != -1) {
                 viewBinding.rcvIncome
-                    .findViewHolderForAdapterPosition(viewModel.idItemRcvCategorySelect)!!
+                    .findViewHolderForAdapterPosition(viewModel.itemCategoryIncomeSelected)!!
                     .itemView.isSelected = false
             }
-            viewModel.idItemRcvCategorySelect = position
+            viewModel.itemCategoryIncomeSelected = position
             viewBinding.rcvIncome
-                .findViewHolderForAdapterPosition(viewModel.idItemRcvCategorySelect)!!
+                .findViewHolderForAdapterPosition(viewModel.itemCategoryIncomeSelected)!!
                 .itemView.isSelected = true
-            viewModel.category = listCategory[position]
+            viewModel.categoryIncomeSelected = listCategory[position]
         }
     }
     private fun setTimeDefault() {
-        val time = viewModel.date.formatDateTime()
+        val time = viewModel.dateIncome.formatDateTime()
         viewBinding.pickTime.text = time
     }
 }

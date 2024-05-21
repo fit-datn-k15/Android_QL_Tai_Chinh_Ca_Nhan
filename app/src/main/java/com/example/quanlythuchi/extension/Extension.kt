@@ -27,3 +27,4 @@ fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.updateList(list: List<T
 
     this.submitList(if (list === this.currentList) list.toMutableList() else list)
 }
+fun CharSequence?.isNotNullAndNotEmpty() = !this.isNullOrEmpty()
