@@ -37,32 +37,34 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_home_container) as NavHostFragment
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_home_container) as NavHostFragment
         navController = navHostFragment?.navController
         navigationBottom()
-            viewBinding.root.viewTreeObserver.addOnGlobalLayoutListener {
-                val rect = Rect()
-                viewBinding.root.getWindowVisibleDisplayFrame(rect)
-                val screenHeight: Int = viewBinding.root.rootView.height
-                val keypadHeight = screenHeight - rect.bottom
-                if (keypadHeight > screenHeight * 0.15) {
-                    this@HomeActivity.viewBinding.bottomNav.visibility = View.GONE
-                } else {
-                    when (navController?.currentDestination?.id) {
-                        R.id.fag_home,
-                        R.id.fag_calender,
-                        R.id.fag_report,
-                        R.id.fag_profile -> {
-                            this@HomeActivity.viewBinding.bottomNav.visibility = View.VISIBLE
-                        }
+        viewBinding.root.viewTreeObserver.addOnGlobalLayoutListener {
+            val rect = Rect()
+            viewBinding.root.getWindowVisibleDisplayFrame(rect)
+            val screenHeight: Int = viewBinding.root.rootView.height
+            val keypadHeight = screenHeight - rect.bottom
+            if (keypadHeight > screenHeight * 0.15) {
+                this@HomeActivity.viewBinding.bottomNav.visibility = View.GONE
+            } else {
+                when (navController?.currentDestination?.id) {
+                    R.id.fag_home,
+                    R.id.fag_calender,
+                    R.id.fag_report,
+                    R.id.fag_profile -> {
+                        this@HomeActivity.viewBinding.bottomNav.visibility = View.VISIBLE
+                    }
 
-                        else -> {
-                            this@HomeActivity.viewBinding.bottomNav.visibility = View.GONE
-                        }
+                    else -> {
+                        this@HomeActivity.viewBinding.bottomNav.visibility = View.GONE
                     }
                 }
+            }
 
         }
+        setUpDrawerLayout()
     }
 
     override fun onResume() {
