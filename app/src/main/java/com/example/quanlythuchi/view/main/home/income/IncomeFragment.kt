@@ -39,6 +39,7 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,ShareHomeViewModel>(),
         viewModel.isAddIncome.observe(viewLifecycleOwner) {
             if(it) {
                 Toast.makeText(this@IncomeFragment.requireContext(),"Đã thêm khoản thu", Toast.LENGTH_SHORT).show()
+                clearInputData()
             }
         }
         setTimeDefault()
@@ -93,5 +94,9 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,ShareHomeViewModel>(),
     private fun setTimeDefault() {
         val time = viewModel.dateIncome.formatDateTime()
         viewBinding.pickTime.text = time
+    }
+    private fun clearInputData() {
+        viewBinding.edtNote.setText("")
+        viewBinding.inputMoney.setText("")
     }
 }

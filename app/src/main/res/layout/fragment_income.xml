@@ -40,7 +40,7 @@
             android:textSize="@dimen/sp16"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="@+id/input_money"
             app:layout_constraintTop_toTopOf="@+id/textView">
 
         </com.google.android.material.textview.MaterialTextView>
@@ -88,7 +88,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rcv_income" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/linearLayout"
+            android:id="@+id/input_money"
             android:layout_width="250dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_money_input"
@@ -116,7 +116,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/edt_note"
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:ems="10"
@@ -124,9 +124,9 @@
             android:textSize="@dimen/sp14"
             android:text="@={viewModel.noteIncome}"
             app:layout_constraintBottom_toBottomOf="@+id/textView10"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="@+id/input_money"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/input_money"
             app:layout_constraintTop_toTopOf="@+id/textView10"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -150,7 +150,7 @@
             android:background="?android:attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="@+id/pick_time"
             app:layout_constraintEnd_toStartOf="@+id/pick_time"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/input_money"
             app:layout_constraintTop_toTopOf="@+id/pick_time"
             app:srcCompat="@drawable/ic_calendar_month" />
 

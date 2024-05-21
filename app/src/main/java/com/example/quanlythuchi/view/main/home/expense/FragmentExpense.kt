@@ -39,6 +39,7 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ShareHomeViewModel>(
 
         viewModel.isAddExpense.observe(viewLifecycleOwner) {
             if(it) {
+                clearDataInput()
                Toast.makeText(this@FragmentExpense.requireContext(),"Đã thêm khoản chi",Toast.LENGTH_SHORT).show()
             }
         }
@@ -94,6 +95,10 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ShareHomeViewModel>(
                 .itemView.isSelected = true
             viewModel.categoryExpenseSelected = listCategory[position]
         }
+    }
+    private fun clearDataInput() {
+        viewBinding.edtNoteExpense.setText("")
+        viewBinding.inputMoneyExpense.setText("")
     }
 
 }
