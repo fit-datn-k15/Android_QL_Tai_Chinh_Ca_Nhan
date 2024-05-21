@@ -10,5 +10,4 @@ object Constant {
     const val EXPENSE = "Expense"
     const val INCOME = "InCome"
     const val VND =" đ"
-    const val CODE_SIGN_IN_GOOGLE = 100
 }

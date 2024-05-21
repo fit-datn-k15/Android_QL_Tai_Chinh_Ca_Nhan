@@ -3,6 +3,7 @@ package com.example.quanlythuchi.data.entity
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.google.firebase.firestore.ServerTimestamp
 import java.io.Serializable
 
 @Entity(
@@ -13,10 +14,10 @@ import java.io.Serializable
     )]
 )
 data class Income(
-    @PrimaryKey(autoGenerate = true)
-    var idIncome: Int?=null,
-    var idCategory: String? =null,
-    var date: String?,
-    var income: Long?=null,
-    var note: String?
+    var idIncome: String? = null,
+    var idCategory: String? = null,
+    var idUser: String? = null,
+    var date: String? = null,
+    var income: Long? = null,
+    var note: String? = null
 ) : Serializable

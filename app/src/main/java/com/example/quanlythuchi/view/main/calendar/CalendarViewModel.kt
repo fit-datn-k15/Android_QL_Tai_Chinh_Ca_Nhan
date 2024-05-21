@@ -30,7 +30,7 @@ class CalendarViewModel @Inject constructor(
     fun getDataByDate() {
         resetData()
         viewModelScope.launch(Dispatchers.IO) {
-            listExpense.addAll(expenseRepository.getExpenseByDate(date.formatDateTime()))
+            listExpense.addAll(expenseRepository.getExpenseByDay(date.formatDateTime()))
             listIncome.addAll(incomeRepository.getIncomeByDate(date.formatDateTime()))
             withContext(Dispatchers.Main) {
                 isGetDataByDate.postValue(true)

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.quanlythuchi.AppBindingAdapter.setTimeFormatter
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.data.Fb
@@ -38,9 +39,10 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ShareHomeViewModel>(
         setTimeDefault()
 
         viewModel.isAddExpense.observe(viewLifecycleOwner) {
-            if(it) {
+            if (it) {
                 clearDataInput()
-               Toast.makeText(this@FragmentExpense.requireContext(),"Đã thêm khoản chi",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@FragmentExpense.requireContext(), "Đã thêm khoản chi", Toast.LENGTH_SHORT).show()
+                viewModel.isAddExpense.postValue(false)
             }
         }
     }
@@ -52,7 +54,7 @@ class FragmentExpense : BaseFragment<FragmentExpenseBinding,ShareHomeViewModel>(
                 viewModel.apply {
                     dateExpense = LocalDate.of(year, month+1, dayOfMonth)
                 }
-                viewBinding.pickTime.text = viewModel.dateExpense.formatDateTime()
+                viewBinding.pickTime.setTimeFormatter(viewModel.dateExpense)
             },
             viewModel.dateExpense.year,
             viewModel.dateExpense.monthValue -1,

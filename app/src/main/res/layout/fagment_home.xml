@@ -67,6 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp20"
+                android:onClick="@{v -> listener.onClickInputData()}"
                 setIconEnableInputData="@{viewModel.isEnableButtonAddAtToolbar()}"
                 android:background="?android:attr/selectableItemBackground" />
         </LinearLayout>

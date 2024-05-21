@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.quanlythuchi.AppBindingAdapter.setTimeFormatter
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.data.Fb
@@ -18,6 +19,7 @@ import com.example.quanlythuchi.view.main.home.ShareHomeViewModel
 import com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
+
 @AndroidEntryPoint
 class IncomeFragment : BaseFragment<FragmentIncomeBinding,ShareHomeViewModel>(),IncomeListener,AdapterIncome.OnClickListener {
     override val viewModel: ShareHomeViewModel by activityViewModels()
@@ -40,6 +42,7 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,ShareHomeViewModel>(),
             if(it) {
                 Toast.makeText(this@IncomeFragment.requireContext(),"Đã thêm khoản thu", Toast.LENGTH_SHORT).show()
                 clearInputData()
+                viewModel.isAddIncome.value = false
             }
         }
         setTimeDefault()
@@ -52,18 +55,17 @@ class IncomeFragment : BaseFragment<FragmentIncomeBinding,ShareHomeViewModel>(),
                     viewModel.apply {
                         dateIncome = LocalDate.of(year, month+1, dayOfMonth)
                     }
-                    viewBinding.pickTime.text = viewModel.dateIncome.formatDateTime()
+                    viewBinding.pickTime.setTimeFormatter(viewModel.dateIncome)
                 },
                 viewModel.dateIncome.year,
                 viewModel.dateIncome.monthValue -1,
                 viewModel.dateIncome.dayOfMonth
             )
             picker.show()
-
     }
 
     override fun submitIncome() {
-       // viewModel.submitIncome();
+        viewModel.submitIncome()
     }
 
     override fun onClick(position: Int, listCategory: MutableList<Category>) {

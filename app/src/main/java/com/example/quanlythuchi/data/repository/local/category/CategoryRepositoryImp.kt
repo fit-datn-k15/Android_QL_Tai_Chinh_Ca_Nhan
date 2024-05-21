@@ -3,7 +3,7 @@ package com.example.quanlythuchi.data.repository.local.category
 import android.util.Log
 import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.data.Fb
-import com.example.quanlythuchi.data.MapperCategory
+import com.example.quanlythuchi.data.mapperCategory
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.entity.categoryExpense
 import com.example.quanlythuchi.data.entity.categoryIncome
@@ -11,10 +11,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-import kotlin.math.log
 
 class CategoryRepositoryImp @Inject constructor(
 
@@ -32,7 +30,7 @@ class CategoryRepositoryImp @Inject constructor(
             .get()
             .addOnSuccessListener { querySnapShot ->
                 querySnapShot?.documents?.forEach {
-                    listCate.add(it.MapperCategory(typeCategory))
+                    listCate.add(it.mapperCategory(typeCategory))
                 }
             }
             .addOnFailureListener { ex -> Log.e(TAG, "getAllCategory: $ex") }

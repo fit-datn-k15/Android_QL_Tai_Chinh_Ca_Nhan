@@ -4,8 +4,10 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.quanlythuchi.data.entity.Icon
+import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.formatMoney
 import com.google.android.material.imageview.ShapeableImageView
+import java.time.LocalDate
 
 object AppBindingAdapter {
     @JvmStatic
@@ -32,4 +34,10 @@ object AppBindingAdapter {
             this.setImageResource(R.drawable.ic_input_data_disable)
         }
     }
+    @JvmStatic
+    @BindingAdapter("setTimeFormatter")
+    fun TextView.setTimeFormatter(time : LocalDate) {
+        text = time.formatDateTime()
+    }
+
 }

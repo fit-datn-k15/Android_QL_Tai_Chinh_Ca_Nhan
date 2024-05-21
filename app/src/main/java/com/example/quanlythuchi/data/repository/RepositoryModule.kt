@@ -18,5 +18,5 @@ abstract class RepositoryModule {
     @Binds
     abstract fun provideCategoryRepository(categoryRepositoryImp: CategoryRepositoryImp) : CategoryRepository
     @Binds
-    abstract fun provideIncome(incomeRepositoryImp: InComeRepositoryImp) : InComeRepository
+    abstract fun provideIncomeRepository(incomeRepositoryImp: InComeRepositoryImp) : InComeRepository
 }
