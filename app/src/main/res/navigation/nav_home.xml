@@ -5,7 +5,7 @@
     app:startDestination="@id/fag_home">
     <fragment
         android:id="@+id/fag_calender"
-        android:name="com.example.quanlythuchi.view.main.calendar.CalendarFragment">
+        android:name="com.example.quanlythuchi.view.main.calendar.Example5Fragment">
 
     </fragment>
     <fragment

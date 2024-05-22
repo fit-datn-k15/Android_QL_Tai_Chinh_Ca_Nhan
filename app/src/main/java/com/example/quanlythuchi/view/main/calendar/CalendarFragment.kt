@@ -41,6 +41,14 @@ class CalendarFragment : BaseFragment<FagmentCalendarBinding,CalendarViewModel>(
         }
     }
 
+    override fun exFiveNextMonthImage() {
+
+    }
+
+    override fun exFivePreviousMonthImage() {
+
+    }
+
 }
 
 

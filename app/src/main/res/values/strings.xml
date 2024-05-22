@@ -46,4 +46,9 @@
     <string name="drawer_export_pdf">Xuất dữ liệu Pdf</string>
     <string name="drawer_export">Xuất dữ liệu</string>
     <string name="drawer_other">Khác</string>
+
+    <string name="activity_title_view">Calendar View Sample</string>
+    <string name="example_5_title">Example 5</string>
+    <string name="example_5_subtitle">Single selection, programmatic calendar scrolling, generates six rows for all months showing \"EndOfGrid\" implementation of OutDateStyle property. A flight schedule calendar.</string>
+
 </resources>

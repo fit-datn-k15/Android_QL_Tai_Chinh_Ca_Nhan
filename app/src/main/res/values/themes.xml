@@ -31,4 +31,5 @@
 
 <!--        <item name="postSplashScreenTheme">@style/Theme.QuanLyThuChi2</item>-->
 <!--    </style>-->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 </resources>
