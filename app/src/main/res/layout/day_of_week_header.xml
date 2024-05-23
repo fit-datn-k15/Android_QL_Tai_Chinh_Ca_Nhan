@@ -8,7 +8,7 @@
     android:layout_marginBottom="@dimen/dp2">
 
     <include
-        android:id="@+id/legendLayout"
+        android:id="@+id/list_day_of_week"
         layout="@layout/calendar_day_legend_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

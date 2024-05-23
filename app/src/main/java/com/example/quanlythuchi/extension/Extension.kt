@@ -33,7 +33,10 @@ fun String.isValidEmail() : Boolean {
 }
 fun CharSequence?.isNotNullAndNotEmpty() = !this.isNullOrEmpty()
 
-
+fun String.toLocalDate() : LocalDate {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    return LocalDate.parse(this, formatter)
+}
 
 fun View.makeVisible() {
     visibility = View.VISIBLE

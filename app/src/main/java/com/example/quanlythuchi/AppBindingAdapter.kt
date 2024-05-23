@@ -7,7 +7,9 @@ import com.example.quanlythuchi.data.entity.Icon
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.formatMoney
 import com.google.android.material.imageview.ShapeableImageView
+import java.text.NumberFormat
 import java.time.LocalDate
+import java.util.Locale
 
 object AppBindingAdapter {
     @JvmStatic
@@ -38,6 +40,12 @@ object AppBindingAdapter {
     @BindingAdapter("setTimeFormatter")
     fun TextView.setTimeFormatter(time : LocalDate) {
         text = time.formatDateTime()
+    }
+    @JvmStatic
+    @BindingAdapter("setMoney")
+    fun TextView.setMoney(money : Long) {
+        val numberFormat = NumberFormat.getInstance(Locale("vi", "VN"))
+        this.text = numberFormat.format(money)
     }
 
 }

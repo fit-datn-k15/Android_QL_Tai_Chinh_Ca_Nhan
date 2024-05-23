@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/exFiveDayLayout"
+    android:id="@+id/layout_item_day_view"
     android:layout_width="100dp"
     android:layout_height="100dp">
 
     <FrameLayout
-        android:id="@+id/frame"
+        android:id="@+id/frame_layout_item_day_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="1dp"
@@ -16,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/exFiveDayText"
+            android:id="@+id/text_view_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
@@ -28,23 +29,24 @@
             tools:text="24" />
 
         <View
-            android:id="@+id/exFiveDayFlightTop"
+            android:id="@+id/item_top_income_line"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="18dp"
-            android:background="@color/blue_grey_700" />
+            android:background="@color/green_2D9849" />
 
         <View
-            android:id="@+id/exFiveDayFlightBottom"
+            android:id="@+id/item_bottom_expense_line"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="8dp"
-            android:background="@color/brown_700" />
+            android:background="#D87378" />
 
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
 
 

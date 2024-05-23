@@ -8,6 +8,7 @@ import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
 import com.example.quanlythuchi.extension.formatDateTime
+import com.example.quanlythuchi.extension.toLocalDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,15 +25,21 @@ class CalendarViewModel @Inject constructor(
     var total = 0L;
     var incomeTotal =0L;
     var expenseTotal =0L;
-    private var listExpense = ArrayList<Expense>()
-    private var listIncome = ArrayList<Income>()
+    var listExpense = ArrayList<Expense>()
+    var listIncome = ArrayList<Income>()
     var isGetDataByDate = SingleLiveData(false)
+
+
+    var listGroupExpense  : Map<LocalDate, List<Expense>> = mapOf()
+    var listGroupIncome : Map<LocalDate,List<Income>> = mapOf()
     fun getDataByDate() {
         resetData()
         viewModelScope.launch(Dispatchers.IO) {
             listExpense.addAll(expenseRepository.getExpenseByDay(date.formatDateTime()))
             listIncome.addAll(incomeRepository.getIncomeByDate(date.formatDateTime()))
             withContext(Dispatchers.Main) {
+                listGroupExpense = listExpense.groupBy { it.date!!.toLocalDate() }
+                listGroupIncome = listIncome.groupBy { it.date!!.toLocalDate() }
                 isGetDataByDate.postValue(true)
                 calculator()
             }
