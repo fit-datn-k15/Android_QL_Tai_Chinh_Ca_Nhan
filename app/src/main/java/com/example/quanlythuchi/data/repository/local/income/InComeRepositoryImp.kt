@@ -27,8 +27,10 @@ class InComeRepositoryImp @Inject constructor(
             .whereEqualTo(Fb.CategoryField.idUser, user!!.uid)
             .get()
             .addOnSuccessListener {querySnapshot ->
-                querySnapshot.documents.forEach {
-                    listIncome.add(it.mapperIncome())
+                querySnapshot.documents.forEach {document ->
+                    document.toObject(Income::class.java)?.let {
+                        listIncome.add(it)
+                    }
                 }
             }
             .addOnFailureListener {}

@@ -19,7 +19,8 @@ fun DocumentSnapshot.mapperExpense() : Expense {
         idCategory = this["idCategory"] as? String?,
         idUser = this["idUser"] as? String?,
         expense = this["expense"] as? Long?,
-        note = this["note"] as? String?
+        note = this["note"] as? String?,
+        date = this["date"] as? String
     )
 }
 fun DocumentSnapshot.mapperIncome() : Income {

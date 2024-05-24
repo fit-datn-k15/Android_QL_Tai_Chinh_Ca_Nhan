@@ -57,10 +57,10 @@ class MondayView(val viewModel: CalendarViewModel,
                     frameLayoutItemDayView.setBackgroundColor(context.getColorCompat(R.color.day_selected_EFF4F9))
                     layoutItemDayView.setBackgroundResource(if (viewModel.selectedDate == day.date) R.drawable.example_5_selected_bg else 0)
 
-                    if(viewModel.listGroupExpense[day.date] != null) {
+                    if(viewModel.listGroupExpenseToShowDayView[day.date] != null) {
                         itemBottomExpenseLine.setBackgroundColor(context.getColor(R.color.red_F74040))
                     }
-                    if (viewModel.listGroupIncome[day.date] != null) {
+                    if (viewModel.listGroupIncomeToShowDayView[day.date] != null) {
                         itemTopIncomeLine.setBackgroundColor(context.getColor(R.color.green_700))
                     }
                 } else {

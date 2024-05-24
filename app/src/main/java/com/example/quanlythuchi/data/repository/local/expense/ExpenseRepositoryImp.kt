@@ -25,8 +25,10 @@ class ExpenseRepositoryImp @Inject constructor(
             .whereEqualTo(Fb.CategoryField.idUser, user!!.uid)
             .get()
             .addOnSuccessListener {querySnapshot ->
-                querySnapshot.documents.forEach {
-                    listExpense.add(it.mapperExpense())
+                querySnapshot.documents.forEach {document ->
+                    document.toObject(Expense::class.java)?.let {
+                            expense -> listExpense.add(expense)
+                    }
                 }
             }
             .addOnFailureListener {

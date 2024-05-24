@@ -30,21 +30,20 @@ class CalendarViewModel @Inject constructor(
     var listIncome = mutableListOf<Income>()
     var isGetDataByMonth = SingleLiveData(false)
 
-
-    var listGroupExpense  : Map<LocalDate, List<Expense>> = mapOf()
-    var listGroupIncome : Map<LocalDate,List<Income>> = mapOf()
+    var listGroupExpenseToShowDayView  : Map<LocalDate, List<Expense>> = mapOf()
+    var listGroupIncomeToShowDayView : Map<LocalDate,List<Income>> = mapOf()
     fun getDataByDate() {
         resetData()
         viewModelScope.launch(Dispatchers.IO) {
-            val lExpense = expenseRepository.getExpenseByMonth(date.formatMonth())
-            val lIncome = incomeRepository.getIncomeByMonth(date.formatMonth())
+            val lExpense = expenseRepository.getAllExpense()
+            val lIncome = incomeRepository.getAllIncome()
             withContext(Dispatchers.Main) {
                 listExpense.clear()
                 listIncome.clear()
                 listExpense.addAll(lExpense)
                 listIncome.addAll(lIncome)
-                listGroupExpense = listExpense.groupBy { it.date!!.toLocalDate() }
-                listGroupIncome = listIncome.groupBy { it.date!!.toLocalDate() }
+                listGroupExpenseToShowDayView = listExpense.groupBy { it.date.toLocalDate() }
+                listGroupIncomeToShowDayView = listIncome.groupBy { it.date.toLocalDate() }
                 isGetDataByMonth.postValue(true)
                 calculator()
             }

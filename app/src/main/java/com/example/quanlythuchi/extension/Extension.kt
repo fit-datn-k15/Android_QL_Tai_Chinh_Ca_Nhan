@@ -37,9 +37,21 @@ fun String.isValidEmail() : Boolean {
 }
 fun CharSequence?.isNotNullAndNotEmpty() = !this.isNullOrEmpty()
 
-fun String.toLocalDate() : LocalDate {
+//fun String.toLocalDate() : LocalDate {
+//    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//    return LocalDate.parse(this, formatter)
+//}
+fun String?.toLocalDate() : LocalDate {
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-    return LocalDate.parse(this, formatter)
+    try {
+        if (this.isNullOrEmpty()) {
+            return LocalDate.parse(LocalDate.now().toString(), formatter)
+        }
+        return LocalDate.parse(this, formatter)
+    }
+    catch (e : Exception) {
+        return LocalDate.parse(LocalDate.now().toString(), formatter)
+    }
 }
 
 fun View.makeVisible() {
