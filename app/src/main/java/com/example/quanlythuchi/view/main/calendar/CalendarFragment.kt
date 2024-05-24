@@ -63,7 +63,7 @@ class CalendarFragment : BaseFragment<Example5FragmentBinding, CalendarViewModel
 
     private fun configureBinders(daysOfWeek: List<DayOfWeek>) {
 
-        viewBinding.calendarView.dayBinder = MondayView(viewModel = this@CalendarFragment.viewModel,viewLifecycleOwner, this)
+        viewBinding.calendarView.dayBinder = MondayView(viewModel = this@CalendarFragment.viewModel, this)
 
         class MonthViewContainer(view: View) : ViewContainer(view) {
             val listDayOfWeek = DayOfWeekHeaderBinding.bind(view).listDayOfWeek.root

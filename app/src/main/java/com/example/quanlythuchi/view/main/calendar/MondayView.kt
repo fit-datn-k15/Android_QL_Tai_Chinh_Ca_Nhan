@@ -1,10 +1,7 @@
 package com.example.quanlythuchi.view.main.calendar
 
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.LifecycleOwner
 import com.example.quanlythuchi.R
-import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.databinding.ItemDayViewCalendarBinding
 import com.example.quanlythuchi.extension.getColorCompat
 import com.example.quanlythuchi.extension.setTextColorRes
@@ -15,18 +12,17 @@ import com.kizitonwose.calendar.view.ViewContainer
 import java.time.LocalDate
 
 class MondayView(val viewModel: CalendarViewModel,
-                 val owner: LifecycleOwner,
                  val onClickDay : OnClickDayListener,
 ) : MonthDayBinder<MondayView.ItemDayViewCalendar> {
     override fun create(view: View): ItemDayViewCalendar {
-        return ItemDayViewCalendar(view,owner)
+        return ItemDayViewCalendar(view)
     }
 
     override fun bind(container: ItemDayViewCalendar, data: CalendarDay) {
             container.day = data
             container.setUpView()
     }
-    inner class ItemDayViewCalendar(view : View, lifecycleOwner: LifecycleOwner) : ViewContainer(view) {
+    inner class ItemDayViewCalendar(view: View) : ViewContainer(view) {
         val binding = ItemDayViewCalendarBinding.bind(view)
         lateinit var day: CalendarDay // Will be set when this container is bound.
         init {
@@ -37,12 +33,6 @@ class MondayView(val viewModel: CalendarViewModel,
                         viewModel.selectedDate = day.date
                         onClickDay.onClickDay(day.date, oldDate)
                     }
-                }
-            }
-            binding.lifecycleOwner = lifecycleOwner
-            viewModel.isGetDataByMonth.observe(lifecycleOwner) {
-                if(it) {
-                    Log.i(TAG, "isGetData: $it")
                 }
             }
         }
