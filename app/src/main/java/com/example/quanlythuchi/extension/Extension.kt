@@ -21,6 +21,10 @@ fun LocalDate.formatDateTime(): String {
     val formatter = DateTimeFormatter.ofPattern(Constant.DATE_FORMAT, Locale.getDefault())
     return this.format(formatter)
 }
+fun LocalDate.formatMonth(): String {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM",Locale.getDefault())
+    return this.format(formatter)
+}
 fun <T : Number>T.formatMoney() : String {
     val numberFormat = NumberFormat.getNumberInstance(Locale.getDefault())
     return  numberFormat.format(this) + Constant.VND

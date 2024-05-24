@@ -7,7 +7,7 @@ import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
-import com.example.quanlythuchi.extension.formatDateTime
+import com.example.quanlythuchi.extension.formatMonth
 import com.example.quanlythuchi.extension.toLocalDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,13 +21,14 @@ class CalendarViewModel @Inject constructor(
     private val expenseRepository: ExpenseRepository,
     private val incomeRepository: InComeRepository
 ): BaseViewModel() {
-    var date =LocalDate.now();
+    var date = LocalDate.now();
+    var selectedDate: LocalDate? = null
     var total = 0L;
     var incomeTotal =0L;
     var expenseTotal =0L;
-    var listExpense = ArrayList<Expense>()
-    var listIncome = ArrayList<Income>()
-    var isGetDataByDate = SingleLiveData(false)
+    var listExpense = mutableListOf<Expense>()
+    var listIncome = mutableListOf<Income>()
+    var isGetDataByMonth = SingleLiveData(false)
 
 
     var listGroupExpense  : Map<LocalDate, List<Expense>> = mapOf()
@@ -35,12 +36,16 @@ class CalendarViewModel @Inject constructor(
     fun getDataByDate() {
         resetData()
         viewModelScope.launch(Dispatchers.IO) {
-            listExpense.addAll(expenseRepository.getExpenseByDay(date.formatDateTime()))
-            listIncome.addAll(incomeRepository.getIncomeByDate(date.formatDateTime()))
+            val lExpense = expenseRepository.getExpenseByMonth(date.formatMonth())
+            val lIncome = incomeRepository.getIncomeByMonth(date.formatMonth())
             withContext(Dispatchers.Main) {
+                listExpense.clear()
+                listIncome.clear()
+                listExpense.addAll(lExpense)
+                listIncome.addAll(lIncome)
                 listGroupExpense = listExpense.groupBy { it.date!!.toLocalDate() }
                 listGroupIncome = listIncome.groupBy { it.date!!.toLocalDate() }
-                isGetDataByDate.postValue(true)
+                isGetDataByMonth.postValue(true)
                 calculator()
             }
         }
