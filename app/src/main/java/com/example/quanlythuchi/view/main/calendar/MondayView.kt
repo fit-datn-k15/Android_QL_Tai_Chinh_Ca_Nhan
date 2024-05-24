@@ -11,20 +11,23 @@ import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.ViewContainer
 import java.time.LocalDate
 
-class MondayView(val viewModel: CalendarViewModel,
-                 val onClickDay : OnClickDayListener,
+class MondayView(
+    val viewModel: CalendarViewModel,
+    val onClickDay: OnClickDayListener,
 ) : MonthDayBinder<MondayView.ItemDayViewCalendar> {
     override fun create(view: View): ItemDayViewCalendar {
         return ItemDayViewCalendar(view)
     }
 
     override fun bind(container: ItemDayViewCalendar, data: CalendarDay) {
-            container.day = data
-            container.setUpView()
+        container.day = data
+        container.setUpView()
     }
+
     inner class ItemDayViewCalendar(view: View) : ViewContainer(view) {
         val binding = ItemDayViewCalendarBinding.bind(view)
         lateinit var day: CalendarDay // Will be set when this container is bound.
+
         init {
             view.setOnClickListener {
                 if (day.position == DayPosition.MonthDate) {
@@ -36,23 +39,29 @@ class MondayView(val viewModel: CalendarViewModel,
                 }
             }
         }
+
         fun setUpView() {
             val context = binding.root.context
             binding.apply {
                 textViewDay.text = day.date.dayOfMonth.toString()
-                itemTopIncomeLine.background = null
-                itemBottomExpenseLine.background = null
+
+                itemBottomExpenseLine.visibility = View.GONE
+                itemTopIncomeLine.visibility = View.GONE
+
                 if (day.position == DayPosition.MonthDate) {
                     textViewDay.setTextColorRes(R.color.black70)
                     frameLayoutItemDayView.setBackgroundColor(context.getColorCompat(R.color.day_selected_EFF4F9))
-                    layoutItemDayView.setBackgroundResource(if (viewModel.selectedDate == day.date) R.drawable.example_5_selected_bg else 0)
+                    layoutItemDayView.setBackgroundResource(
+                        if (viewModel.selectedDate == day.date) R.drawable.example_5_selected_bg
+                        else 0
+                    )
 
-                    if(viewModel.listGroupExpenseToShowDayView[day.date] != null) {
-                        itemBottomExpenseLine.setBackgroundColor(context.getColor(R.color.red_F74040))
-                    }
-                    if (viewModel.listGroupIncomeToShowDayView[day.date] != null) {
-                        itemTopIncomeLine.setBackgroundColor(context.getColor(R.color.green_700))
-                    }
+                    if (viewModel.listGroupExpenseToShowDayView[day.date] != null)
+                        itemBottomExpenseLine.visibility = View.VISIBLE
+
+                    if (viewModel.listGroupIncomeToShowDayView[day.date] != null)
+                        itemTopIncomeLine.visibility = View.VISIBLE
+
                 } else {
                     textViewDay.setTextColorRes(R.color.white)
                     frameLayoutItemDayView.setBackgroundColor(context.getColor(R.color.day_not_selected_EFF4F9))
@@ -61,7 +70,8 @@ class MondayView(val viewModel: CalendarViewModel,
         }
 
     }
+
     public interface OnClickDayListener {
-        fun onClickDay(selectedDate: LocalDate, oldDate : LocalDate?)
+        fun onClickDay(selectedDate: LocalDate, oldDate: LocalDate?)
     }
 }

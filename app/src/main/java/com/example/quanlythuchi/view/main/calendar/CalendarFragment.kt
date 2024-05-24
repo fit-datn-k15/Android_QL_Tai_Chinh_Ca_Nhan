@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.DayOfWeekHeaderBinding
-import com.example.quanlythuchi.databinding.Example5FragmentBinding
+import com.example.quanlythuchi.databinding.FragmentCalendarBinding
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.core.nextMonth
@@ -21,12 +21,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+
 @AndroidEntryPoint
-class CalendarFragment : BaseFragment<Example5FragmentBinding, CalendarViewModel>(),
+class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel>(),
     CalendarListener, AdapterExpenseIncomeReport.OnClickListener, MondayView.OnClickDayListener {
 
     override val viewModel: CalendarViewModel by viewModels()
-    override val layoutID: Int = R.layout.example_5_fragment
+    override val layoutID: Int = R.layout.fragment_calendar
 
 
     private val adapter by lazy { AdapterExpenseIncomeReport(this) }
@@ -63,7 +64,8 @@ class CalendarFragment : BaseFragment<Example5FragmentBinding, CalendarViewModel
 
     private fun configureBinders(daysOfWeek: List<DayOfWeek>) {
 
-        viewBinding.calendarView.dayBinder = MondayView(viewModel = this@CalendarFragment.viewModel, this)
+        viewBinding.calendarView.dayBinder =
+            MondayView(viewModel = this@CalendarFragment.viewModel, this)
 
         class MonthViewContainer(view: View) : ViewContainer(view) {
             val listDayOfWeek = DayOfWeekHeaderBinding.bind(view).listDayOfWeek.root
@@ -85,7 +87,7 @@ class CalendarFragment : BaseFragment<Example5FragmentBinding, CalendarViewModel
             }
     }
 
-    override fun onClickDay(selectedDate: LocalDate, oldDate : LocalDate?) {
+    override fun onClickDay(selectedDate: LocalDate, oldDate: LocalDate?) {
         val binding = this@CalendarFragment.viewBinding
         binding.calendarView.notifyDateChanged(selectedDate)
         oldDate?.let { binding.calendarView.notifyDateChanged(it) }

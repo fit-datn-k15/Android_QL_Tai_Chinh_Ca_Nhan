@@ -54,34 +54,6 @@ fun String?.toLocalDate() : LocalDate {
     }
 }
 
-fun View.makeVisible() {
-    visibility = View.VISIBLE
-}
-
-fun View.makeInVisible() {
-    visibility = View.INVISIBLE
-}
-
-fun View.makeGone() {
-    visibility = View.GONE
-}
-
-fun dpToPx(dp: Int, context: Context): Int =
-    TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP,
-        dp.toFloat(),
-        context.resources.displayMetrics,
-    ).toInt()
-
-internal val Context.layoutInflater: LayoutInflater
-    get() = LayoutInflater.from(this)
-
-internal val Context.inputMethodManager
-    get() = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
-internal fun Context.getDrawableCompat(@DrawableRes drawable: Int): Drawable =
-    requireNotNull(ContextCompat.getDrawable(this, drawable))
-
 internal fun Context.getColorCompat(@ColorRes color: Int) =
     ContextCompat.getColor(this, color)
 
