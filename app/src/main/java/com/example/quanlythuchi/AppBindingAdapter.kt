@@ -10,6 +10,7 @@ import com.example.quanlythuchi.data.entity.Icon
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.formatMoney
 import com.example.quanlythuchi.extension.setTextColorRes
+import com.example.quanlythuchi.extension.toLocalDate
 import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 import com.google.android.material.imageview.ShapeableImageView
 import java.text.NumberFormat
@@ -54,6 +55,13 @@ object AppBindingAdapter {
     @BindingAdapter("setTimeFormatter")
     fun TextView.setTimeFormatter(time : LocalDate) {
         text = time.formatDateTime()
+    }
+    @JvmStatic
+    @BindingAdapter("setTimeString")
+    fun TextView.setTimeString(time : String) {
+        try {
+            text = time.toLocalDate().formatDateTime()
+        }catch (_: Exception) {}
     }
     @JvmStatic
     @BindingAdapter("setMoney")
