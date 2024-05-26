@@ -23,7 +23,7 @@ class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val viewBinding = DataBindingUtil.inflate<ItemTotalCalendarBinding>(
-            inflater, R.layout.item_category, parent, false
+            inflater, R.layout.item_total_calendar, parent, false
         )
         return CategoryViewHolder(viewBinding)
     }
@@ -38,7 +38,7 @@ class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
 
     class Callback : DiffUtil.ItemCallback<ExpenseIncome>() {
         override fun areItemsTheSame(oldItem: ExpenseIncome, newItem: ExpenseIncome): Boolean {
-            return oldItem.idCategory == newItem.idCategory
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: ExpenseIncome, newItem: ExpenseIncome): Boolean {

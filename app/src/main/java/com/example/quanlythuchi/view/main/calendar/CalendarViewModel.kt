@@ -1,13 +1,15 @@
 package com.example.quanlythuchi.view.main.calendar
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.base.BaseViewModel
 import com.example.quanlythuchi.base.SingleLiveData
+import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
-import com.example.quanlythuchi.extension.formatMonth
+import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
 import com.example.quanlythuchi.extension.toLocalDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
     private val expenseRepository: ExpenseRepository,
-    private val incomeRepository: InComeRepository
+    private val incomeRepository: InComeRepository,
+    private val categoryRepository: CategoryRepository
 ): BaseViewModel() {
     var date = LocalDate.now();
     var selectedDate: LocalDate? = null
@@ -32,20 +35,62 @@ class CalendarViewModel @Inject constructor(
 
     var listGroupExpenseToShowDayView  : Map<LocalDate, List<Expense>> = mapOf()
     var listGroupIncomeToShowDayView : Map<LocalDate,List<Income>> = mapOf()
+
+    var listCategory : Map<String, Category> = mutableMapOf()
+    // list này là tổng hợp các khoản thu, chi của 1 ngày
+    var listSyntheticByDate = MutableLiveData(mutableListOf<ExpenseIncome>())
     fun getDataByDate() {
-        resetData()
         viewModelScope.launch(Dispatchers.IO) {
             val lExpense = expenseRepository.getAllExpense()
             val lIncome = incomeRepository.getAllIncome()
+            val lCategory = categoryRepository.getAll()
             withContext(Dispatchers.Main) {
-                listExpense.clear()
-                listIncome.clear()
+                resetData()
                 listExpense.addAll(lExpense)
                 listIncome.addAll(lIncome)
+                listCategory = lCategory.associateBy { it.idCategory ?: "otherCategory" }
                 listGroupExpenseToShowDayView = listExpense.groupBy { it.date.toLocalDate() }
                 listGroupIncomeToShowDayView = listIncome.groupBy { it.date.toLocalDate() }
                 isGetDataByMonth.postValue(true)
                 calculator()
+            }
+        }
+    }
+    fun filterListSyntheticByDate(dateSelecting : LocalDate) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list: MutableList<ExpenseIncome> = mutableListOf()
+            for (item in listExpense) {
+                if (dateSelecting.toString() == item.date)
+                    list.add(
+                        ExpenseIncome(
+                            idCategory = item.idCategory,
+                            id = item.idExpense,
+                            noteExpenseIncome = item.note,
+                            date = item.date,
+                            money = item.expense,
+                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
+                            titleCategory = listCategory[item.idCategory]?.title,
+                            icon = listCategory[item.idCategory]?.icon
+                        )
+                    )
+            }
+            for (item in listIncome) {
+                if (dateSelecting.toString() == item.date)
+                    list.add(
+                        ExpenseIncome(
+                            idCategory = item.idCategory,
+                            id = item.idIncome,
+                            noteExpenseIncome = item.note,
+                            date = item.date,
+                            money = item.income,
+                            typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
+                            titleCategory = listCategory[item.idCategory]?.title,
+                            icon = listCategory[item.idCategory]?.icon
+                        )
+                    )
+            }
+            withContext(Dispatchers.Main) {
+                listSyntheticByDate.postValue(list)
             }
         }
     }

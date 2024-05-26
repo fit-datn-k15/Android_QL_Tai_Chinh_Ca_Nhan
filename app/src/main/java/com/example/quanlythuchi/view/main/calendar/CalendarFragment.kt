@@ -35,12 +35,14 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDataByDate()
-        viewBinding.listener = this
-        viewBinding.listIncomeAndExpense.apply {
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = this@CalendarFragment.adapter
+        viewBinding.apply {
+            listener = this@CalendarFragment
+            listIncomeAndExpense.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            listIncomeAndExpense.adapter = this@CalendarFragment.adapter
         }
-
+        viewModel.listSyntheticByDate.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
         val daysOfWeek = daysOfWeek()
         val currentMonth = YearMonth.now()
         val startMonth = currentMonth.minusMonths(200)
@@ -88,9 +90,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
     }
 
     override fun onClickDay(selectedDate: LocalDate, oldDate: LocalDate?) {
-        val binding = this@CalendarFragment.viewBinding
-        binding.calendarView.notifyDateChanged(selectedDate)
-        oldDate?.let { binding.calendarView.notifyDateChanged(it) }
+        viewBinding.calendarView.notifyDateChanged(selectedDate)
+        oldDate?.let {
+            viewBinding.calendarView.notifyDateChanged(it)
+        }
+        viewModel.filterListSyntheticByDate(selectedDate)
     }
 
     override fun exFiveNextMonthImage() {

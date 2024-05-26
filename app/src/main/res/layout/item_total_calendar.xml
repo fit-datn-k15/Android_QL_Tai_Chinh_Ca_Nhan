@@ -14,13 +14,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_margin="1dp"
-        android:background="@drawable/bg_expense_income_balance_radius_10">
+        android:layout_marginVertical="@dimen/dp2"
+        android:layout_marginHorizontal="@dimen/dp2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:paddingVertical="@dimen/dp10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/dp15"
             android:gravity="center|start"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,27 +28,42 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/bg_icon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:background="@color/green_B8D8C1"
-                android:src="@drawable/ic_down"
-                setIcon="@{item.icon}"
+                android:background="@color/bar_drawer_EFF4F9"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.75"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.4"
                 app:shapeAppearanceOverlay="@style/circleImageView" />
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/icon"
+                setIcon="@{item.icon}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/dp10"
+                app:layout_constraintBottom_toBottomOf="@+id/bg_icon"
+                app:layout_constraintEnd_toEndOf="@+id/bg_icon"
+                app:layout_constraintStart_toStartOf="@+id/bg_icon"
+                app:layout_constraintTop_toTopOf="@+id/bg_icon"
+                app:shapeAppearanceOverlay="@style/Widget.AppCompat.Button.Borderless" />
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="0dp"
                 android:layout_marginStart="@dimen/dp20"
+                android:orientation="vertical"
                 android:weightSum="2"
-                app:layout_constraintStart_toEndOf="@+id/icon">
+                app:layout_constraintBottom_toBottomOf="@+id/bg_icon"
+                app:layout_constraintStart_toEndOf="@+id/bg_icon"
+                app:layout_constraintTop_toTopOf="@+id/bg_icon">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/name"
@@ -57,61 +71,40 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="start|center"
+                    android:hint="name note"
                     android:text="@{item.noteExpenseIncome}"
-                    android:textColor="@color/black80"
-                    android:hint="name note"/>
+                    android:textColor="@color/black80" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/category"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:gravity="center|start"
                     android:layout_weight="1"
-                    android:text="@{item.titleCategory}"
+                    android:gravity="center|start"
                     android:hint="Thời trang"
-                    android:textSize="@dimen/sp12" />
+                    android:text="@{item.titleCategory}"
+                    android:textColor="@color/black90"
+                    android:textSize="@dimen/sp12"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+"
-                android:textSize="18sp"
-                android:textColor="@{ item.typeMoney == ExpenseIncome.TYPE_EXPENSE ? @color/red_d61c1c : @color/green_2D9849}"
-                android:textStyle="bold"
-                android:layout_marginEnd="@dimen/dp5"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/materialTextView3"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView3"
+                setMoney="@{item}"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="start|center"
                 android:text="100.000"
-                setMoney="@{item.money}"
-                android:textColor="@{ item.typeMoney == ExpenseIncome.TYPE_EXPENSE ? @color/red_d61c1c : @color/green_2D9849}"
-                android:textSize="@dimen/sp18"
+                android:textColor="@{ item.typeExpenseOrIncome == ExpenseIncome.TYPE_EXPENSE ? @color/red_d61c1c : @color/green_2D9849}"
+                android:textSize="@dimen/sp16"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp5"
-                android:text=" đ"
-                android:textColor="@{ item.typeMoney == ExpenseIncome.TYPE_EXPENSE ? @color/red_d61c1c : @color/green_2D9849}"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,9 +3,9 @@ package com.example.quanlythuchi.view.main.calendar
 import java.time.LocalDateTime
 
 data class ExpenseIncome (
-    val id : String,
-    val time : LocalDateTime,
-    val typeMoney: Int,
+    val id : String?,
+    val date : String?,
+    val typeExpenseOrIncome: Int,
     val money : Long? = null,
     val icon : String? = null,
     val idCategory : String? = null,

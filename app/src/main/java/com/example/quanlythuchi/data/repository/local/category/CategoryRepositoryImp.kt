@@ -11,6 +11,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -20,7 +24,7 @@ class CategoryRepositoryImp @Inject constructor(
 
     private val db: FirebaseFirestore = Firebase.firestore
     private val user by lazy {  FirebaseAuth.getInstance().currentUser}
-    override suspend fun getAllCategory(typeCategory: String): MutableList<Category> {
+    override suspend fun getAllCategoryByType(typeCategory: String): MutableList<Category> {
         if (user == null) {return  mutableListOf() }
 
         val listCate = mutableListOf<Category>()
@@ -37,6 +41,37 @@ class CategoryRepositoryImp @Inject constructor(
             .await()
         return listCate
     }
+
+    override suspend fun getAll(): MutableList<Category> {
+        if (user == null) {return  mutableListOf() }
+
+        val listCate = mutableListOf<Category>()
+        db.collection(Fb.User)
+            .document(user!!.uid)
+            .collection(Fb.CategoryIncome)
+            .get()
+            .addOnSuccessListener { querySnapShot ->
+                querySnapShot?.documents?.forEach {
+                    listCate.add(it.mapperCategory(Fb.CategoryIncome))
+                }
+            }
+            .addOnFailureListener { ex -> Log.e(TAG, "getAllCategory: $ex") }
+            .await()
+        db.collection(Fb.User)
+            .document(user!!.uid)
+            .collection(Fb.CategoryExpense)
+            .get()
+            .addOnSuccessListener { querySnapShot ->
+                querySnapShot?.documents?.forEach {
+                    listCate.add(it.mapperCategory(Fb.CategoryExpense))
+                }
+            }
+            .addOnFailureListener { ex -> Log.e(TAG, "getAllCategory: $ex") }
+            .await()
+
+        return listCate
+    }
+
 
     override suspend fun addCategory(category: Category, typeCategory: String) {
         if (user == null) return

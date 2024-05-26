@@ -26,7 +26,7 @@ class ShareHomeViewModel @Inject constructor(
     var isAddIncome = SingleLiveData(false)
     fun getCategoryExpense() {
         viewModelScope.launch(Dispatchers.IO) {
-            val it = categoryRepository.getAllCategory(Fb.CategoryExpense)
+            val it = categoryRepository.getAllCategoryByType(Fb.CategoryExpense)
             withContext(Dispatchers.Main) {
                 it.add(Category.categoryAdded())
                 listCategoryExpense.postValue(it)
@@ -36,7 +36,7 @@ class ShareHomeViewModel @Inject constructor(
     }
     fun getCategoryIncome() {
         viewModelScope.launch(Dispatchers.IO) {
-            val it = categoryRepository.getAllCategory(Fb.CategoryIncome)
+            val it = categoryRepository.getAllCategoryByType(Fb.CategoryIncome)
             withContext(Dispatchers.Main) {
                 it.add(Category.categoryAdded())
                 listCategoryIncome.postValue(it)

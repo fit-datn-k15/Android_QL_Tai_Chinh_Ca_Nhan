@@ -43,7 +43,8 @@ object Icon{
         "ic_38" to R.drawable.ic_up,
         "ic_39" to R.drawable.ic_down,
         "ic_40" to R.drawable.ic_people,
-        "ic_41" to R.drawable.ic_money_income
+        "ic_41" to R.drawable.ic_money_income,
+        "ic_42" to R.drawable.ic_gift
 
     )
     fun getIcon(iconName: String): Int {
@@ -89,9 +90,11 @@ object Icon{
     const val ic_38 = "ic_38"
     const val ic_39 = "ic_39"
     const val ic_40 = "ic_40"
+    const val ic_41 = "ic_41"
+    const val ic_42 = "ic_42"
     fun getListIcon() = mutableListOf(ic_1, ic_2, ic_3, ic_4, ic_5, ic_6, ic_7, ic_8, ic_9, ic_10,
         ic_11, ic_12, ic_13, ic_14, ic_15, ic_16, ic_17, ic_18, ic_19, ic_20, ic_21, ic_22, ic_23,
         ic_24, ic_25, ic_26, ic_27, ic_28, ic_29, ic_30, ic_31, ic_32, ic_33, ic_34, ic_35, ic_36,
-        ic_37, ic_38, ic_39, ic_40)
+        ic_37, ic_38, ic_39, ic_40,ic_41, ic_42)
 }
 

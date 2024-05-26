@@ -22,7 +22,7 @@ class CategoryDetailViewModel @Inject constructor(
     var nameCategory : String? = null
     fun getCategory(typeCategory: String = Fb.CategoryExpense) {
         viewModelScope.launch(Dispatchers.IO) {
-            val it = categoryRepository.getAllCategory(typeCategory = typeCategory)
+            val it = categoryRepository.getAllCategoryByType(typeCategory = typeCategory)
             withContext(Dispatchers.Main) {
                 listCategory.postValue(it)
             }
