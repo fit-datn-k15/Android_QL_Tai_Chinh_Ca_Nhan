@@ -1,8 +1,11 @@
 package com.example.quanlythuchi
 
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.example.quanlythuchi.AppBindingAdapter.setMoney
+import com.example.quanlythuchi.AppBindingAdapter.setTextWithTotalMoney
 import com.example.quanlythuchi.data.entity.Icon
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.formatMoney
@@ -15,6 +18,15 @@ import java.util.Locale
 
 object AppBindingAdapter {
     @JvmStatic
+    @BindingAdapter("setVisible")
+    fun View.setVisible(boolean: Boolean) {
+        if(boolean)
+            this.visibility = View.VISIBLE
+        else {
+            this.visibility = View.GONE
+        }
+    }
+
     @BindingAdapter("setTextFormat")
     fun <T:Number> TextView.setTextFormat(money : T) {
         text = money.formatMoney()
@@ -51,19 +63,49 @@ object AppBindingAdapter {
         try {
             var money: String = numberFormat.format(item.money)
             if (item.typeExpenseOrIncome == ExpenseIncome.TYPE_EXPENSE) {
-                moneyBuilder += "- " + money + "đ"
+                moneyBuilder += "- $money đ"
                 this.text = moneyBuilder
                 this.setTextColorRes(R.color.red_d61c1c)
                 return
             }
             else {
-                moneyBuilder += "+ " + money + "đ"
+                moneyBuilder += "+ $money đ"
                 this.text = moneyBuilder
                 this.setTextColorRes(R.color.green_2D9849)
                 return
             }
         }
         catch (_: Exception) {}
+    }
+
+    // tính tổng số tiền còn lại của
+    // cần truyền vào số âm hoặc số dương
+    @JvmStatic
+    @BindingAdapter("setTextWithTotalMoney")
+    fun TextView.setTextWithTotalMoney(long : Long) {
+        val numberFormat = NumberFormat.getInstance(Locale("vi", "VN"))
+        var moneyBuilder = ""
+        try {
+            val money: String = numberFormat.format(long)
+            when (true) {
+                (long < 0) -> {
+                    moneyBuilder += "$money đ"
+                    this.text = moneyBuilder
+                    this.setTextColorRes(R.color.red_d61c1c)
+                }
+                (long > 0) ->{
+                    moneyBuilder += "+ $money đ"
+                    this.text = moneyBuilder
+                    this.setTextColorRes(R.color.green_2D9849)
+                }
+                else -> {
+                    moneyBuilder += "$money đ"
+                    this.text = moneyBuilder
+                    this.setTextColorRes(R.color.grey_33363F)
+                }
+            }
+        }
+        catch (_ : Exception) {}
     }
 
 }

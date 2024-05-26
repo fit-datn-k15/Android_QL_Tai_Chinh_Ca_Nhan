@@ -20,6 +20,9 @@ import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseActivity
 import com.example.quanlythuchi.databinding.ActivityMainBinding
 import com.example.quanlythuchi.databinding.NavHeaderMainBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.PersistentCacheSettings
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

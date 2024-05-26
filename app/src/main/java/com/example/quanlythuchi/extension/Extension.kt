@@ -1,21 +1,23 @@
 package com.example.quanlythuchi.extension
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.util.Patterns
-import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
+import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.Constant
 import java.text.NumberFormat
 import java.time.LocalDate
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+
+fun YearMonth.formatMonthVN() : String{
+    val formatter = DateTimeFormatter.ofPattern("MM/yyyy", Locale.getDefault())
+    return this.format(formatter)
+}
 
 fun LocalDate.formatDateTime(): String {
     val formatter = DateTimeFormatter.ofPattern(Constant.DATE_FORMAT, Locale.getDefault())
@@ -68,3 +70,18 @@ internal fun TextView.setTextColorRes(@ColorRes color: Int) =
 //        ),
 //    )
 //}
+
+// kiểm tra xem ngườid dùng có chọn ngày nào ko. nếu ko chọn ngày nào thì hiển thị tên tháng đó
+fun TextView.setTimeSelected(time : LocalDate?, yearMonth: YearMonth?, isSelectedDay : Boolean) {
+    when(true) {
+        (isSelectedDay && time != null) -> {
+            text = time.formatDateTime()
+        }
+        (yearMonth != null ) -> {
+            text = context.getString(R.string.selected_date_to_show_information, yearMonth.formatMonthVN())
+        }
+        else -> {
+            return
+        }
+    }
+}

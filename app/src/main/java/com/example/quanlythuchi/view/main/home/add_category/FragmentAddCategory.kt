@@ -30,6 +30,10 @@ class FragmentAddCategory(
         }
         typeCategory = arguments?.getString(FragmentCategoryDetail.KEY_CATEGORY) ?: Fb.CategoryIncome
 
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         adapter.submitList(viewModel.getListIcon())
     }
 

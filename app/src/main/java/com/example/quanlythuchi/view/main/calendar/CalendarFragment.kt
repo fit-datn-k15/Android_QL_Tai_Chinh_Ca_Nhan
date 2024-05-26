@@ -11,6 +11,7 @@ import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.DayOfWeekHeaderBinding
 import com.example.quanlythuchi.databinding.FragmentCalendarBinding
+import com.example.quanlythuchi.extension.setTimeSelected
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.core.nextMonth
@@ -39,6 +40,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
             listener = this@CalendarFragment
             listIncomeAndExpense.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             listIncomeAndExpense.adapter = this@CalendarFragment.adapter
+            viewModel = this@CalendarFragment.viewModel
         }
         viewModel.listSyntheticByDate.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -57,10 +59,17 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
                 viewModel.selectedDate = null
                 viewBinding.calendarView.notifyDateChanged(it)
             }
+            viewModel.filterListSyntheticByMonth(month.yearMonth)
         }
         viewModel.isGetDataByMonth.observe(viewLifecycleOwner) {
             viewBinding.calendarView.notifyCalendarChanged()
         }
+
+        viewBinding.filter.setTimeSelected(
+            time = null,
+            yearMonth = YearMonth.now(),
+            isSelectedDay = false
+        )
     }
 
 
@@ -95,17 +104,35 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
             viewBinding.calendarView.notifyDateChanged(it)
         }
         viewModel.filterListSyntheticByDate(selectedDate)
+        viewBinding.filter.setTimeSelected(
+            time = viewModel.selectedDate,
+            yearMonth = null,
+            isSelectedDay = true
+        )
     }
 
     override fun exFiveNextMonthImage() {
         viewBinding.calendarView.findFirstVisibleMonth()?.let {
             viewBinding.calendarView.smoothScrollToMonth(it.yearMonth.nextMonth)
+            viewModel.filterListSyntheticByMonth(it.yearMonth.nextMonth)
+            viewBinding.filter.setTimeSelected(
+                time = null,
+                yearMonth = it.yearMonth.nextMonth,
+                isSelectedDay = false
+            )
         }
+
     }
 
     override fun exFivePreviousMonthImage() {
         viewBinding.calendarView.findFirstVisibleMonth()?.let {
             viewBinding.calendarView.smoothScrollToMonth(it.yearMonth.previousMonth)
+            viewModel.filterListSyntheticByMonth(it.yearMonth.previousMonth)
+            viewBinding.filter.setTimeSelected(
+                time = null,
+                yearMonth = it.yearMonth.previousMonth,
+                isSelectedDay = false
+            )
         }
     }
 

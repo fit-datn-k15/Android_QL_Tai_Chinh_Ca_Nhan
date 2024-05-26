@@ -96,13 +96,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:autoSizeMaxTextSize="@dimen/sp16"
+                android:autoSizeMinTextSize="@dimen/sp10"
+                android:fontFamily="sans-serif-medium"
                 android:gravity="start|center"
                 android:text="100.000"
                 android:textColor="@{ item.typeExpenseOrIncome == ExpenseIncome.TYPE_EXPENSE ? @color/red_d61c1c : @color/green_2D9849}"
-                android:textSize="@dimen/sp16"
                 android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

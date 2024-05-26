@@ -34,7 +34,7 @@
     <string name="error_password">Mật khẩu sai định dạng</string>
     <string name="error_email">Email sai định dạng</string>
     <string name="label_email">Email</string>
-    <string name="ok">ok</string>
+    <string name="ok">OK</string>
     <string name="add_category">Thêm danh mục</string>
     <string name="da_them_danh_muc">Đã thêm danh muc</string>
     <string name="drawer_logout">Đăng xuất</string>
@@ -46,7 +46,7 @@
     <string name="drawer_export_pdf">Xuất dữ liệu Pdf</string>
     <string name="drawer_export">Xuất dữ liệu</string>
     <string name="drawer_other">Khác</string>
-
+    <string name="selected_date_to_show_information">"Tháng %s"</string>
     <string name="activity_title_view">Calendar View Sample</string>
     <string name="example_5_title">Example 5</string>
     <string name="example_5_subtitle">Single selection, programmatic calendar scrolling, generates six rows for all months showing \"EndOfGrid\" implementation of OutDateStyle property. A flight schedule calendar.</string>

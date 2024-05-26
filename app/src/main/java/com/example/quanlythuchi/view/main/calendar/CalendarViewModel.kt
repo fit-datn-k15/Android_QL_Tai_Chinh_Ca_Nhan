@@ -10,12 +10,16 @@ import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
 import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
+import com.example.quanlythuchi.extension.formatMonth
 import com.example.quanlythuchi.extension.toLocalDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,9 +30,8 @@ class CalendarViewModel @Inject constructor(
 ): BaseViewModel() {
     var date = LocalDate.now();
     var selectedDate: LocalDate? = null
-    var total = 0L;
-    var incomeTotal =0L;
-    var expenseTotal =0L;
+    var incomeTotal = MutableLiveData(0L);
+    var expenseTotal = MutableLiveData(0L);
     var listExpense = mutableListOf<Expense>()
     var listIncome = mutableListOf<Income>()
     var isGetDataByMonth = SingleLiveData(false)
@@ -37,7 +40,7 @@ class CalendarViewModel @Inject constructor(
     var listGroupIncomeToShowDayView : Map<LocalDate,List<Income>> = mapOf()
 
     var listCategory : Map<String, Category> = mutableMapOf()
-    // list này là tổng hợp các khoản thu, chi của 1 ngày
+    // list này là tổng hợp các khoản thu, chi của 1 ngày hoặc 1 tháng,
     var listSyntheticByDate = MutableLiveData(mutableListOf<ExpenseIncome>())
     fun getDataByDate() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -52,7 +55,8 @@ class CalendarViewModel @Inject constructor(
                 listGroupExpenseToShowDayView = listExpense.groupBy { it.date.toLocalDate() }
                 listGroupIncomeToShowDayView = listIncome.groupBy { it.date.toLocalDate() }
                 isGetDataByMonth.postValue(true)
-                calculator()
+                filterListSyntheticByMonth(YearMonth.now())
+                //calculator()
             }
         }
     }
@@ -60,7 +64,7 @@ class CalendarViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val list: MutableList<ExpenseIncome> = mutableListOf()
             for (item in listExpense) {
-                if (dateSelecting.toString() == item.date)
+                if (dateSelecting.toString() == item.date) {
                     list.add(
                         ExpenseIncome(
                             idCategory = item.idCategory,
@@ -73,9 +77,10 @@ class CalendarViewModel @Inject constructor(
                             icon = listCategory[item.idCategory]?.icon
                         )
                     )
+                }
             }
             for (item in listIncome) {
-                if (dateSelecting.toString() == item.date)
+                if (dateSelecting.toString() == item.date) {
                     list.add(
                         ExpenseIncome(
                             idCategory = item.idCategory,
@@ -88,25 +93,76 @@ class CalendarViewModel @Inject constructor(
                             icon = listCategory[item.idCategory]?.icon
                         )
                     )
+                }
             }
             withContext(Dispatchers.Main) {
                 listSyntheticByDate.postValue(list)
             }
         }
     }
-    private fun calculator() {
-        for (income in listIncome) {
-            income.income?.let { incomeTotal += it }
+    fun filterListSyntheticByMonth(monthSelecting : YearMonth) {
+        clearDataTotal()
+        var incomeTotalByDate = 0L
+        var expenseTotalByDate = 0L
+        viewModelScope.launch(Dispatchers.IO) {
+            val list: MutableList<ExpenseIncome> = mutableListOf()
+            for (item in listExpense) {
+                if (monthSelecting.toString() == item.date.toLocalDate().formatMonth()) {
+                    list.add(
+                        ExpenseIncome(
+                            idCategory = item.idCategory,
+                            id = item.idExpense,
+                            noteExpenseIncome = item.note,
+                            date = item.date,
+                            money = item.expense,
+                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
+                            titleCategory = listCategory[item.idCategory]?.title,
+                            icon = listCategory[item.idCategory]?.icon
+                        )
+                    )
+                    item.expense?.let { expenseTotalByDate += it }
+                }
+            }
+            for (item in listIncome) {
+                if (monthSelecting.toString() == item.date.toLocalDate().formatMonth()) {
+                    list.add(
+                        ExpenseIncome(
+                            idCategory = item.idCategory,
+                            id = item.idIncome,
+                            noteExpenseIncome = item.note,
+                            date = item.date,
+                            money = item.income,
+                            typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
+                            titleCategory = listCategory[item.idCategory]?.title,
+                            icon = listCategory[item.idCategory]?.icon
+                        )
+                    )
+                    item.income?.let { incomeTotalByDate += it }
+                }
+            }
+            withContext(Dispatchers.Main) {
+                listSyntheticByDate.postValue(list)
+                incomeTotal.postValue(incomeTotalByDate)
+                expenseTotal.postValue(expenseTotalByDate)
+            }
         }
-        for (expense in listExpense)
-            expense.expense?.let { expenseTotal += it }
-        total =  expenseTotal +  incomeTotal
     }
+//    private fun calculator() {
+//        for (income in listIncome) {
+//            income.income?.let { incomeTotal += it }
+//        }
+//        for (expense in listExpense)
+//            expense.expense?.let { expenseTotal += it }
+//        total =  expenseTotal +  incomeTotal
+//    }
     fun resetData() {
-        incomeTotal = 0L
-        expenseTotal = 0L
-        total = 0L
+        incomeTotal.postValue(0L)
+        expenseTotal.postValue(0L)
         listExpense.clear()
         listIncome.clear()
+    }
+    private fun clearDataTotal () {
+        incomeTotal.postValue(0L)
+        expenseTotal.postValue(0L)
     }
 }
