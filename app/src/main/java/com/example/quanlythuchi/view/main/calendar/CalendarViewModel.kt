@@ -101,7 +101,7 @@ class CalendarViewModel @Inject constructor(
         }
     }
     fun filterListSyntheticByMonth(monthSelecting : YearMonth) {
-        clearDataTotal()
+     //   clearDataTotal()
         var incomeTotalByDate = 0L
         var expenseTotalByDate = 0L
         viewModelScope.launch(Dispatchers.IO) {

@@ -2,31 +2,21 @@ package com.example.quanlythuchi.view.activity.home
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
-import androidx.core.view.isVisible
-import androidx.lifecycle.withCreated
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseActivity
 import com.example.quanlythuchi.databinding.ActivityMainBinding
 import com.example.quanlythuchi.databinding.NavHeaderMainBinding
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.PersistentCacheSettings
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -68,6 +58,15 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
 
         }
         setUpDrawerLayout()
+        val settings = FirebaseFirestoreSettings.Builder()
+            .setLocalCacheSettings(PersistentCacheSettings.newBuilder().setSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED).build())
+            .build()
+        Firebase.firestore.firestoreSettings = settings
+        Firebase.firestore.persistentCacheIndexManager?.apply {
+            // Indexing is disabled by default
+            enableIndexAutoCreation()
+        } ?: println("indexManager is null")
+
     }
 
     override fun onResume() {

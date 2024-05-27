@@ -24,9 +24,9 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
             vpg.adapter = this@FragmentReport.adapterViewpager
             TabLayoutMediator(tabLayoutReport, vpg) { tab, position ->
                 if (position == 0)
-                    tab.text = Constant.EXPENSE
+                    tab.text = context?.getString(R.string.expense)
                 else
-                    tab.text = Constant.INCOME
+                    tab.text = context?.getString(R.string.income)
             }.attach()
         }
 
