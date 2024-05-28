@@ -6,6 +6,9 @@
         <variable
             name="listener"
             type="com.example.quanlythuchi.view.main.report.ReportListener" />
+        <variable
+            name="viewModel"
+            type="com.example.quanlythuchi.view.main.report.ReportViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,74 +59,58 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialToolbar2">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp181"
-                android:elevation="@dimen/dp5"
-                android:translationZ="@dimen/dp5"
+                android:layout_height="@dimen/dp95"
                 android:layout_margin="@dimen/dp15"
+                android:weightSum="5"
+                android:background="@drawable/bg_expense_income_balance_radius_10"
+                android:backgroundTint="@color/white"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bg">
+                android:orientation="vertical">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/icon_other"
+                    <ImageButton
+                        android:id="@+id/materialTextView6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_trash"
+                        android:background="@color/transfer"
+                        android:padding="@dimen/dp3"
+                        android:textColor="@color/black90"
+                        android:textSize="@dimen/sp18"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Cường Nguyễn"
+                        android:textColor="@color/black90"
+                        android:textSize="@dimen/sp18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp15"
-                    android:src="@drawable/ic_money"
-                    app:layout_constraintVertical_bias="0.15"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nguyễn Cường"
-                    android:textSize="@dimen/sp18"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="@dimen/dp10"
-                    app:layout_constraintBottom_toBottomOf="@+id/icon_other"
-                    app:layout_constraintStart_toEndOf="@id/icon_other"
-                    app:layout_constraintTop_toTopOf="@+id/icon_other" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/textView22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp15"
-                    android:gravity="center_vertical"
-                    android:text="Tổng số dư"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp18"
-                    app:layout_constraintVertical_bias="0.2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/icon_other" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:autoSizeMaxTextSize="@dimen/sp30"
-                    android:autoSizeMinTextSize="8sp"
-                    android:autoSizeTextType="uniform"
-                    android:gravity="start|center_vertical"
-                    android:text=" + 1.000.000 đ"
-                    android:textColor="@color/white"
-                    app:fontFamily="sans-serif-medium"
-                    android:textSize="@dimen/sp30"
-                    android:textStyle="bold"
-                    app:autoSizeStepGranularity="1sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView22"
-                    app:layout_constraintTop_toBottomOf="@+id/textView22"
-                    app:layout_constraintVertical_bias="0.2">
-
-                </com.google.android.material.textview.MaterialTextView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout2"

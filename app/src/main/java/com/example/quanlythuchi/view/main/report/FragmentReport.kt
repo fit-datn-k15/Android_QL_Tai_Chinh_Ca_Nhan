@@ -6,7 +6,6 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
-import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.databinding.FagmentReportBinding
 import com.example.quanlythuchi.extension.formatDateTime
 import com.google.android.material.tabs.TabLayoutMediator
@@ -18,6 +17,8 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
     private val adapterViewpager by lazy { AdapterReport(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getAllIncome()
+        viewModel.getAllExpense()
         setTimeDefault()
         viewBinding.apply {
             listener = this@FragmentReport

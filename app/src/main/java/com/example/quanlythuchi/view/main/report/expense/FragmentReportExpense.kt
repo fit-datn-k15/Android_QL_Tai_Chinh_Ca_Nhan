@@ -8,7 +8,9 @@ import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FragmentReportExpenseBinding
 import com.example.quanlythuchi.view.main.report.ReportViewModel
 import com.example.quanlythuchi.view.main.report.income.ReportExpenseListener
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportViewModel>(),
     ReportExpenseListener {
     override val layoutID: Int = R.layout.fragment_report_expense

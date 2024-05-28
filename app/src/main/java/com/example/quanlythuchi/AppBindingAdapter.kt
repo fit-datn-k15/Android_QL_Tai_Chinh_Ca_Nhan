@@ -4,8 +4,6 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.quanlythuchi.AppBindingAdapter.setMoney
-import com.example.quanlythuchi.AppBindingAdapter.setTextWithTotalMoney
 import com.example.quanlythuchi.data.entity.Icon
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.formatMoney
@@ -91,6 +89,33 @@ object AppBindingAdapter {
     @JvmStatic
     @BindingAdapter("setTextWithTotalMoney")
     fun TextView.setTextWithTotalMoney(long : Long) {
+        val numberFormat = NumberFormat.getInstance(Locale("vi", "VN"))
+        var moneyBuilder = ""
+        try {
+            val money: String = numberFormat.format(long)
+            when (true) {
+                (long < 0) -> {
+                    moneyBuilder += "$money đ"
+                    this.text = moneyBuilder
+                    this.setTextColorRes(R.color.red_d61c1c)
+                }
+                (long > 0) ->{
+                    moneyBuilder += "+ $money đ"
+                    this.text = moneyBuilder
+                    this.setTextColorRes(R.color.green_2D9849)
+                }
+                else -> {
+                    moneyBuilder += "$money đ"
+                    this.text = moneyBuilder
+                    this.setTextColorRes(R.color.grey_33363F)
+                }
+            }
+        }
+        catch (_ : Exception) {}
+    }
+    @JvmStatic
+    @BindingAdapter("setMoneyTotalReport")
+    fun TextView.setMoneyTotalReport(long : Long) {
         val numberFormat = NumberFormat.getInstance(Locale("vi", "VN"))
         var moneyBuilder = ""
         try {

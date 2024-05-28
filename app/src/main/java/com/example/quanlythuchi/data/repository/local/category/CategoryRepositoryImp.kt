@@ -3,18 +3,14 @@ package com.example.quanlythuchi.data.repository.local.category
 import android.util.Log
 import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.data.Fb
-import com.example.quanlythuchi.data.mapperCategory
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.entity.categoryExpense
 import com.example.quanlythuchi.data.entity.categoryIncome
+import com.example.quanlythuchi.data.mapperCategory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -71,7 +67,19 @@ class CategoryRepositoryImp @Inject constructor(
 
         return listCate
     }
-
+//    suspend fun getALlData() : MutableList<Category> {
+//        coroutineScope {
+//
+//        }.await()
+//        return runBlocking {
+//            var list : MutableList<Category> = mutableListOf()
+//            val a = getAllCategoryByType(Fb.CategoryIncome)
+//            val b = getAllCategoryByType(Fb.CategoryExpense)
+//            list.addAll(a)
+//            list.addAll(b)
+//            list
+//        }
+//    }
 
     override suspend fun addCategory(category: Category, typeCategory: String) {
         if (user == null) return

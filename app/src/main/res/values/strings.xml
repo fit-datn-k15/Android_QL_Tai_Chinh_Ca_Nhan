@@ -50,5 +50,5 @@
     <string name="activity_title_view">Calendar View Sample</string>
     <string name="example_5_title">Example 5</string>
     <string name="example_5_subtitle">Single selection, programmatic calendar scrolling, generates six rows for all months showing \"EndOfGrid\" implementation of OutDateStyle property. A flight schedule calendar.</string>
-
+    <string name="other">Khác</string>
 </resources>

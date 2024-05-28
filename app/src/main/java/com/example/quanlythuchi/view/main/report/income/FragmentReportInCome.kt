@@ -3,26 +3,27 @@ package com.example.quanlythuchi.view.main.report.income
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FragmentReportIncomeBinding
 import com.example.quanlythuchi.view.main.report.ReportViewModel
-import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import dagger.hilt.android.AndroidEntryPoint
 
-class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding,ReportViewModel>(),
+@AndroidEntryPoint
+class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportViewModel>(),
     ReportExpenseListener, OnChartValueSelectedListener {
     override val layoutID: Int = R.layout.fragment_report_income
-    override val viewModel : ReportViewModel by activityViewModels()
+    override val viewModel: ReportViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.lifecycleOwner = this
@@ -30,15 +31,31 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding,ReportView
 
         }
         viewBinding.apply {
-            mChart.isRotationEnabled = true
-            mChart.description = Description()
-            mChart.holeRadius = 35f
-            mChart.setTransparentCircleAlpha(0)
-            mChart.centerText = "PieChart"
+            mChart.isRotationEnabled = false  // cho phep xoay biểu đồ
+         // thiet lap mo tả cho biểu do
+            mChart.holeRadius = 30f              // bán kính của lỗ trống ở giữa bieiể đồ
+            mChart.setTransparentCircleAlpha(10)  // đặt độ trong suouốt cho vòng tròn bên ngoài
+            mChart.centerText = "PieChart"   // vaăn bản ở giữa biểu đồ
             mChart.setCenterTextSize(10f)
-            mChart.setDrawEntryLabels(true)
-            addDataSet(mChart)
+            mChart.setEntryLabelColor(R.color.black80)
+            mChart.setDrawEntryLabels(true) // hiển thị nhãn của các muục dữ liệu
+            addDataSet()
             mChart.setOnChartValueSelectedListener(this@FragmentReportInCome)
+        }
+        viewModel.listDataExpensePieChar.observe(viewLifecycleOwner) {
+            val pieDataSet = PieDataSet(it, "Employee Sales")
+            pieDataSet.apply {
+                sliceSpace = 2f
+                valueTextSize = 12f
+                colors = listOf(Color.GRAY, Color.BLUE, Color.RED, Color.MAGENTA,Color.YELLOW,Color.CYAN, Color.BLACK)
+            }
+            pieDataSet.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+            pieDataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+
+            // Use lines to connect labels with slices
+
+            pieDataSet.valueLineColor = Color.BLACK
+            viewBinding.mChart.data = PieData(pieDataSet)
         }
     }
 
@@ -49,34 +66,33 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding,ReportView
 
     override fun onNothingSelected() {}
 
-    companion object {
-        private fun addDataSet(pieChart: PieChart?) {
-            val yEntrys = ArrayList<PieEntry>()
-            val xEntrys = ArrayList<String>()
-            val yData = floatArrayOf(25f, 40f, 70f)
-            val xData = arrayOf("January", "February", "January")
-            for (i in yData.indices) {
-                yEntrys.add(PieEntry(yData[i], i))
-            }
-            for (i in xData.indices) {
-                xEntrys.add(xData[i])
-            }
-            val pieDataSet = PieDataSet(yEntrys, "Employee Sales")
-            pieDataSet.sliceSpace = 2f
-            pieDataSet.valueTextSize = 12f
-            val colors = ArrayList<Int>()
-            colors.add(Color.GRAY)
-            colors.add(Color.BLUE)
-            colors.add(Color.RED)
-            pieDataSet.colors = colors
-            val legend = pieChart!!.legend
+    private fun addDataSet() {
+        val data = arrayListOf(
+            PieEntry(25f, "January"),
+            PieEntry(25f, "February"),
+            PieEntry(50f, "January")
+        )
+
+        val pieDataSet = PieDataSet(data, "Employee Sales")
+
+        pieDataSet.apply {
+            sliceSpace = 2f
+            valueTextSize = 12f
+            colors = listOf(Color.GRAY, Color.BLUE, Color.RED)
+        }
+        viewBinding.mChart.apply {
             legend.form = Legend.LegendForm.CIRCLE
-           // legend.po(Legend.LegendDirection.LEFT_TO_RIGHT)
-            val pieData = PieData(pieDataSet)
-            pieChart.data = pieData
-            pieChart.invalidate()
+            legend.orientation = Legend.LegendOrientation.VERTICAL
+            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+            legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            legend.setDrawInside(false)
+            legend.xEntrySpace = 7f
+            legend.yEntrySpace = 0f
+            legend.yOffset = 10f
+            legend.isEnabled = false
+            this@apply.data = PieData(pieDataSet)
+        //    invalidate()
         }
     }
-
 
 }
