@@ -94,6 +94,7 @@ class ReportViewModel @Inject constructor(
                     lExpenseOther.addAll(listExpenseWithCategory[i].third)
                 }
                 listPieEntry.add(
+                    POSITION_ITEM_OTHER,
                     PieEntry(
                         dataOther.toFloat(),
                         applicationContext.getString(R.string.other),
@@ -123,5 +124,6 @@ class ReportViewModel @Inject constructor(
     }
     companion object {
         const val MAX_ITEM_IN_PIE_CHART = 6
+        const val POSITION_ITEM_OTHER = 2
     }
 }
