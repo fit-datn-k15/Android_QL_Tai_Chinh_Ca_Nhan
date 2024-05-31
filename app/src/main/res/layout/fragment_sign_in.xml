@@ -135,26 +135,26 @@
         android:id="@+id/sign_in_with_mxh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp15"
         android:gravity="center"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintEnd_toEndOf="@+id/login_with_email"
         app:layout_constraintStart_toStartOf="@+id/login_with_email"
         app:layout_constraintTop_toBottomOf="@id/login_with_email">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/dp10"
-            android:text="Hoặc đăng nhập bằng"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
             android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:weightSum="3">
+            android:layout_gravity="center">
 
             <ImageButton
                 android:id="@+id/login_with_google"
@@ -165,13 +165,6 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/ic_google" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp15"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/ic_logo_facebook" />
-
         </LinearLayout>
     </LinearLayout>
 
@@ -180,10 +173,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        app:layout_constraintEnd_toEndOf="@+id/sign_in_with_mxh"
-        app:layout_constraintStart_toStartOf="@+id/sign_in_with_mxh"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_with_mxh">
+        app:layout_constraintEnd_toEndOf="@+id/login_with_email"
+        app:layout_constraintStart_toStartOf="@+id/login_with_email"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_with_mxh"
+        app:layout_constraintVertical_bias="0.2">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -195,9 +188,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp10"
-            android:text="Đăng ký"
             android:background="?android:attr/selectableItemBackground"
             android:onClick="@{v -> listener.openSignUp()}"
+            android:text="Đăng ký"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
