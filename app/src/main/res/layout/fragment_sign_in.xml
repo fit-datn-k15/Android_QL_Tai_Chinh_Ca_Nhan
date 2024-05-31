@@ -168,12 +168,6 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/ic_logo_facebook" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp15"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/ic_google" />
         </LinearLayout>
     </LinearLayout>
 
@@ -198,6 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp10"
             android:text="Đăng ký"
+            android:background="?android:attr/selectableItemBackground"
             android:onClick="@{v -> listener.openSignUp()}"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -209,7 +204,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:onClick="@{v -> listener.openApp()}"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:visibility="invisible"
         android:text="Sử dụng mà không cần tài khoản"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.3"

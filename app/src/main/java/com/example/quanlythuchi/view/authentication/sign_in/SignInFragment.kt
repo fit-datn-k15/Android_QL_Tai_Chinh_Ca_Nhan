@@ -101,6 +101,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
         viewModel.insertDefaultCategory(isNewsUser) {
             val intent = Intent(this.requireActivity(), HomeActivity::class.java)
             startActivity(intent)
+            getOwnerActivity<AuthenticationActivity>()?.finishAffinity()
         }
     }
     private fun displayToast(s: String) {

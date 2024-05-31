@@ -1,7 +1,9 @@
 package com.example.quanlythuchi.view.activity.home
 
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
@@ -12,6 +14,13 @@ import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseActivity
 import com.example.quanlythuchi.databinding.ActivityMainBinding
 import com.example.quanlythuchi.databinding.NavHeaderMainBinding
+import com.example.quanlythuchi.view.activity.authen.AuthenticationActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.PersistentCacheSettings
 import com.google.firebase.firestore.ktx.firestore
@@ -23,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
     override val viewModel: HomeActivityViewModel by viewModels()
     override val layoutId: Int = R.layout.activity_main
-
+    private lateinit var googleSignInClient: GoogleSignInClient
     private var navHostFragment : NavHostFragment?= null
     private var navController : NavController?=null
     val headerDrawer : NavHeaderMainBinding by lazy {  NavHeaderMainBinding.bind(viewBinding.navigationViewDrawer.getHeaderView(0))}
@@ -58,14 +67,14 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
 
         }
         setUpDrawerLayout()
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setLocalCacheSettings(PersistentCacheSettings.newBuilder().setSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED).build())
-            .build()
-        Firebase.firestore.firestoreSettings = settings
-        Firebase.firestore.persistentCacheIndexManager?.apply {
-            // Indexing is disabled by default
-            enableIndexAutoCreation()
-        } ?: println("indexManager is null")
+//        val settings = FirebaseFirestoreSettings.Builder()
+//            .setLocalCacheSettings(PersistentCacheSettings.newBuilder().setSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED).build())
+//            .build()
+//        Firebase.firestore.firestoreSettings = settings
+//        Firebase.firestore.persistentCacheIndexManager?.apply {
+//            // Indexing is disabled by default
+//            enableIndexAutoCreation()
+//        } ?: println("indexManager is null")
 
     }
 
@@ -143,10 +152,41 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
                 R.id.item_drawer_buy -> {
 
                 }
+                R.id.log_out -> {
+                    Firebase.auth.currentUser?.delete()?.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Sign out from Firebase
+                            FirebaseAuth.getInstance().signOut()
+                            // Sign out from Google
+                            signOutFromGoogle()
+                        } else {
+                            FirebaseAuth.getInstance().signOut()
+                            signOutFromGoogle()
+                            // Handle delete account failure
+                            Log.e("Logout", "Account deletion failed", task.exception)
+                        }
+                    }
+                }
                 else ->{}
             }
             viewBinding.drawer.closeDrawers()
             true
         }
     }
+    private fun signOutFromGoogle() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
+        googleSignInClient.signOut().addOnCompleteListener { task: Task<Void> ->
+            if (task.isSuccessful) {
+                val intent = Intent(this, AuthenticationActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                val intent = Intent(this, AuthenticationActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
+
 }

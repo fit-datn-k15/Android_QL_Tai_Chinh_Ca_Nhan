@@ -18,7 +18,7 @@ class AuthenticationActivity : BaseActivity<ActivityAuthenticationBinding, Authe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment
+        navHostFragment = supportFragmentManager.findFragmentById(viewBinding.navContainer.id) as NavHostFragment
         navController = navHostFragment?.navController
     }
 

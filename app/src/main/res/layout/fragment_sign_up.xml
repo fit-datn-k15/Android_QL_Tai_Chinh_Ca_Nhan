@@ -221,6 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp10"
                 android:text="Đăng nhập"
+                android:background="?android:attr/selectableItemBackground"
                 android:onClick="@{v -> listener.backSignUp()}"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
