@@ -1,7 +1,7 @@
 package com.example.quanlythuchi.view.authentication.sign_up
 
 interface SignUpListener {
-    fun openLoginPhone()
+    fun signUp()
     fun openSignInGoogle()
     fun openSignInFacebook()
     fun openApp()

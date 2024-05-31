@@ -2,19 +2,27 @@ package com.example.quanlythuchi.view.authentication.sign_up
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseViewModel
+import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
 import com.example.quanlythuchi.extension.isPasswordValid
 import com.example.quanlythuchi.extension.isValidEmail
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    @ApplicationContext var applicationContext: Context
+    @ApplicationContext var applicationContext: Context,
+    private val categoryRepository: CategoryRepository
 ): BaseViewModel() {
-    var emailInput = "sssss"
+    val auth = FirebaseAuth.getInstance()
+    var emailInput = ""
         set(value) {
             field = value
             checkValidEmail()
@@ -62,5 +70,29 @@ class SignUpViewModel @Inject constructor(
                 && passwordInput.isPasswordValid()
                 && confirmPassword.isPasswordValid()
                 && passwordInput == confirmPassword)
+    }
+    fun signUp(callback: (Boolean, String) -> Unit) {
+        if(auth.currentUser == null) {
+            auth.createUserWithEmailAndPassword(emailInput, passwordInput).addOnCompleteListener{task ->
+                if (task.isSuccessful) {
+                    callback(true, "")
+                }
+                else {
+                    callback(false, task.exception?.message.toString())
+                }
+            }
+        }
+        else {
+
+        }
+    }
+    fun insertDefaultCategory(success : () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            categoryRepository.importCategoryDefault()
+            withContext(Dispatchers.Main) {
+                success()
+            }
+
+        }
     }
 }

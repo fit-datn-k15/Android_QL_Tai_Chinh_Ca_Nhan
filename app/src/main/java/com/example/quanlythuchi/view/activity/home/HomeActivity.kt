@@ -153,19 +153,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
 
                 }
                 R.id.log_out -> {
-                    Firebase.auth.currentUser?.delete()?.addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            // Sign out from Firebase
-                            FirebaseAuth.getInstance().signOut()
-                            // Sign out from Google
-                            signOutFromGoogle()
-                        } else {
-                            FirebaseAuth.getInstance().signOut()
-                            signOutFromGoogle()
+                    FirebaseAuth.getInstance().signOut()
+                    signOutFromGoogle()
                             // Handle delete account failure
-                            Log.e("Logout", "Account deletion failed", task.exception)
-                        }
-                    }
+               //             Log.e("Logout", "Account deletion failed", task.exception)
+
                 }
                 else ->{}
             }

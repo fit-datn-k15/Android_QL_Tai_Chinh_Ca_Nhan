@@ -14,4 +14,7 @@ object Fb{
         const val idUser = "idUser"
         const val idCategory = "idCategory"
     }
+    object ErrorCode {
+
+    }
 }

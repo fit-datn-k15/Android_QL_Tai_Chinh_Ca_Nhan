@@ -146,6 +146,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dp30"
                 android:gravity="center"
+                android:onClick="@{ v -> listener.signUp()}"
                 android:enabled="@{viewModel.isEnableButtonSignUp()}"
                 android:paddingHorizontal="@dimen/dp30"
                 android:paddingVertical="@dimen/dp14"

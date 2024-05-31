@@ -17,6 +17,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>(), SignUpListener {
     override val viewModel: SignUpViewModel by viewModels()
     override val layoutID: Int = R.layout.fragment_sign_up
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
@@ -24,8 +28,24 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>(), S
             viewModel = this@SignUpFragment.viewModel
         }
     }
-    override fun openLoginPhone() {
-        Toast.makeText(requireContext(), "Chức năng đang phát triển", Toast.LENGTH_SHORT).show()
+
+    override fun signUp() {
+        viewModel.signUp(callback = { success, message ->
+            if (success) {
+                viewModel.insertDefaultCategory {
+                    Toast.makeText(context, "Đăng ký thành công", Toast.LENGTH_SHORT).show()
+                    navigateToHome()
+                }
+            } else {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(getOwnerActivity<AuthenticationActivity>(), HomeActivity::class.java)
+        getOwnerActivity<AuthenticationActivity>()?.startActivity(intent)
+        getOwnerActivity<AuthenticationActivity>()?.finish()
     }
 
     override fun openSignInGoogle() {

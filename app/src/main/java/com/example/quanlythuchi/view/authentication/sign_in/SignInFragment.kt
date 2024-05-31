@@ -3,6 +3,7 @@ package com.example.quanlythuchi.view.authentication.sign_in
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Message
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -31,8 +32,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),SignInListener,
-    Observer<KeyboardManager.KeyboardStatus>{
+class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),SignInListener{
     override val viewModel: SignInViewModel by viewModels()
     override val layoutID: Int = R.layout.fragment_sign_in
 
@@ -46,9 +46,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
             listener = this@SignInFragment
             viewModel = this@SignInFragment.viewModel
         }
-        this.getOwnerActivity<AuthenticationActivity>()
-            ?.let { KeyboardManager.init(it).status()?.observeForever(this) }
-
         checkSignIn()
     }
 
@@ -67,8 +64,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
                 val signInAccountTask: Task<GoogleSignInAccount> =
                     GoogleSignIn.getSignedInAccountFromIntent(data)
                 if (signInAccountTask.isSuccessful) {
-                    val s = "Google sign in successful"
-                    displayToast(s)
+
                     // Initialize sign in account
                     try {
                         // Initialize sign in account
@@ -81,7 +77,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
                                 .addOnCompleteListener(this.requireActivity()) { task ->
                                     // Check condition
                                     if (task.isSuccessful)
-                                        displayToast("Firebase authentication successful")
+                                        displayToast("Đăng nhập thành công")
                                     else
                                         displayToast("Authentication Failed :" + task.exception?.message)
                                     val isNewsUser = task.result.additionalUserInfo?.isNewUser ?: false
@@ -101,11 +97,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
         viewModel.insertDefaultCategory(isNewsUser) {
             val intent = Intent(this.requireActivity(), HomeActivity::class.java)
             startActivity(intent)
-            getOwnerActivity<AuthenticationActivity>()?.finishAffinity()
+            getOwnerActivity<AuthenticationActivity>()?.finish()
         }
     }
-    private fun displayToast(s: String) {
-        Toast.makeText(this.requireContext().applicationContext, s, Toast.LENGTH_SHORT).show()
+    private fun displayToast(message: String) {
+        Toast.makeText(this.requireContext().applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun openSignInGoogle() {
@@ -126,24 +122,14 @@ class SignInFragment : BaseFragment<FragmentSignInBinding,SignInViewModel>(),Sig
         findNavController().navigate(R.id.fag_sign_up)
     }
 
-    override fun onChanged(value: KeyboardManager.KeyboardStatus) {
-        if (value == KeyboardManager.KeyboardStatus.OPEN) {
-            val layoutParamsLogo = viewBinding.logo.layoutParams as ConstraintLayout.LayoutParams
-            layoutParamsLogo.verticalBias = 0.1f
-            viewBinding.logo.layoutParams = layoutParamsLogo
-
-            val layoutParamsLoginWithEmail = viewBinding.loginWithEmail.layoutParams as ConstraintLayout.LayoutParams
-            layoutParamsLoginWithEmail.verticalBias = 0.1f
-            viewBinding.loginWithEmail.layoutParams = layoutParamsLoginWithEmail
-        }
-        else {
-            val layoutParamsLogo = viewBinding.logo.layoutParams as ConstraintLayout.LayoutParams
-            layoutParamsLogo.verticalBias = 0.17f
-            viewBinding.logo.layoutParams = layoutParamsLogo
-
-            val layoutParamsLoginWithEmail = viewBinding.loginWithEmail.layoutParams as ConstraintLayout.LayoutParams
-            layoutParamsLoginWithEmail.verticalBias = 0.2f
-            viewBinding.loginWithEmail.layoutParams = layoutParamsLoginWithEmail
+    override fun signUpWithEmail() {
+        viewModel.signInWithEmail{success, message ->
+            if (success) {
+                navigateActivityHome(false)
+            } else {
+                displayToast(message)
+            }
         }
     }
+
 }
