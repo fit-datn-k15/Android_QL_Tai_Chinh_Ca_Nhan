@@ -16,10 +16,12 @@
 
     <LinearLayout
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintVertical_bias="0.17"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +121,7 @@
             android:text="Quên mật khẩu" />
 
         <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp20"
@@ -131,42 +133,22 @@
             android:text="Đăng nhập" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <LinearLayout
-        android:id="@+id/sign_in_with_mxh"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_with_google"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:paddingVertical="@dimen/dp8"
         android:layout_marginTop="@dimen/dp15"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="2"
+        android:onClick="@{v -> listener.openSignInGoogle()}"
+        android:text="Đăng nhập bằng google"
+        android:textColor="@color/black90"
+        app:icon="@drawable/ic_google"
+        app:iconTint="@null"
         app:layout_constraintEnd_toEndOf="@+id/login_with_email"
         app:layout_constraintStart_toStartOf="@+id/login_with_email"
-        app:layout_constraintTop_toBottomOf="@id/login_with_email">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/black" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <ImageButton
-                android:id="@+id/login_with_google"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{v -> listener.openSignInGoogle()}"
-                android:layout_marginHorizontal="@dimen/dp15"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/ic_google" />
-
-        </LinearLayout>
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/login_with_email" />
 
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:id="@+id/circularRevealLinearLayout"
@@ -175,7 +157,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/login_with_email"
         app:layout_constraintStart_toStartOf="@+id/login_with_email"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_with_mxh"
+        app:layout_constraintTop_toBottomOf="@id/login_with_google"
         app:layout_constraintVertical_bias="0.2">
 
         <com.google.android.material.textview.MaterialTextView
