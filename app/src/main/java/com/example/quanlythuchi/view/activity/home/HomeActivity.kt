@@ -149,9 +149,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>(){
                 R.id.item_drawer_infor -> {
 
                 }
-                R.id.item_drawer_buy -> {
-
-                }
                 R.id.log_out -> {
                     FirebaseAuth.getInstance().signOut()
                     signOutFromGoogle()

@@ -42,7 +42,7 @@
     <string name="drawer_remove_ad">Loại bỏ quảng cáo</string>
     <string name="drawer_infor_app">Thông tin ứng dụng</string>
     <string name="drawer_share">Chia sẻ</string>
-    <string name="drawer_export_excel">Xuất dữ liệu excel</string>
+    <string name="drawer_export_excel">Xuất file csv</string>
     <string name="drawer_export_pdf">Xuất dữ liệu Pdf</string>
     <string name="drawer_export">Xuất dữ liệu</string>
     <string name="drawer_other">Khác</string>

@@ -37,7 +37,7 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
          // thiet lap mo tả cho biểu do
             holeRadius = 40f              // bán kính của lỗ trống ở giữa bieiể đồ
             setTransparentCircleAlpha(50)  // đặt độ trong suouốt cho vòng tròn bên ngoài
-            centerText = "PieChart"   // vaăn bản ở giữa biểu đồ
+            centerText = "Thống kê"   // vaăn bản ở giữa biểu đồ
             setCenterTextSize(10f)
             setEntryLabelColor(R.color.black80)
             setDrawEntryLabels(true) // hiển thị nhãn của các muục dữ liệu
@@ -45,10 +45,11 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
             addDataSet()
             setExtraOffsets(20f,20f,20f,20f)
             setOnChartValueSelectedListener(this@FragmentReportInCome)
+
         }
 
         viewModel.listDataExpensePieChar.observe(viewLifecycleOwner) {
-            val pieDataSet = PieDataSet(it, "Employee Sales")
+            val pieDataSet = PieDataSet(it, "Khoản thu")
             pieDataSet.apply {
                 sliceSpace = 2f
                 valueTextSize = 12f
@@ -60,11 +61,16 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
                 yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
                 valueLinePart1Length = 0.8f
                 valueLinePart2Length = 0.5f
+                valueLinePart1OffsetPercentage = 90f
                 valueLineColor = Color.BLACK
             }
             val pieData = PieData(pieDataSet)
+
+            viewBinding.mChart.minAngleForSlices = 5f
             pieData.setValueFormatter(valueFormatter)
             viewBinding.mChart.data = pieData
+            pieDataSet.sliceSpace = 0f
+
         }
     }
 

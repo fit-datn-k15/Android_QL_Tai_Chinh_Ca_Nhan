@@ -47,9 +47,6 @@
                     android:icon="@drawable/ic_information"
                     android:iconTint="@color/orange"
                     android:title="@string/drawer_infor_app" />
-                <item android:id="@+id/item_drawer_buy"
-                    android:icon="@drawable/ic_premium"
-                    android:title="@string/drawer_remove_ad"/>
             </menu>
         </item>
     </group>
