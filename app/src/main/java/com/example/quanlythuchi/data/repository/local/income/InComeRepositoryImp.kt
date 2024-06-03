@@ -78,4 +78,45 @@ class InComeRepositoryImp @Inject constructor(
             .await()
         return listIncome
     }
+
+    override suspend fun deleteIncome(income: Income): Boolean {
+        if (user == null) { return false}
+        var result = false
+        income.idIncome?.let {
+            db.collection(Fb.Income)
+                .document(it)
+                .delete()
+                .addOnCompleteListener{
+                    result = true
+                }.addOnFailureListener {result = false}
+                .await()
+        }
+        return result
+
+    }
+
+    override suspend fun updateIncome(income: Income): Boolean {
+        if (user == null) { return false}
+        var result = false
+        income.idIncome?.let {
+            db.collection(Fb.Income)
+                .document(it)
+                .update(mapOf(
+                    "idIncome" to income.idIncome,
+                    "idUser" to income.idUser,
+                    "idCategory" to income.idCategory,
+                    "note" to income.note,
+                    "date" to income.date,
+                    "income" to income.income
+                ))
+                .addOnCompleteListener {
+                    result = true
+                }
+                .addOnFailureListener {
+                    result = false
+                }
+                .await()
+        }
+        return result
+    }
 }

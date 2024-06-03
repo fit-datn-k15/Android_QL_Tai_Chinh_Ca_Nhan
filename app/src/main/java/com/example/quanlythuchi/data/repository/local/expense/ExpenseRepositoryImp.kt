@@ -114,4 +114,49 @@ class ExpenseRepositoryImp @Inject constructor(
             .await()
         return listExpense
     }
+
+    override suspend fun deleteExpense(expense: Expense): Boolean {
+        if (user == null) {return false}
+        var result = false
+        expense.idExpense?.let {
+            db.collection(Fb.Expense)
+                .document(it)
+                .delete()
+                .addOnSuccessListener {
+                    result = true
+                }
+                .addOnFailureListener {
+                    result = false
+                }
+                .await()
+                }
+        return result
+        }
+
+    override suspend fun updateExpense(expense: Expense): Boolean {
+        if (user == null) {return false}
+        var result = false
+        expense.idExpense?.let {
+            db.collection(Fb.Expense)
+                .document(it)
+                .update(
+                    mapOf(
+                        "idExpense" to expense.idExpense,
+                        "idUser" to expense.idUser,
+                        "expense" to expense.expense,
+                        "date" to expense.date,
+                        "idCategory" to expense.idCategory,
+                        "note" to expense.note,
+                    )
+                )
+                .addOnSuccessListener {
+                    result = true
+                }
+                .addOnFailureListener {
+                    result = false
+                }
+                .await()
+        }
+        return result
+    }
 }

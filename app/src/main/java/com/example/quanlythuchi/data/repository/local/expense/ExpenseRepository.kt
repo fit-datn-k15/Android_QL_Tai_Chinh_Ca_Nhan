@@ -9,4 +9,6 @@ interface ExpenseRepository {
     suspend fun getExpenseByDay(date: String) : List<Expense>
     suspend fun getExpenseByWeek(week: String) : List<Expense>
     suspend fun getExpenseByMonth(month: String) : List<Expense>
+    suspend fun deleteExpense(expense: Expense) : Boolean
+    suspend fun updateExpense(expense: Expense) : Boolean
 }
