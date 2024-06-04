@@ -36,6 +36,8 @@
     <string name="label_email">Email</string>
     <string name="ok">OK</string>
     <string name="add_category">Thêm danh mục</string>
+    <string name="edit_expense">Sửa khoản chi</string>
+    <string name="edit_income">Sửa khoản thu</string>
     <string name="da_them_danh_muc">Đã thêm danh muc</string>
     <string name="drawer_logout">Đăng xuất</string>
     <string name="drawer_account">Tài khoản</string>

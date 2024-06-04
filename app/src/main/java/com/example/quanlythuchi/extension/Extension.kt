@@ -5,7 +5,6 @@ import android.util.Patterns
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import androidx.databinding.BindingAdapter
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.Constant
 import java.text.NumberFormat
@@ -23,8 +22,9 @@ fun LocalDate.formatDateTime(): String {
     val formatter = DateTimeFormatter.ofPattern(Constant.DATE_FORMAT, Locale.getDefault())
     return this.format(formatter)
 }
-fun LocalDate.formatMonth(): String {
+fun LocalDate.toMonthYearString(): String {
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM",Locale.getDefault())
+
     return this.format(formatter)
 }
 fun <T : Number>T.formatMoney() : String {

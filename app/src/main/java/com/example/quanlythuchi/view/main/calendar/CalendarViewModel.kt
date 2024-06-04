@@ -10,7 +10,7 @@ import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
 import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
-import com.example.quanlythuchi.extension.formatMonth
+import com.example.quanlythuchi.extension.toMonthYearString
 import com.example.quanlythuchi.extension.toLocalDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,8 +18,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -107,7 +105,7 @@ class CalendarViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val list: MutableList<ExpenseIncome> = mutableListOf()
             for (item in listExpense) {
-                if (monthSelecting.toString() == item.date.toLocalDate().formatMonth()) {
+                if (monthSelecting.toString() == item.date.toLocalDate().toMonthYearString()) {
                     list.add(
                         ExpenseIncome(
                             idCategory = item.idCategory,
@@ -124,7 +122,7 @@ class CalendarViewModel @Inject constructor(
                 }
             }
             for (item in listIncome) {
-                if (monthSelecting.toString() == item.date.toLocalDate().formatMonth()) {
+                if (monthSelecting.toString() == item.date.toLocalDate().toMonthYearString()) {
                     list.add(
                         ExpenseIncome(
                             idCategory = item.idCategory,

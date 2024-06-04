@@ -1,18 +1,14 @@
 package com.example.quanlythuchi.data.repository.local.income
 
 import com.example.quanlythuchi.data.Fb
-import com.example.quanlythuchi.data.entity.Expense
-import com.example.quanlythuchi.data.mapperExpense
 import com.example.quanlythuchi.data.entity.Income
-import com.example.quanlythuchi.data.mapperIncome
-import com.example.quanlythuchi.extension.formatMonth
+import com.example.quanlythuchi.extension.toMonthYearString
 import com.example.quanlythuchi.extension.toLocalDate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class InComeRepositoryImp @Inject constructor(
@@ -69,7 +65,7 @@ class InComeRepositoryImp @Inject constructor(
             .addOnSuccessListener { querySnapshot ->
                 for (doc in querySnapshot.documents) {
                     val item = doc.toObject(Income::class.java)
-                    if (item != null && item.date?.toLocalDate()?.formatMonth() == month) {
+                    if (item != null && item.date?.toLocalDate()?.toMonthYearString() == month) {
                         listIncome.add(item)
                     }
                 }
