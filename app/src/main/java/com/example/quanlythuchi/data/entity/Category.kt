@@ -1,15 +1,17 @@
 package com.example.quanlythuchi.data.entity
 
+import android.os.Parcelable
 import com.example.quanlythuchi.data.Fb
 import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class Category (
     var idCategory: String? = null,
     var icon: String? = null,
     var title: String? = null,
     var type : String? = null
-) {
+)  : Parcelable{
     companion object {
         fun categoryAdded() = Category(icon = Icon.ic_30, title = "Thêm", idCategory = Fb.ItemAddedCategory)
     }

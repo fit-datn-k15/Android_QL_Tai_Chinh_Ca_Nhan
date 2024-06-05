@@ -32,12 +32,13 @@ class CalendarViewModel @Inject constructor(
     var expenseTotal = MutableLiveData(0L);
     var listExpense = mutableListOf<Expense>()
     var listIncome = mutableListOf<Income>()
+    var listCategory = mutableListOf<Category>()
     var isGetDataByMonth = SingleLiveData(false)
 
-    var listGroupExpenseToShowDayView  : Map<LocalDate, List<Expense>> = mapOf()
-    var listGroupIncomeToShowDayView : Map<LocalDate,List<Income>> = mapOf()
+    var mapGroupExpenseToShowDayView  : Map<LocalDate, List<Expense>> = mapOf()
+    var mapGroupIncomeToShowDayView : Map<LocalDate,List<Income>> = mapOf()
 
-    var listCategory : Map<String, Category> = mutableMapOf()
+    var mapCategory : Map<String, Category> = mutableMapOf()
     // list này là tổng hợp các khoản thu, chi của 1 ngày hoặc 1 tháng,
     var listSyntheticByDate = MutableLiveData(mutableListOf<ExpenseIncome>())
     fun getDataByDate() {
@@ -49,9 +50,10 @@ class CalendarViewModel @Inject constructor(
                 resetData()
                 listExpense.addAll(lExpense)
                 listIncome.addAll(lIncome)
-                listCategory = lCategory.associateBy { it.idCategory ?: "otherCategory" }
-                listGroupExpenseToShowDayView = listExpense.groupBy { it.date.toLocalDate() }
-                listGroupIncomeToShowDayView = listIncome.groupBy { it.date.toLocalDate() }
+                listCategory.addAll(lCategory)
+                mapCategory = lCategory.associateBy { it.idCategory ?: "otherCategory" }
+                mapGroupExpenseToShowDayView = listExpense.groupBy { it.date.toLocalDate() }
+                mapGroupIncomeToShowDayView = listIncome.groupBy { it.date.toLocalDate() }
                 isGetDataByMonth.postValue(true)
                 filterListSyntheticByMonth(YearMonth.now())
                 //calculator()
@@ -71,8 +73,8 @@ class CalendarViewModel @Inject constructor(
                             date = item.date,
                             money = item.expense,
                             typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
-                            titleCategory = listCategory[item.idCategory]?.title,
-                            icon = listCategory[item.idCategory]?.icon
+                            titleCategory = mapCategory[item.idCategory]?.title,
+                            icon = mapCategory[item.idCategory]?.icon
                         )
                     )
                 }
@@ -87,8 +89,8 @@ class CalendarViewModel @Inject constructor(
                             date = item.date,
                             money = item.income,
                             typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
-                            titleCategory = listCategory[item.idCategory]?.title,
-                            icon = listCategory[item.idCategory]?.icon
+                            titleCategory = mapCategory[item.idCategory]?.title,
+                            icon = mapCategory[item.idCategory]?.icon
                         )
                     )
                 }
@@ -114,8 +116,8 @@ class CalendarViewModel @Inject constructor(
                             date = item.date,
                             money = item.expense,
                             typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
-                            titleCategory = listCategory[item.idCategory]?.title,
-                            icon = listCategory[item.idCategory]?.icon
+                            titleCategory = mapCategory[item.idCategory]?.title,
+                            icon = mapCategory[item.idCategory]?.icon
                         )
                     )
                     item.expense?.let { expenseTotalByDate += it }
@@ -131,8 +133,8 @@ class CalendarViewModel @Inject constructor(
                             date = item.date,
                             money = item.income,
                             typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
-                            titleCategory = listCategory[item.idCategory]?.title,
-                            icon = listCategory[item.idCategory]?.icon
+                            titleCategory = mapCategory[item.idCategory]?.title,
+                            icon = mapCategory[item.idCategory]?.icon
                         )
                     )
                     item.income?.let { incomeTotalByDate += it }

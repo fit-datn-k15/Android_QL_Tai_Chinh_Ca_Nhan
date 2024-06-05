@@ -56,10 +56,10 @@ class MondayView(
                         else 0
                     )
 
-                    if (viewModel.listGroupExpenseToShowDayView[day.date] != null)
+                    if (viewModel.mapGroupExpenseToShowDayView[day.date] != null)
                         itemBottomExpenseLine.visibility = View.VISIBLE
 
-                    if (viewModel.listGroupIncomeToShowDayView[day.date] != null)
+                    if (viewModel.mapGroupIncomeToShowDayView[day.date] != null)
                         itemTopIncomeLine.visibility = View.VISIBLE
 
                 } else {

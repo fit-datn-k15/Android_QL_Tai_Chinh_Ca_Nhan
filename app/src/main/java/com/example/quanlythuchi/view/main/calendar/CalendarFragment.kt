@@ -5,13 +5,17 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
+import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.databinding.DayOfWeekHeaderBinding
 import com.example.quanlythuchi.databinding.FragmentCalendarBinding
+import com.example.quanlythuchi.extension.navigateWithAnim
 import com.example.quanlythuchi.extension.setTimeSelected
+import com.example.quanlythuchi.extension.toParcelableArrayList
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.core.nextMonth
@@ -136,7 +140,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
         }
     }
 
-    override fun onClick(item: ExpenseIncome) {
-
+    override fun onClickItemEI(item: ExpenseIncome) {
+        findNavController().navigateWithAnim(R.id.frg_edit_i_e, Bundle().apply {
+            putParcelable(Constant.KEY_ITEM_IE , item)
+            putParcelableArrayList(Constant.KEY_LIST_CATEGORY,viewModel.listCategory.toParcelableArrayList())
+        })
     }
 }

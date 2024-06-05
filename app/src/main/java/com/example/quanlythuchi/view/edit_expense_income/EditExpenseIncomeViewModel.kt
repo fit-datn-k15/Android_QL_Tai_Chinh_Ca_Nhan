@@ -10,6 +10,7 @@ import com.example.quanlythuchi.data.entity.Income
 import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.extension.isNotNullAndNotEmpty
+import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,11 +24,14 @@ class EditExpenseIncomeViewModel @Inject constructor(
     private val expenseRepository: ExpenseRepository,
     private val incomeRepository: InComeRepository
 ) : BaseViewModel() {
+    var itemData : ExpenseIncome? = null
     var isEnableButtonAdd = MutableLiveData(false)
+    var listCategory : List<Category>? = null
     var money = ""
         set(value) {
             field = value
             validData()
+            val a = intArrayOf()
         }
     var date = LocalDate.now()
         set(value) {

@@ -1,18 +1,27 @@
 package com.example.quanlythuchi.extension
 
 import android.content.Context
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.Patterns
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.Constant
+import com.example.quanlythuchi.data.entity.Category
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
+
+fun NavController.navigateWithAnim(@IdRes resId: Int, args: Bundle?) {
+    this.navigate(resId, args)
+}
 fun YearMonth.formatMonthVN() : String{
     val formatter = DateTimeFormatter.ofPattern("MM/yyyy", Locale.getDefault())
     return this.format(formatter)
@@ -62,14 +71,6 @@ internal fun Context.getColorCompat(@ColorRes color: Int) =
 internal fun TextView.setTextColorRes(@ColorRes color: Int) =
     setTextColor(context.getColorCompat(color))
 
-//fun Fragment.addStatusBarColorUpdate(@ColorRes colorRes: Int) {
-//    view?.findViewTreeLifecycleOwner()?.lifecycle?.addObserver(
-//        StatusBarColorLifecycleObserver(
-//            requireActivity(),
-//            requireContext().getColorCompat(colorRes),
-//        ),
-//    )
-//}
 
 // kiểm tra xem ngườid dùng có chọn ngày nào ko. nếu ko chọn ngày nào thì hiển thị tên tháng đó
 fun TextView.setTimeSelected(time : LocalDate?, yearMonth: YearMonth?, isSelectedDay : Boolean) {
@@ -84,4 +85,9 @@ fun TextView.setTimeSelected(time : LocalDate?, yearMonth: YearMonth?, isSelecte
             return
         }
     }
+}
+fun <T: Parcelable> MutableList<T>.toParcelableArrayList(): ArrayList<out Parcelable> {
+    val data = ArrayList<Parcelable>()
+    this.forEach { data.add(it) }
+    return data
 }

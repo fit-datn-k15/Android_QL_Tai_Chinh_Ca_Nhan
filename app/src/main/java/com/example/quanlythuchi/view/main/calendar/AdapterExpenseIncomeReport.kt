@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.databinding.ItemTotalCalendarBinding
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 
 class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
@@ -32,7 +30,7 @@ class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
         val item = getItem(position)
         holder.bind(item)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(getItem(position))
+            onClickListener.onClickItemEI(getItem(holder.absoluteAdapterPosition))
         }
     }
 
@@ -47,6 +45,6 @@ class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
 
     }
     interface OnClickListener {
-        fun onClick(item : ExpenseIncome)
+        fun onClickItemEI(item : ExpenseIncome)
     }
 }

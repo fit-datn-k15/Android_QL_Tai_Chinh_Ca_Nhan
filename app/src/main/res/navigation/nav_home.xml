@@ -34,5 +34,8 @@
         android:name="com.example.quanlythuchi.view.main.home.add_category.FragmentAddCategory">
 
     </fragment>
+    <fragment
+        android:id="@+id/frg_edit_i_e"
+        android:name="com.example.quanlythuchi.view.edit_expense_income.FragmentEditExpenseIncome"/>
 
 </navigation>

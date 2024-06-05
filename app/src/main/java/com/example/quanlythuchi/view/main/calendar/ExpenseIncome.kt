@@ -1,7 +1,9 @@
 package com.example.quanlythuchi.view.main.calendar
 
-import java.time.LocalDateTime
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ExpenseIncome (
     val id : String?,
     val date : String?,
@@ -11,7 +13,7 @@ data class ExpenseIncome (
     val idCategory : String? = null,
     val noteExpenseIncome : String? = null,
     val titleCategory : String? = null
-) {
+) :Parcelable {
     companion object {
         const val TYPE_EXPENSE = 0
         const val TYPE_INCOME = 1
