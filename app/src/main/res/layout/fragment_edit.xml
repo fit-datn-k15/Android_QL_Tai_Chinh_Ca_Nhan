@@ -46,32 +46,33 @@
                     app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
                 <ImageButton
+                    android:id="@+id/imageButton"
+                    setIconEnableInputData="@{viewModel.isEnableButtonAdd()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="@dimen/dp15"
-                    android:textSize="@dimen/sp18"
-                    setIconEnableInputData="@{viewModel.isEnableButtonAdd()}"
-                    app:iconGravity="end"
+                    android:layout_marginEnd="@dimen/dp15"
                     android:background="?android:attr/selectableItemBackground"
+                    android:elevation="@dimen/dp15"
                     android:onClick="@{v -> listener.onClickUpdate()}"
                     android:textColor="@color/black80"
-                    android:layout_marginEnd="@dimen/dp15"
+                    android:textSize="@dimen/sp18"
+                    app:iconGravity="end"
                     app:layout_constraintBottom_toBottomOf="@+id/toolbar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/type_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp25"
-                    android:text="ok"
+                    android:text="______________"
                     android:textColor="@color/black80"
                     android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/btn_back"
-                    app:layout_constraintStart_toEndOf="@id/btn_back"
-                    app:layout_constraintTop_toTopOf="@id/btn_back" />
+                    app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView

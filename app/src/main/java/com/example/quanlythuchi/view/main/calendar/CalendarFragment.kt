@@ -3,6 +3,7 @@ package com.example.quanlythuchi.view.main.calendar
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -141,9 +142,9 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
     }
 
     override fun onClickItemEI(item: ExpenseIncome) {
-        findNavController().navigateWithAnim(R.id.frg_edit_i_e, Bundle().apply {
-            putParcelable(Constant.KEY_ITEM_IE , item)
-            putParcelableArrayList(Constant.KEY_LIST_CATEGORY,viewModel.listCategory.toParcelableArrayList())
-        })
+        findNavController().navigateWithAnim(R.id.frg_edit_i_e, bundleOf(
+            Constant.KEY_ITEM_IE to item,
+            Constant.KEY_LIST_CATEGORY to viewModel.filterListCategory(item.typeExpenseOrIncome)
+        ))
     }
 }

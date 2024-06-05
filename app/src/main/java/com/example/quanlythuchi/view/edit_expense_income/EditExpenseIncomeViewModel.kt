@@ -26,7 +26,8 @@ class EditExpenseIncomeViewModel @Inject constructor(
 ) : BaseViewModel() {
     var itemData : ExpenseIncome? = null
     var isEnableButtonAdd = MutableLiveData(false)
-    var listCategory : List<Category>? = null
+    var listCategory : MutableList<Category>? = null
+    var itemCategorySelected = -1
     var money = ""
         set(value) {
             field = value
@@ -61,8 +62,8 @@ class EditExpenseIncomeViewModel @Inject constructor(
         isEnableButtonAdd.postValue(false)
     }
     val isUpdate = SingleLiveData(false)
-    fun updateData(typeUpdate: Int) {
-        if (typeUpdate == FragmentEditExpenseIncome.UPDATE_EXPENSE)
+    fun updateItemData(typeUpdate: Int) {
+        if (typeUpdate == ExpenseIncome.TYPE_EXPENSE)
             updateExpense()
         else
             updateIncome()

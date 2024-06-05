@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.base.BaseViewModel
 import com.example.quanlythuchi.base.SingleLiveData
+import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
@@ -147,6 +148,14 @@ class CalendarViewModel @Inject constructor(
             }
         }
     }
+    fun filterListCategory(type : Int) : MutableList<Category>{
+        if (type == ExpenseIncome.TYPE_EXPENSE) {
+            return listCategory.filter{ it.type == Fb.CategoryExpense }.toMutableList()
+        }
+        else {
+            return listCategory.filter{ it.type == Fb.CategoryIncome }.toMutableList()
+        }
+    }
 //    private fun calculator() {
 //        for (income in listIncome) {
 //            income.income?.let { incomeTotal += it }
@@ -160,6 +169,7 @@ class CalendarViewModel @Inject constructor(
         expenseTotal.postValue(0L)
         listExpense.clear()
         listIncome.clear()
+        listCategory.clear()
     }
     private fun clearDataTotal () {
         incomeTotal.postValue(0L)

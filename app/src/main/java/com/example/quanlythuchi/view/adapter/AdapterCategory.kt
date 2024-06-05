@@ -33,7 +33,7 @@ class AdapterCategory(private var onClickListener: OnClickListener) :
         val item = getItem(position)
         holder.bind(item)
         holder.itemView.setOnClickListener{
-           onClickListener.onClick(holder.absoluteAdapterPosition, currentList)
+           onClickListener.onClickItemCategory(holder.absoluteAdapterPosition, currentList)
         }
 
     }
@@ -54,7 +54,7 @@ class AdapterCategory(private var onClickListener: OnClickListener) :
     }
 
     interface OnClickListener {
-        fun onClick(position: Int, listCategory : MutableList<Category>)
+        fun onClickItemCategory(position: Int, listCategory : MutableList<Category>)
     }
 
 }
