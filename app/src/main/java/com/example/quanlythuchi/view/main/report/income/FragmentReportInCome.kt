@@ -7,17 +7,16 @@ import androidx.fragment.app.activityViewModels
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FragmentReportIncomeBinding
+import com.example.quanlythuchi.view.main.report.PercentFormatter
 import com.example.quanlythuchi.view.main.report.ReportViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -107,11 +106,6 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
             legend.isEnabled = false
             this@apply.data = PieData(pieDataSet)
         //    invalidate()
-        }
-    }
-    class PercentFormatter : ValueFormatter() {
-        override fun getFormattedValue(value: Float): String {
-            return String.format(Locale.getDefault(),"%.1f%%", value)
         }
     }
 }

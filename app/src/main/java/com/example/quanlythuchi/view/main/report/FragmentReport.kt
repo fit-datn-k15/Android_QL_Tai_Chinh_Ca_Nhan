@@ -9,8 +9,9 @@ import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FagmentReportBinding
 import com.example.quanlythuchi.extension.formatDateTime
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
-
+@AndroidEntryPoint
 class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), ReportListener {
     override val layoutID: Int = R.layout.fagment_report
     override val viewModel: ReportViewModel by activityViewModels()

@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.github.mikephil.charting.charts.BarChart
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
+<!--        <com.google.android.material.textview.MaterialTextView-->
+<!--            android:id="@+id/filter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/bar_drawer_EFF4F9"-->
+<!--            android:paddingHorizontal="@dimen/dp15"-->
+<!--            android:paddingVertical="@dimen/dp5"-->
+<!--            android:drawableStart="@drawable/ic_filter"-->
+<!--            android:textColor="@color/black90"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/m_chart"-->
+<!--            app:layout_constraintHorizontal_bias="0"/>-->
+
+<!--        <com.google.android.material.textview.MaterialTextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="@color/bar_drawer_EFF4F9"-->
+<!--            android:text="T6/2024"-->
+<!--            android:gravity="center|start"-->
+<!--            android:textSize="@dimen/sp16"-->
+<!--            android:textColor="@color/black90"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/filter"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/filter"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/filter" />-->
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/m_chart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:0.6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="1" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_income_and_expense"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/m_chart"
+            android:layout_marginBottom="@dimen/dp60"
+            tools:listitem="@layout/item_total_calendar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

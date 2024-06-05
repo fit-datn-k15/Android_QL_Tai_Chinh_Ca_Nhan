@@ -54,7 +54,7 @@
             app:layout_constraintTop_toTopOf="@+id/textView9" />
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/gr_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -345,14 +345,39 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
+            android:paddingHorizontal="@dimen/dp15"
+            android:paddingVertical="@dimen/dp5"
+            android:drawableStart="@drawable/ic_filter"
+            android:textColor="@color/black90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gr_3"
+            app:layout_constraintHorizontal_bias="0"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:text="T6/2024"
+            android:gravity="center|start"
+            android:textSize="@dimen/sp16"
+            android:textColor="@color/black90"
+            app:layout_constraintBottom_toBottomOf="@+id/filter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/filter"
+            app:layout_constraintTop_toTopOf="@+id/filter" />
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout_report"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/filter"
             app:tabIndicatorAnimationDuration="@integer/material_motion_duration_medium_1"
             app:tabIndicatorColor="@color/orange"
             app:tabIndicatorFullWidth="false"
@@ -375,7 +400,6 @@
             android:id="@+id/vpg"
             android:layout_width="match_parent"
             android:layout_height="432dp"
-            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tab_layout_report" />
