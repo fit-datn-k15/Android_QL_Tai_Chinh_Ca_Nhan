@@ -70,6 +70,7 @@ class CalendarViewModel @Inject constructor(
                         ExpenseIncome(
                             idCategory = item.idCategory,
                             id = item.idExpense,
+                            idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.expense,
@@ -86,6 +87,7 @@ class CalendarViewModel @Inject constructor(
                         ExpenseIncome(
                             idCategory = item.idCategory,
                             id = item.idIncome,
+                            idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.income,
@@ -113,6 +115,7 @@ class CalendarViewModel @Inject constructor(
                         ExpenseIncome(
                             idCategory = item.idCategory,
                             id = item.idExpense,
+                            idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.expense,
@@ -130,6 +133,7 @@ class CalendarViewModel @Inject constructor(
                         ExpenseIncome(
                             idCategory = item.idCategory,
                             id = item.idIncome,
+                            idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.income,

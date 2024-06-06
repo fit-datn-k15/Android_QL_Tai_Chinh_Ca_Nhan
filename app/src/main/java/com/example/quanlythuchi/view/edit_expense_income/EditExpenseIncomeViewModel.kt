@@ -1,7 +1,9 @@
 package com.example.quanlythuchi.view.edit_expense_income
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseViewModel
 import com.example.quanlythuchi.base.SingleLiveData
 import com.example.quanlythuchi.data.entity.Category
@@ -12,6 +14,7 @@ import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.extension.isNotNullAndNotEmpty
 import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,6 +24,7 @@ import kotlin.math.E
 
 @HiltViewModel
 class EditExpenseIncomeViewModel @Inject constructor(
+    @ApplicationContext val context: Context,
     private val expenseRepository: ExpenseRepository,
     private val incomeRepository: InComeRepository
 ) : BaseViewModel() {
@@ -53,7 +57,14 @@ class EditExpenseIncomeViewModel @Inject constructor(
     private fun validData() {
         try {
             val numberIncome = money.toLong()
-            if (categorySelected != null && money.isNotNullAndNotEmpty() && numberIncome > 0) {
+            if (categorySelected != null
+                && money.isNotNullAndNotEmpty()
+                && numberIncome > 0
+                && (itemData?.noteExpenseIncome != note
+                        || itemData?.date.toString() != date.toString()
+                        || itemData?.money != money.toLong()
+                        || itemData?.idCategory != categorySelected?.idCategory)
+            ) {
                 isEnableButtonAdd.postValue(true)
                 return
             }
@@ -61,15 +72,16 @@ class EditExpenseIncomeViewModel @Inject constructor(
         catch (_ : Exception) {}
         isEnableButtonAdd.postValue(false)
     }
-    val isUpdate = SingleLiveData(false)
-    fun updateItemData(typeUpdate: Int) {
+    fun updateItemData(typeUpdate: Int, callBack : (String) -> Unit) {
         if (typeUpdate == ExpenseIncome.TYPE_EXPENSE)
-            updateExpense()
+            updateExpense(callBack)
         else
-            updateIncome()
+            updateIncome(callBack)
     }
-    private fun updateExpense() {
+    private fun updateExpense(callBackIsUpdate : (String) -> Unit) {
         val item = Expense(
+            idExpense = this.itemData?.id,
+            idUser = this.itemData?.idUser,
             expense = money.toLong(),
             date = date.toString(),
             note = note,
@@ -78,12 +90,19 @@ class EditExpenseIncomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val isU = expenseRepository.updateExpense(item)
             withContext(Dispatchers.Main) {
-                isUpdate.postValue(isU)
+                if (isU) {
+                    callBackIsUpdate.invoke(context.getString(R.string.message_update_expense))
+                }
+                else {
+                    callBackIsUpdate.invoke(context.getString(R.string.err_update_income))
+                }
             }
         }
     }
-    private fun updateIncome() {
+    private fun updateIncome(callBackIsUpdate: (String) -> Unit) {
         val item = Income(
+            idIncome = this.itemData?.id,
+            idUser = this.itemData?.idUser,
             income = money.toLong(),
             date = date.toString(),
             note = note,
@@ -92,7 +111,12 @@ class EditExpenseIncomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val isU = incomeRepository.updateIncome(item)
             withContext(Dispatchers.Main) {
-                isUpdate.postValue(isU)
+                if (isU) {
+                    callBackIsUpdate.invoke(context.getString(R.string.message_update_income))
+                }
+                else {
+                    callBackIsUpdate.invoke(context.getString(R.string.err_update_income))
+                }
             }
         }
     }

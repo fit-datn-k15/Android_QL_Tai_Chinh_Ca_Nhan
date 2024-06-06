@@ -7,11 +7,12 @@ import java.io.Serializable
 @Parcelize
 data class ExpenseIncome (
     val id : String?,
+    val idCategory : String? = null,
+    val idUser : String? = null,
     val date : String?,
     val typeExpenseOrIncome: Int,
     val money : Long? = null,
     val icon : String? = null,
-    val idCategory : String? = null,
     val noteExpenseIncome : String? = null,
     val titleCategory : String? = null
 ) :Parcelable, Serializable {

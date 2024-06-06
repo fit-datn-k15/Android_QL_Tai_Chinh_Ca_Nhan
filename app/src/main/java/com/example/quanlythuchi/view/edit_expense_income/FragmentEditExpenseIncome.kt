@@ -65,18 +65,11 @@ class FragmentEditExpenseIncome : BaseFragment<FragmentEditBinding, EditExpenseI
             }
         }
         setData()
-        viewModel.isUpdate.observe(viewLifecycleOwner) {
-            if (it) {
-
-              //  showToast()
-                viewModel.isUpdate.value = false
-            }
-        }
     }
-   private  fun showToast(message : String) {
+   private  fun showToastIsUpdate(message : String) {
        Toast.makeText(
            requireContext(),
-           getString(R.string.message_update_income_expense) + getString(R.string.income),
+           message,
            Toast.LENGTH_SHORT
        ).show()
    }
@@ -87,7 +80,10 @@ class FragmentEditExpenseIncome : BaseFragment<FragmentEditBinding, EditExpenseI
 
     override fun onClickUpdate() {
         viewModel.itemData?.let {
-            viewModel.updateItemData(it.typeExpenseOrIncome)
+            viewModel.updateItemData(it.typeExpenseOrIncome) {message ->
+                showToastIsUpdate(message)
+                findNavController().popBackStack()
+            }
         }
     }
 

@@ -55,5 +55,8 @@
     <string name="other">Khác</string>
     <string name="update_income">Sửa khoản thu</string>
     <string name="update_expense">Sửa khoản chi</string>
-    <string name="message_update_income_expense">Đã sửa</string>
+    <string name="message_update_expense">Đã sửa khoản chi</string>
+    <string name="message_update_income">Đã sửa khoản thu</string>
+    <string name="err_update_income">Lỗi không xác định khi sửa thu</string>
+    <string name="err_update_expense">Lỗi không xác định khi sửa chi</string>
 </resources>

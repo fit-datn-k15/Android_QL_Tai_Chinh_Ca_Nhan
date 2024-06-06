@@ -25,6 +25,7 @@ class InComeRepositoryImp @Inject constructor(
             .addOnSuccessListener {querySnapshot ->
                 querySnapshot.documents.forEach {document ->
                     document.toObject(Income::class.java)?.let {
+                        it.idIncome = document.id
                         listIncome.add(it)
                     }
                 }
@@ -65,6 +66,7 @@ class InComeRepositoryImp @Inject constructor(
             .addOnSuccessListener { querySnapshot ->
                 for (doc in querySnapshot.documents) {
                     val item = doc.toObject(Income::class.java)
+                    item?.idIncome = doc.id
                     if (item != null && item.date?.toLocalDate()?.toMonthYearString() == month) {
                         listIncome.add(item)
                     }

@@ -18,15 +18,18 @@ class ExpenseRepositoryImp @Inject constructor(
     private val db: FirebaseFirestore = Firebase.firestore
     private val user by lazy {  FirebaseAuth.getInstance().currentUser}
     override suspend fun getAllExpense(): MutableList<Expense> {
-        if(user == null) {return mutableListOf() }
+        if (user == null) {
+            return mutableListOf()
+        }
         val listExpense = mutableListOf<Expense>()
         db.collection(Fb.Expense)
             .whereEqualTo(Fb.CategoryField.idUser, user!!.uid)
             .get()
-            .addOnSuccessListener {querySnapshot ->
-                querySnapshot.documents.forEach {document ->
-                    document.toObject(Expense::class.java)?.let {
-                            expense -> listExpense.add(expense)
+            .addOnSuccessListener { querySnapshot ->
+                querySnapshot.documents.forEach { document ->
+                    document.toObject(Expense::class.java)?.let { expense ->
+                        expense.idExpense = document.id
+                        listExpense.add(expense)
                     }
                 }
             }
@@ -104,6 +107,7 @@ class ExpenseRepositoryImp @Inject constructor(
             .addOnSuccessListener { querySnapshot ->
                 for (doc in querySnapshot.documents) {
                     val item = doc.toObject(Expense::class.java)
+                    item?.idExpense = doc.id
                     if (item != null && item.date?.toLocalDate()?.toMonthYearString() == month) {
                         listExpense.add(item)
                     }
@@ -152,6 +156,7 @@ class ExpenseRepositoryImp @Inject constructor(
                     result = true
                 }
                 .addOnFailureListener {
+                    throw Exception(it.message)
                     result = false
                 }
                 .await()
