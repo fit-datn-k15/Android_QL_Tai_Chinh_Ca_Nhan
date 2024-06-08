@@ -228,12 +228,42 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vpg"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tab_layout_report" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableEnd="@drawable/ic_filter"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/dp5"
+            android:paddingVertical="@dimen/dp4"
+            android:text=""
+            android:backgroundTint="@color/bar_drawer_EFF4F9"
+            android:layout_marginEnd="@dimen/dp10"
+            android:background="@drawable/bg_expense_income_balance_radius_10"
+            android:textColor="@color/orange"
+            app:backgroundTint="@null"
+            app:iconSize="@dimen/dp24"
+            app:iconTint="@color/orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vpg" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dp60"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter"
+            tools:listitem="@layout/item_total_calendar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

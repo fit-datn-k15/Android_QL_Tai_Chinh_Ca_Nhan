@@ -15,17 +15,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/dp60"
-        android:nestedScrollingEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="@dimen/dp1"
+        android:layout_marginHorizontal="@dimen/dp20"
+        android:background="@color/orange"
+        app:layout_constraintTop_toBottomOf="@id/m_chart"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/m_chart"
-        tools:listitem="@layout/item_total_calendar" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 <!--    <com.google.android.material.textview.MaterialTextView-->
 <!--        android:id="@+id/filter"-->
 <!--        android:layout_width="wrap_content"-->

@@ -7,22 +7,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
+import com.example.quanlythuchi.data.entity.BaseDataEI
+import com.example.quanlythuchi.data.entity.TotalCategory
 import com.example.quanlythuchi.databinding.ItemTotalCalendarBinding
+import com.example.quanlythuchi.databinding.ItemTotalCategoryBinding
 import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 
 
-class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
-    ListAdapter<ExpenseIncome, AdapterExpenseIncomeReport.CategoryViewHolder>(Callback()) {
-    class CategoryViewHolder(var viewBinding: ItemTotalCalendarBinding) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun bind(item: ExpenseIncome) {
+class AdapterTotalCategory(private var onClickListener: OnClickListener) :
+    ListAdapter<TotalCategory, AdapterTotalCategory.CategoryViewHolder>(Callback()) {
+    class CategoryViewHolder(var viewBinding: ItemTotalCategoryBinding) : RecyclerView.ViewHolder(viewBinding.root) {
+        fun bind(item: TotalCategory) {
             viewBinding.item = item
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val viewBinding = DataBindingUtil.inflate<ItemTotalCalendarBinding>(
-            inflater, R.layout.item_total_calendar, parent, false
+        val viewBinding = DataBindingUtil.inflate<ItemTotalCategoryBinding>(
+            inflater, R.layout.item_total_category, parent, false
         )
         return CategoryViewHolder(viewBinding)
     }
@@ -35,17 +38,17 @@ class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
         }
     }
 
-    class Callback : DiffUtil.ItemCallback<ExpenseIncome>() {
-        override fun areItemsTheSame(oldItem: ExpenseIncome, newItem: ExpenseIncome): Boolean {
-            return oldItem.id == newItem.id
+    class Callback : DiffUtil.ItemCallback<TotalCategory>() {
+        override fun areItemsTheSame(oldItem: TotalCategory, newItem: TotalCategory): Boolean {
+            return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: ExpenseIncome, newItem: ExpenseIncome): Boolean {
+        override fun areContentsTheSame(oldItem: TotalCategory, newItem: TotalCategory): Boolean {
             return oldItem == newItem
         }
 
     }
     interface OnClickListener {
-        fun onClickItemEI(item : ExpenseIncome)
+        fun onClickItemEI(item : TotalCategory)
     }
 }

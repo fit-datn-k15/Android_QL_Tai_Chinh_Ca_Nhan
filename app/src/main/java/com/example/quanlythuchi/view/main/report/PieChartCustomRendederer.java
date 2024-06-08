@@ -115,7 +115,7 @@ public class PieChartCustomRendederer extends PieChartRenderer {
 
                 PieEntry entry = dataSet.getEntryForIndex(j);
                 // Nếu giá trị của phần hiện tại nhỏ hơn 10, bỏ qua việc vẽ nhãn và đường line
-                if ((entry.getValue()/yValueSum)*100 < 5) {
+                if ((entry.getValue()/yValueSum)*100 < 4) {
                     xIndex++;
                     continue;
                 }

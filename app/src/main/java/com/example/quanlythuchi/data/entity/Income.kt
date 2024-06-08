@@ -17,4 +17,11 @@ data class Income(
     var date: String? = null,
     var income: Long? = null,
     var note: String? = null
-) : Serializable, Parcelable
+) : BaseDataEI(
+    id = idIncome,
+    idCate = idCategory,
+    uuidUser = idUser,
+    dateEI = date,
+    money = income,
+    noteEI = note
+), Parcelable

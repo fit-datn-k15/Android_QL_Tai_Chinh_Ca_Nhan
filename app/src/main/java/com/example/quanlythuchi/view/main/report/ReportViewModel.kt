@@ -6,10 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseViewModel
+import com.example.quanlythuchi.base.SingleLiveData
 import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
+import com.example.quanlythuchi.data.entity.TotalCategory
 import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
 import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
@@ -50,8 +52,7 @@ class ReportViewModel @Inject constructor(
     var listIncomeWithCategoryDec:
             MutableLiveData<MutableList<Triple<Category, Long, List<Income>>>> = MutableLiveData(mutableListOf())
 
-    var dataExpenseRcv : MutableLiveData<MutableList<ExpenseIncome>> = MutableLiveData()
-    var dataIncomeRcv : MutableLiveData<MutableList<ExpenseIncome>> = MutableLiveData()
+    var dataRcv : SingleLiveData<MutableList<TotalCategory>> = SingleLiveData(mutableListOf())
 
     fun getAllData() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -63,7 +64,6 @@ class ReportViewModel @Inject constructor(
                 listCategory = lCategory
                 listIncome = lIncome
                 filterDataExpenseByMonth(YearMonth.now())
-                filterDataIncomeByMonth(YearMonth.now())
                 calculateTotal()
             }
         }
@@ -252,55 +252,51 @@ class ReportViewModel @Inject constructor(
     }
 
     fun rcvExpensePrepare(yearMonth: YearMonth) {
-        val l = mutableListOf<ExpenseIncome>()
+        val l = mutableListOf<TotalCategory>()
         val m = yearMonth.toString()
         for (item in listExpenseWithCategoryDec.value!!) {
             val data = item.third
+            val lExpense = mutableListOf<Expense>()
             data.forEach { expense ->
                 if (m == expense.date.toLocalDate().toMonthYearString()) {
-                    l.add(
-                        ExpenseIncome(
-                            id = expense.idExpense,
-                            idUser = expense.idUser,
-                            idCategory = expense.idCategory,
-                            money = expense.expense,
-                            date = expense.date,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
-                            noteExpenseIncome = expense.note,
-                            icon = item.first.icon,
-                            titleCategory = item.first.title
-                        )
-                    )
+                    lExpense.add(expense)
                 }
             }
+            if (lExpense.size != 0) {
+                l.add(
+                    TotalCategory(
+                        total = item.second,
+                        category = item.first,
+                        data = item.third
+                    )
+                )
+            }
         }
-        dataExpenseRcv.postValue(l)
+        dataRcv.postValue(l)
     }
 
     fun rcvIncomePrepare(yearMonth: YearMonth) {
-        val l = mutableListOf<ExpenseIncome>()
+        val l = mutableListOf<TotalCategory>()
         val m = yearMonth.toString()
         for (item in listIncomeWithCategoryDec.value!!) {
             val data = item.third
+            val lIncome = mutableListOf<Income>()
             data.forEach { income ->
                 if (m == income.date.toLocalDate().toMonthYearString()) {
-                    l.add(
-                        ExpenseIncome(
-                            id = income.idIncome,
-                            idUser = income.idUser,
-                            idCategory = income.idCategory,
-                            money = income.income,
-                            date = income.date,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
-                            noteExpenseIncome = income.note,
-                            icon = item.first.icon,
-                            titleCategory = item.first.title
-                        )
-                    )
+                    lIncome.add(income)
                 }
             }
+            if (lIncome.size != 0) {
+                l.add(
+                    TotalCategory(
+                        total = item.second,
+                        category = item.first,
+                        data = item.third
+                    )
+                )
+            }
         }
-        dataIncomeRcv.postValue(l)
+        dataRcv.postValue(l)
     }
     private fun calculateTotal() {
         viewModelScope.launch(Dispatchers.IO) {

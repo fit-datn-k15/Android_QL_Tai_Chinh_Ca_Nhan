@@ -74,25 +74,17 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
                 invalidate()
             }
         }
-        viewBinding.apply {
-        //    adapterRcv.submitList(viewModel.dataIncomeRcv.value)
-            rcv.adapter = this@FragmentReportInCome.adapterRcv
-            rcv.layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        }
-        viewModel.dataIncomeRcv.observe(viewLifecycleOwner) {
-            adapterRcv.submitList(it)
-        }
-        viewModel.rcvIncomePrepare(YearMonth.now())
-        viewBinding.rcv.isNestedScrollingEnabled = false;
-        val itemDeclaration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
-        viewBinding.rcv.addItemDecoration(itemDeclaration)
+        viewModel.filterDataIncomeByMonth(YearMonth.now())
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.rcvIncomePrepare(YearMonth.now())
+    }
 
     override fun onNothingSelected() {}
 

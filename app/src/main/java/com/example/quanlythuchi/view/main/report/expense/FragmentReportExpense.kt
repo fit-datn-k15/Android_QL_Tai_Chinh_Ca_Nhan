@@ -81,19 +81,7 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
                 invalidate()
             }
         }
-        viewBinding.apply {
-           // adapterRcv.submitList(viewModel.dataExpenseRcv.value)
-            rcv.layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            rcv.adapter = this@FragmentReportExpense.adapterRcv
-        }
-        viewModel.dataExpenseRcv.observe(viewLifecycleOwner) {
-            adapterRcv.submitList(it)
-        }
-        viewModel.rcvExpensePrepare(YearMonth.now())
-        viewBinding.rcv.isNestedScrollingEnabled = false;
-        val itemDeclaration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
-        viewBinding.rcv.addItemDecoration(itemDeclaration)
+        viewModel.filterDataExpenseByMonth(YearMonth.now())
     }
 
     override fun onValueSelected(p0: Entry?, p1: Highlight?) {
@@ -159,6 +147,10 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
         popup.showAtLocation(requireActivity().window.decorView, Gravity.NO_GRAVITY, x.toInt(), y.toInt())
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.rcvExpensePrepare(YearMonth.now())
+    }
     override fun onClickItemEI(item: ExpenseIncome) {
         Log.d(TAG, "onClickItemEI: ${item.noteExpenseIncome}")
     }
