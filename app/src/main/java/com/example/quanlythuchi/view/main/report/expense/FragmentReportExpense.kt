@@ -81,7 +81,7 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
                 invalidate()
             }
         }
-        viewModel.filterDataExpenseByMonth(YearMonth.now())
+        viewModel.filterDataExpenseByMonth(YearMonth.from(viewModel.date))
     }
 
     override fun onValueSelected(p0: Entry?, p1: Highlight?) {
@@ -149,7 +149,7 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
 
     override fun onResume() {
         super.onResume()
-        viewModel.rcvExpensePrepare(YearMonth.now())
+        viewModel.rcvExpensePrepare(YearMonth.from(viewModel.date))
     }
     override fun onClickItemEI(item: ExpenseIncome) {
         Log.d(TAG, "onClickItemEI: ${item.noteExpenseIncome}")

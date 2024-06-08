@@ -36,6 +36,7 @@ class ReportViewModel @Inject constructor(
     private val expenseRepository: ExpenseRepository,
     private val categoryRepository: CategoryRepository
 ) : BaseViewModel() {
+    var isFragment = FragmentReport.FRAGMENT_EXPENSE
     var date: LocalDate = LocalDate.now()
     var listIncome: MutableList<Income> = mutableListOf()
     var listExpense: MutableList<Expense> = mutableListOf()
@@ -63,7 +64,8 @@ class ReportViewModel @Inject constructor(
                 listExpense = lExpense
                 listCategory = lCategory
                 listIncome = lIncome
-                filterDataExpenseByMonth(YearMonth.now())
+                filterDataExpenseByMonth(YearMonth.from(date))
+
                 calculateTotal()
             }
         }

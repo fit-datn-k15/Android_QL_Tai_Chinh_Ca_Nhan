@@ -74,7 +74,7 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
                 invalidate()
             }
         }
-        viewModel.filterDataIncomeByMonth(YearMonth.now())
+       viewModel.filterDataIncomeByMonth(YearMonth.from(viewModel.date))
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -83,7 +83,7 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
 
     override fun onResume() {
         super.onResume()
-        viewModel.rcvIncomePrepare(YearMonth.now())
+        viewModel.rcvIncomePrepare(YearMonth.from(viewModel.date))
     }
 
     override fun onNothingSelected() {}
