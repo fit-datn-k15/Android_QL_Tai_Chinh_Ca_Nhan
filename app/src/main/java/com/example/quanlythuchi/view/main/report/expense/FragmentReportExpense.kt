@@ -53,7 +53,15 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
             pieDataSet.apply {
                 sliceSpace = 2f
                 valueTextSize = 12f
-                colors = listOf(Color.GRAY, Color.BLUE, Color.RED, Color.MAGENTA,Color.YELLOW,Color.CYAN, Color.BLACK)
+                colors = listOf(
+                    context?.getColor(R.color.orange) ?: Color.GRAY,
+                    context?.getColor(R.color.green_700) ?: Color.GREEN,
+                    Color.RED,
+                    context?.getColor(R.color.color_FF8126) ?: Color.MAGENTA,
+                    Color.YELLOW,
+                    Color.CYAN,
+                    Color.BLACK
+                )
             }
             // set đuườn line mô tả biểu đồ
             pieDataSet.apply {

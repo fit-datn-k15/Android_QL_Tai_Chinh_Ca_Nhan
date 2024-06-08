@@ -8,7 +8,6 @@ import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseViewModel
 import com.example.quanlythuchi.base.SingleLiveData
 import com.example.quanlythuchi.base.TAG
-import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
@@ -28,7 +27,6 @@ import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.YearMonth
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(

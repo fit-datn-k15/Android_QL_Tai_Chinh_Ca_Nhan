@@ -116,6 +116,10 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
 
     }
 
+    override fun openViewAll() {
+        findNavController().navigateWithAnim(R.id.frg_all_income_expense, bundleOf())
+    }
+
     override fun btnNextDay() {
 
     }

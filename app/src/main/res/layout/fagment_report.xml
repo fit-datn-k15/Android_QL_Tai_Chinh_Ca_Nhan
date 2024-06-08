@@ -85,6 +85,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@color/transfer"
+                        android:onClick="@{v -> listener.openViewAll()}"
                         android:padding="@dimen/dp3"
                         android:layout_marginEnd="@dimen/dp10"
                         android:textColor="@color/color_31a24c"
