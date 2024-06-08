@@ -4,18 +4,24 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FagmentReportBinding
 import com.example.quanlythuchi.extension.formatDateTime
+import com.example.quanlythuchi.view.adapter.AdapterExpenseIncomeReport
+import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 @AndroidEntryPoint
-class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), ReportListener {
+class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), ReportListener,
+    AdapterExpenseIncomeReport.OnClickListener{
     override val layoutID: Int = R.layout.fagment_report
     override val viewModel: ReportViewModel by activityViewModels()
     private val adapterViewpager by lazy { AdapterReport(this) }
+    private val adapterRcv by lazy { AdapterExpenseIncomeReport(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAllIncome()
@@ -30,8 +36,13 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
                 else
                     tab.text = context?.getString(R.string.income)
             }.attach()
+            adapterRcv.submitList(viewModel?.dataRcv?.value)
+            listIncomeAndExpense.adapter = this@FragmentReport.adapterRcv
+            listIncomeAndExpense.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         }
-
+        viewModel.dataRcv.observe(viewLifecycleOwner) {
+            adapterRcv.submitList(it)
+        }
 
     }
     override fun openDayPicker() {
@@ -62,6 +73,10 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
     private fun setTimeDefault() {
         val time = viewModel.date.formatDateTime()
         viewBinding.pickTime.text = time
+
+    }
+
+    override fun onClickItemEI(item: ExpenseIncome) {
 
     }
 }

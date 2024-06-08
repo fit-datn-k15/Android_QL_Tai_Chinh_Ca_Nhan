@@ -13,6 +13,7 @@ import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.extension.toLocalDate
 import com.example.quanlythuchi.extension.toMonthYearString
+import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -38,9 +39,13 @@ class ReportViewModel @Inject constructor(
     var listDataIncomePieChar = MutableLiveData<MutableList<PieEntry>>(mutableListOf())
 
     var listCategory = mutableListOf<Category>()
+    var mapCategory = mapOf<String?,Category>()
     var total = MutableLiveData(0L)
 
-    var listExpenseWithCategoryDec :MutableLiveData<MutableList<Triple<Category,Long, List<Expense>>>> = MutableLiveData()
+    var listExpenseWithCategoryDec:
+            MutableLiveData<MutableList<Triple<Category, Long, List<Expense>>>> = MutableLiveData(mutableListOf())
+
+    var dataRcv : MutableLiveData<MutableList<ExpenseIncome>> = MutableLiveData()
     fun getAllExpense() {
         viewModelScope.launch(Dispatchers.IO) {
             val lExpense = expenseRepository.getAllExpense()
@@ -48,7 +53,7 @@ class ReportViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 listExpense = lExpense
                 listCategory = lCategory
-                filterDataExpense()
+                filterDataExpenseByMonth(YearMonth.now())
             }
         }
     }
@@ -61,7 +66,7 @@ class ReportViewModel @Inject constructor(
         }
     }
 
-    fun filterDataExpense() {
+    private fun filterDataExpense() {
         viewModelScope.launch(Dispatchers.IO) {
             val mapExpenseByIdCategory: Map<String?, List<Expense>> =
                 listExpense.groupBy { it.idCategory }
@@ -106,8 +111,11 @@ class ReportViewModel @Inject constructor(
             }
 
             withContext(Dispatchers.Main) {
-                this@ReportViewModel.listExpenseWithCategoryDec.postValue(listExpenseWithCategory)
-                this@ReportViewModel.listDataExpensePieChar.postValue(listPieEntry)
+                this@ReportViewModel.apply {
+                    listExpenseWithCategoryDec.postValue(listExpenseWithCategory)
+                    listDataExpensePieChar.postValue(listPieEntry)
+                    this.mapCategory = mapCategory
+                }
             }
         }
     }
@@ -125,7 +133,9 @@ class ReportViewModel @Inject constructor(
                 }
             val mapCategory: Map<String?, Category> = listCategory.associateBy { it.idCategory }
 
-            // list chứa danh mục, tổng số tiền của danh mục đó và list các khoản chi thuộc nó
+            /*
+                list chứa danh mục, tổng số tiền của danh mục đó và list các khoản chi thuộc nó
+             */
             var listExpenseWithCategory: MutableList<Triple<Category, Long, List<Expense>>> =
                 mapExpenseByIdCategoryOfMonth.mapNotNull { item ->
                     val key: Category? = mapCategory[item.key]
@@ -136,7 +146,9 @@ class ReportViewModel @Inject constructor(
                 }.sortedByDescending { triple ->
                     triple.second
                 }.toMutableList()
-            // chuẩn bị dữ liệu cho biểu đồ
+            /*
+                chuẩn bị dữ liệu cho biểu đồ
+             */
             val listPieEntry = mutableListOf<PieEntry>()
             for (i in 0..4) {
                 if (listExpenseWithCategory.size <= i)
@@ -146,7 +158,7 @@ class ReportViewModel @Inject constructor(
                     PieEntry(
                         item.second.toFloat(),
                         item.first.title,
-                        item.third
+                        item
                     )
                 )
             }
@@ -168,10 +180,37 @@ class ReportViewModel @Inject constructor(
             }
 
             withContext(Dispatchers.Main) {
-                this@ReportViewModel.listExpenseWithCategoryDec.postValue(listExpenseWithCategory)
-                this@ReportViewModel.listDataExpensePieChar.postValue(listPieEntry)
+                this@ReportViewModel.listExpenseWithCategoryDec.value = listExpenseWithCategory
+                this@ReportViewModel.listDataExpensePieChar.value = listPieEntry
+                prepareExpenseDataRcv(month)
             }
         }
+    }
+
+    private fun prepareExpenseDataRcv(yearMonth: YearMonth) {
+        val l = mutableListOf<ExpenseIncome>()
+        val m = yearMonth.toString()
+        for (item in listExpenseWithCategoryDec.value!!) {
+            val data = item.third
+            data.forEach { expense ->
+                if (m == expense.date.toLocalDate().toMonthYearString()) {
+                    l.add(
+                        ExpenseIncome(
+                            id = expense.idExpense,
+                            idUser = expense.idUser,
+                            idCategory = expense.idCategory,
+                            money = expense.expense,
+                            date = expense.date,
+                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
+                            noteExpenseIncome = expense.note,
+                            icon = item.first.icon,
+                            titleCategory = item.first.title
+                        )
+                    )
+                }
+            }
+        }
+        dataRcv.postValue(l)
     }
     fun calculateTotal() {
         viewModelScope.launch(Dispatchers.IO) {

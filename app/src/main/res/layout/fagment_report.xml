@@ -155,154 +155,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/dp10"
-                android:weightSum="2">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/group_income"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp95"
-                    android:layout_marginHorizontal="@dimen/dp5"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/bar_drawer_EFF4F9"
-                    android:background="@drawable/bg_expense_income_balance">
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/view"
-                        app:layout_constraintEnd_toEndOf="@+id/view"
-                        app:layout_constraintStart_toStartOf="@+id/view"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/shapeableImageView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/green_B8D8C1"
-                            android:src="@drawable/ic_down"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.4"
-                            app:shapeAppearanceOverlay="@style/circleImageView" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/materialTextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dp8"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/income"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
-                            app:layout_constraintTop_toTopOf="@+id/shapeableImageView" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/total_income"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="100.000 đ"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
-                            app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:layout_marginHorizontal="@dimen/dp15"
-                        android:layout_weight="1"
-                        android:background="@color/orange"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.85"
-                        tools:layout_editor_absoluteX="15dp" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/group_expense"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp95"
-                    android:layout_marginHorizontal="@dimen/dp5"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_expense_income_balance"
-                    android:backgroundTint="#E3DADA">
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/line_red"
-                        app:layout_constraintEnd_toEndOf="@+id/line_red"
-                        app:layout_constraintStart_toStartOf="@+id/line_red"
-                        app:layout_constraintTop_toTopOf="parent">
-
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/icon_expense"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/red_E1B9BB"
-                            android:src="@drawable/ic_up"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.4"
-                            app:shapeAppearanceOverlay="@style/circleImageView" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/label_expense"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dp8"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/expense"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/icon_expense"
-                            app:layout_constraintTop_toTopOf="@+id/icon_expense" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/total_expense"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="0.00 đ"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/icon_expense"
-                            app:layout_constraintTop_toBottomOf="@+id/label_expense" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/line_red"
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:layout_marginHorizontal="@dimen/dp15"
-                        android:layout_weight="1"
-                        android:background="@color/red_d61c1c"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.85"
-                        tools:layout_editor_absoluteX="15dp" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/group_day"
                 android:layout_width="match_parent"
@@ -345,42 +197,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:paddingHorizontal="@dimen/dp15"
-            android:paddingVertical="@dimen/dp5"
-            android:drawableStart="@drawable/ic_filter"
-            android:textColor="@color/black90"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gr_3"
-            app:layout_constraintHorizontal_bias="0"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            android:text="T6/2024"
-            android:gravity="center|start"
-            android:textSize="@dimen/sp16"
-            android:textColor="@color/black90"
-            app:layout_constraintBottom_toBottomOf="@+id/filter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/filter"
-            app:layout_constraintTop_toTopOf="@+id/filter" />
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout_report"
             android:layout_width="0dp"
             android:layout_height="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/filter"
+            app:layout_constraintTop_toBottomOf="@+id/gr_3"
             app:tabIndicatorAnimationDuration="@integer/material_motion_duration_medium_1"
             app:tabIndicatorColor="@color/orange"
-            app:tabIndicatorFullWidth="false"
+            app:tabTextColor="@color/black60"
+            android:layout_marginHorizontal="@dimen/dp20"
+            app:tabIndicatorFullWidth="true"
             app:tabSelectedTextColor="@color/orange"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
 
@@ -399,10 +227,24 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vpg"
             android:layout_width="match_parent"
-            android:layout_height="432dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:0.6"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tab_layout_report" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_income_and_expense"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dp60"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vpg"
+            tools:listitem="@layout/item_total_calendar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

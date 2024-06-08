@@ -1,18 +1,15 @@
 package com.example.quanlythuchi.data.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 import com.google.firebase.firestore.ServerTimestamp
+import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
-@Entity(
-    foreignKeys = [ForeignKey(
-        entity = Category::class,
-        parentColumns = ["idCategory"],
-        childColumns = ["idCategory"]
-    )]
-)
+@Parcelize
 data class Income(
     var idIncome: String? = null,
     var idCategory: String? = null,
@@ -20,4 +17,4 @@ data class Income(
     var date: String? = null,
     var income: Long? = null,
     var note: String? = null
-) : Serializable
+) : Serializable, Parcelable

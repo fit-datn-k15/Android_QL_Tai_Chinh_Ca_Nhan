@@ -1,4 +1,4 @@
-package com.example.quanlythuchi.view.main.calendar
+package com.example.quanlythuchi.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.databinding.ItemTotalCalendarBinding
+import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 
 
 class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :

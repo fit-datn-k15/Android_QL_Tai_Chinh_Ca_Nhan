@@ -36,7 +36,7 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
          // thiet lap mo tả cho biểu do
             holeRadius = 40f              // bán kính của lỗ trống ở giữa bieiể đồ
             setTransparentCircleAlpha(50)  // đặt độ trong suouốt cho vòng tròn bên ngoài
-            centerText = "Thống kê"   // vaăn bản ở giữa biểu đồ
+            centerText = "PieChart"   // vaăn bản ở giữa biểu đồ
             setCenterTextSize(10f)
             setEntryLabelColor(R.color.black80)
             setDrawEntryLabels(true) // hiển thị nhãn của các muục dữ liệu
