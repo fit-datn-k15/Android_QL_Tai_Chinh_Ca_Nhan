@@ -3,7 +3,9 @@ package com.example.quanlythuchi.view.main.report
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +13,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.quanlythuchi.AppBindingAdapter.setTimeFormatter
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
+import com.example.quanlythuchi.base.Constant
 import com.example.quanlythuchi.data.entity.TotalCategory
 import com.example.quanlythuchi.databinding.FagmentReportBinding
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.formatMonthVN
+import com.example.quanlythuchi.extension.navigateWithAnim
 import com.example.quanlythuchi.extension.toMonthYearString
 import com.example.quanlythuchi.view.adapter.AdapterTotalCategory
 import com.google.android.material.tabs.TabLayoutMediator
@@ -38,7 +42,7 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
         setTimeDefault()
         viewBinding.apply {
             listener = this@FragmentReport
-            vpg.adapter = this@FragmentReport.adapterViewpager
+            vpg.adapter = AdapterReport(this@FragmentReport)
             TabLayoutMediator(tabLayoutReport, vpg) { tab, position ->
                 if (position == 0)
                     tab.text = context?.getString(R.string.expense)
@@ -49,11 +53,11 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
         viewBinding.vpg.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 if (position == 0) {
-                    viewModel.date = LocalDate.now()
+
                     viewModel.isFragment = FRAGMENT_EXPENSE
                 }
                 else {
-                    viewModel.date = LocalDate.now()
+
                     viewModel.isFragment = FRAGMENT_INCOME
                 }
             }
@@ -123,6 +127,10 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
     }
 
     override fun onClickItemEI(item: TotalCategory) {
-
+        findNavController().navigateWithAnim(R.id.frg_list_data, bundleOf(
+            Constant.KEY_ITEM_CATEGORY_OF_DATA to item.category.idCategory,
+            Constant.DATA to item.data,
+            Constant.TITLE_CATEGORY to item.category.title
+        ))
     }
 }

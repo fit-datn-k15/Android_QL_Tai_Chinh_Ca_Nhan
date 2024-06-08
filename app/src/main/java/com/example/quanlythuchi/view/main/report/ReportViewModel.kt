@@ -8,6 +8,7 @@ import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseViewModel
 import com.example.quanlythuchi.base.SingleLiveData
 import com.example.quanlythuchi.base.TAG
+import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
@@ -64,8 +65,10 @@ class ReportViewModel @Inject constructor(
                 listExpense = lExpense
                 listCategory = lCategory
                 listIncome = lIncome
-                filterDataExpenseByMonth(YearMonth.from(date))
-
+                if (isFragment == FragmentReport.FRAGMENT_EXPENSE)
+                    filterDataExpenseByMonth(YearMonth.from(date))
+                else
+                    filterDataIncomeByMonth(YearMonth.from(date))
                 calculateTotal()
             }
         }
@@ -184,6 +187,7 @@ class ReportViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 this@ReportViewModel.listIncomeWithCategoryDec.value = listIncomeWithCategory
                 this@ReportViewModel.listDataIncomePieChar.value = listPieEntry
+                this@ReportViewModel.mapCategory = mapCategory
                 rcvIncomePrepare(month)
             }
         }
@@ -248,6 +252,7 @@ class ReportViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 this@ReportViewModel.listExpenseWithCategoryDec.value = listExpenseWithCategory
                 this@ReportViewModel.listDataExpensePieChar.value = listPieEntry
+                this@ReportViewModel.mapCategory = mapCategory
                 rcvExpensePrepare(month)
             }
         }
@@ -257,19 +262,34 @@ class ReportViewModel @Inject constructor(
         val l = mutableListOf<TotalCategory>()
         val m = yearMonth.toString()
         for (item in listExpenseWithCategoryDec.value!!) {
-            val data = item.third
             val lExpense = mutableListOf<Expense>()
-            data.forEach { expense ->
+            item.third.forEach { expense ->
                 if (m == expense.date.toLocalDate().toMonthYearString()) {
                     lExpense.add(expense)
                 }
             }
             if (lExpense.size != 0) {
+                val lExpenseIncome = mutableListOf<ExpenseIncome>()
+                lExpense.forEach { expense ->
+                    lExpenseIncome.add(
+                        ExpenseIncome(
+                            id = expense.idExpense,
+                            idCategory = expense.idCategory,
+                            idUser = expense.idUser,
+                            date = expense.date,
+                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
+                            money = expense.expense,
+                            icon = mapCategory[expense.idCategory]?.icon ?: "",
+                            noteExpenseIncome = expense.note,
+                            titleCategory = mapCategory[expense.idCategory]?.title ?: ""
+                        )
+                    )
+                }
                 l.add(
                     TotalCategory(
                         total = item.second,
                         category = item.first,
-                        data = item.third
+                        data = lExpenseIncome
                     )
                 )
             }
@@ -289,11 +309,27 @@ class ReportViewModel @Inject constructor(
                 }
             }
             if (lIncome.size != 0) {
+                val lExpenseIncome = mutableListOf<ExpenseIncome>()
+                lIncome.forEach { income ->
+                    lExpenseIncome.add(
+                        ExpenseIncome(
+                            id = income.idIncome,
+                            idCategory = income.idCategory,
+                            idUser = income.idUser,
+                            date = income.date,
+                            typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
+                            money = income.income,
+                            icon = mapCategory[income.idCategory]?.icon ?: "",
+                            noteExpenseIncome = income.note,
+                            titleCategory = mapCategory[income.idCategory]?.title ?: ""
+                        )
+                    )
+                }
                 l.add(
                     TotalCategory(
                         total = item.second,
                         category = item.first,
-                        data = item.third
+                        data = lExpenseIncome
                     )
                 )
             }

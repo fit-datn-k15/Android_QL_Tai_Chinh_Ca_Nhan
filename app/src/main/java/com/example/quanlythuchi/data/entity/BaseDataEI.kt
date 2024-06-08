@@ -1,5 +1,9 @@
 package com.example.quanlythuchi.data.entity
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
 abstract class BaseDataEI(
     var id: String? = null,
     var idCate: String? = null,
@@ -7,7 +11,7 @@ abstract class BaseDataEI(
     var dateEI: String? = null,
     var money: Long? = null,
     var noteEI: String? = null
-) {
+) : Parcelable{
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
     }

@@ -38,4 +38,7 @@
         android:id="@+id/frg_edit_i_e"
         android:name="com.example.quanlythuchi.view.edit_expense_income.FragmentEditExpenseIncome"/>
 
+    <fragment
+        android:id="@+id/frg_list_data"
+        android:name="com.example.quanlythuchi.view.main.list_data_form_category.FragmentListData"/>
 </navigation>
