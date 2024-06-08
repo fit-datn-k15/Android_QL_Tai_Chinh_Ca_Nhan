@@ -1,5 +1,6 @@
 package com.example.quanlythuchi.data.repository.local.expense
 
+import android.util.Log
 import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.mapperExpense
 import com.example.quanlythuchi.data.entity.Expense
@@ -11,6 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import kotlin.math.log
 
 class ExpenseRepositoryImp @Inject constructor(
 
@@ -144,7 +146,6 @@ class ExpenseRepositoryImp @Inject constructor(
                 .document(it)
                 .update(
                     mapOf(
-                        "idExpense" to expense.idExpense,
                         "idUser" to expense.idUser,
                         "expense" to expense.expense,
                         "date" to expense.date,
@@ -155,8 +156,8 @@ class ExpenseRepositoryImp @Inject constructor(
                 .addOnSuccessListener {
                     result = true
                 }
-                .addOnFailureListener {
-                    throw Exception(it.message)
+                .addOnFailureListener {e ->
+                    Log.e("error", "updateExpense: ${e.message}")
                     result = false
                 }
                 .await()

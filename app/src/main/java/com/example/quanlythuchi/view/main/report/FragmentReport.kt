@@ -21,11 +21,12 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
     override val layoutID: Int = R.layout.fagment_report
     override val viewModel: ReportViewModel by activityViewModels()
     private val adapterViewpager by lazy { AdapterReport(this) }
-    private val adapterRcv by lazy { AdapterExpenseIncomeReport(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getAllIncome()
-        viewModel.getAllExpense()
+        viewBinding.apply {
+            viewModel = this@FragmentReport.viewModel
+        }
+        viewModel.getAllData()
         setTimeDefault()
         viewBinding.apply {
             listener = this@FragmentReport
@@ -36,14 +37,7 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
                 else
                     tab.text = context?.getString(R.string.income)
             }.attach()
-            adapterRcv.submitList(viewModel?.dataRcv?.value)
-            listIncomeAndExpense.adapter = this@FragmentReport.adapterRcv
-            listIncomeAndExpense.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         }
-        viewModel.dataRcv.observe(viewLifecycleOwner) {
-            adapterRcv.submitList(it)
-        }
-
     }
     override fun openDayPicker() {
         val picker = DatePickerDialog(

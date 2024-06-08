@@ -1,5 +1,6 @@
 package com.example.quanlythuchi.data.repository.local.income
 
+import android.util.Log
 import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Income
 import com.example.quanlythuchi.extension.toMonthYearString
@@ -100,7 +101,6 @@ class InComeRepositoryImp @Inject constructor(
             db.collection(Fb.Income)
                 .document(it)
                 .update(mapOf(
-                    "idIncome" to income.idIncome,
                     "idUser" to income.idUser,
                     "idCategory" to income.idCategory,
                     "note" to income.note,
@@ -110,7 +110,8 @@ class InComeRepositoryImp @Inject constructor(
                 .addOnCompleteListener {
                     result = true
                 }
-                .addOnFailureListener {
+                .addOnFailureListener {e ->
+                    Log.e("error", "updateExpense: ${e.message}")
                     result = false
                 }
                 .await()

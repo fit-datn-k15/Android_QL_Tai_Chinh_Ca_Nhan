@@ -3,14 +3,21 @@ package com.example.quanlythuchi.view.main.report.expense
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.PopupWindow
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
+import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.databinding.FragmentReportExpenseBinding
+import com.example.quanlythuchi.view.adapter.AdapterExpenseIncomeReport
+import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 import com.example.quanlythuchi.view.main.report.PercentFormatter
 import com.example.quanlythuchi.view.main.report.PieChartCustomRendederer
 import com.example.quanlythuchi.view.main.report.ReportViewModel
@@ -23,17 +30,17 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.github.mikephil.charting.utils.MPPointF
-import com.google.android.play.integrity.internal.h
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.YearMonth
 
 
 @AndroidEntryPoint
 class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportViewModel>(),
-    ReportExpenseListener, OnChartValueSelectedListener {
+    ReportExpenseListener, OnChartValueSelectedListener,AdapterExpenseIncomeReport.OnClickListener {
     override val layoutID: Int = R.layout.fragment_report_expense
     override val viewModel : ReportViewModel by activityViewModels()
     private val valueFormatter by lazy { PercentFormatter() }
+    private val adapterRcv by lazy { AdapterExpenseIncomeReport(this) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.lifecycleOwner = this
@@ -74,7 +81,19 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
                 invalidate()
             }
         }
-
+        viewBinding.apply {
+           // adapterRcv.submitList(viewModel.dataExpenseRcv.value)
+            rcv.layoutManager =
+                LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            rcv.adapter = this@FragmentReportExpense.adapterRcv
+        }
+        viewModel.dataExpenseRcv.observe(viewLifecycleOwner) {
+            adapterRcv.submitList(it)
+        }
+        viewModel.rcvExpensePrepare(YearMonth.now())
+        viewBinding.rcv.isNestedScrollingEnabled = false;
+        val itemDeclaration = DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
+        viewBinding.rcv.addItemDecoration(itemDeclaration)
     }
 
     override fun onValueSelected(p0: Entry?, p1: Highlight?) {
@@ -101,9 +120,9 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
             setEntryLabelColor(R.color.black80)
             setDrawEntryLabels(true) // hiển thị nhãn của các muục dữ liệu
             setUsePercentValues(true)
-
+            isRotationEnabled = false
             description = getDescriptionPieChart()
-            setExtraOffsets(20f,20f,20f,20f)
+            setExtraOffsets(15f,15f,15f,15f)
             setOnChartValueSelectedListener(this@FragmentReportExpense)
             renderer = PieChartCustomRendederer(viewBinding.mChart, viewBinding.mChart.animator, viewBinding.mChart.viewPortHandler)
 
@@ -139,4 +158,8 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
         viewBinding.mChart.getLocationOnScreen(chartLocation)
         popup.showAtLocation(requireActivity().window.decorView, Gravity.NO_GRAVITY, x.toInt(), y.toInt())
     }
- }
+
+    override fun onClickItemEI(item: ExpenseIncome) {
+        Log.d(TAG, "onClickItemEI: ${item.noteExpenseIncome}")
+    }
+}

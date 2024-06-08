@@ -37,7 +37,7 @@ class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
 
     class Callback : DiffUtil.ItemCallback<ExpenseIncome>() {
         override fun areItemsTheSame(oldItem: ExpenseIncome, newItem: ExpenseIncome): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: ExpenseIncome, newItem: ExpenseIncome): Boolean {

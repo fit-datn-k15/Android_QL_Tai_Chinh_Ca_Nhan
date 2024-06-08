@@ -15,7 +15,7 @@ data class ExpenseIncome (
     val icon : String? = null,
     val noteExpenseIncome : String? = null,
     val titleCategory : String? = null
-) :Parcelable, Serializable {
+) :Parcelable {
     companion object {
         const val TYPE_EXPENSE = 0
         const val TYPE_INCOME = 1
