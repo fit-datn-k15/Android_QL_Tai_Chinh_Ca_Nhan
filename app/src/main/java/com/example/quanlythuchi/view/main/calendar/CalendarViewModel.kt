@@ -41,7 +41,7 @@ class CalendarViewModel @Inject constructor(
 
     var mapCategory : Map<String, Category> = mutableMapOf()
     // list này là tổng hợp các khoản thu, chi của 1 ngày hoặc 1 tháng,
-    var listSyntheticByDate = MutableLiveData(mutableListOf<ExpenseIncome>())
+    var listSyntheticByDate = MutableLiveData(mutableListOf<FinancialRecord>())
     fun getDataByDate() {
         viewModelScope.launch(Dispatchers.IO) {
             val lExpense = expenseRepository.getAllExpense()
@@ -63,18 +63,18 @@ class CalendarViewModel @Inject constructor(
     }
     fun filterListSyntheticByDate(dateSelecting : LocalDate) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list: MutableList<ExpenseIncome> = mutableListOf()
+            val list: MutableList<FinancialRecord> = mutableListOf()
             for (item in listExpense) {
                 if (dateSelecting.toString() == item.date) {
                     list.add(
-                        ExpenseIncome(
+                        FinancialRecord(
                             idCategory = item.idCategory,
                             id = item.idExpense,
                             idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.expense,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
+                            typeExpenseOrIncome = FinancialRecord.TYPE_EXPENSE,
                             titleCategory = mapCategory[item.idCategory]?.title,
                             icon = mapCategory[item.idCategory]?.icon
                         )
@@ -84,14 +84,14 @@ class CalendarViewModel @Inject constructor(
             for (item in listIncome) {
                 if (dateSelecting.toString() == item.date) {
                     list.add(
-                        ExpenseIncome(
+                        FinancialRecord(
                             idCategory = item.idCategory,
                             id = item.idIncome,
                             idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.income,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
+                            typeExpenseOrIncome = FinancialRecord.TYPE_INCOME,
                             titleCategory = mapCategory[item.idCategory]?.title,
                             icon = mapCategory[item.idCategory]?.icon
                         )
@@ -108,18 +108,18 @@ class CalendarViewModel @Inject constructor(
         var incomeTotalByDate = 0L
         var expenseTotalByDate = 0L
         viewModelScope.launch(Dispatchers.IO) {
-            val list: MutableList<ExpenseIncome> = mutableListOf()
+            val list: MutableList<FinancialRecord> = mutableListOf()
             for (item in listExpense) {
                 if (monthSelecting.toString() == item.date.toLocalDate().toMonthYearString()) {
                     list.add(
-                        ExpenseIncome(
+                        FinancialRecord(
                             idCategory = item.idCategory,
                             id = item.idExpense,
                             idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.expense,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
+                            typeExpenseOrIncome = FinancialRecord.TYPE_EXPENSE,
                             titleCategory = mapCategory[item.idCategory]?.title,
                             icon = mapCategory[item.idCategory]?.icon
                         )
@@ -130,14 +130,14 @@ class CalendarViewModel @Inject constructor(
             for (item in listIncome) {
                 if (monthSelecting.toString() == item.date.toLocalDate().toMonthYearString()) {
                     list.add(
-                        ExpenseIncome(
+                        FinancialRecord(
                             idCategory = item.idCategory,
                             id = item.idIncome,
                             idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.income,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
+                            typeExpenseOrIncome = FinancialRecord.TYPE_INCOME,
                             titleCategory = mapCategory[item.idCategory]?.title,
                             icon = mapCategory[item.idCategory]?.icon
                         )
@@ -153,7 +153,7 @@ class CalendarViewModel @Inject constructor(
         }
     }
     fun filterListCategory(type : Int) : MutableList<Category>{
-        if (type == ExpenseIncome.TYPE_EXPENSE) {
+        if (type == FinancialRecord.TYPE_EXPENSE) {
             return listCategory.filter{ it.type == Fb.CategoryExpense }.toMutableList()
         }
         else {

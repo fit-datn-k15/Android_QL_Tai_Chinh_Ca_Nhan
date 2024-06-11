@@ -7,17 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
-import com.example.quanlythuchi.data.entity.BaseDataEI
-import com.example.quanlythuchi.data.entity.TotalCategory
-import com.example.quanlythuchi.databinding.ItemTotalCalendarBinding
+import com.example.quanlythuchi.data.entity.FinancialSummaryWithCategory
 import com.example.quanlythuchi.databinding.ItemTotalCategoryBinding
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
 
 
 class AdapterTotalCategory(private var onClickListener: OnClickListener) :
-    ListAdapter<TotalCategory, AdapterTotalCategory.CategoryViewHolder>(Callback()) {
+    ListAdapter<FinancialSummaryWithCategory, AdapterTotalCategory.CategoryViewHolder>(Callback()) {
     class CategoryViewHolder(var viewBinding: ItemTotalCategoryBinding) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun bind(item: TotalCategory) {
+        fun bind(item: FinancialSummaryWithCategory) {
             viewBinding.item = item
         }
     }
@@ -38,17 +35,17 @@ class AdapterTotalCategory(private var onClickListener: OnClickListener) :
         }
     }
 
-    class Callback : DiffUtil.ItemCallback<TotalCategory>() {
-        override fun areItemsTheSame(oldItem: TotalCategory, newItem: TotalCategory): Boolean {
+    class Callback : DiffUtil.ItemCallback<FinancialSummaryWithCategory>() {
+        override fun areItemsTheSame(oldItem: FinancialSummaryWithCategory, newItem: FinancialSummaryWithCategory): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: TotalCategory, newItem: TotalCategory): Boolean {
+        override fun areContentsTheSame(oldItem: FinancialSummaryWithCategory, newItem: FinancialSummaryWithCategory): Boolean {
             return oldItem == newItem
         }
 
     }
     interface OnClickListener {
-        fun onClickItemEI(item : TotalCategory)
+        fun onClickItemEI(item : FinancialSummaryWithCategory)
     }
 }

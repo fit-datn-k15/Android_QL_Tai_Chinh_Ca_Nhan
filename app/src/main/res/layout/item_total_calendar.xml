@@ -7,8 +7,8 @@
 
         <variable
             name="item"
-            type="com.example.quanlythuchi.view.main.calendar.ExpenseIncome" />
-        <import type="com.example.quanlythuchi.view.main.calendar.ExpenseIncome"/>
+            type="com.example.quanlythuchi.view.main.calendar.FinancialRecord" />
+        <import type="com.example.quanlythuchi.view.main.calendar.FinancialRecord"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

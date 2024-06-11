@@ -11,13 +11,14 @@ import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
-import com.example.quanlythuchi.data.entity.TotalCategory
+import com.example.quanlythuchi.data.entity.FinancialSummaryWithCategory
 import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
 import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.extension.toLocalDate
 import com.example.quanlythuchi.extension.toMonthYearString
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
+import com.example.quanlythuchi.view.main.calendar.toExpenseIncome
 import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -52,7 +53,7 @@ class ReportViewModel @Inject constructor(
     var listIncomeWithCategoryDec:
             MutableLiveData<MutableList<Triple<Category, Long, List<Income>>>> = MutableLiveData(mutableListOf())
 
-    var dataRcv : SingleLiveData<MutableList<TotalCategory>> = SingleLiveData(mutableListOf())
+    var dataRcv : SingleLiveData<MutableList<FinancialSummaryWithCategory>> = SingleLiveData(mutableListOf())
 
     fun getAllData() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -72,59 +73,6 @@ class ReportViewModel @Inject constructor(
         }
     }
 
-    private fun filterDataExpense() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val mapExpenseByIdCategory: Map<String?, List<Expense>> =
-                listExpense.groupBy { it.idCategory }
-            val mapCategory = listCategory.associateBy { it.idCategory }
-            // list chứa danh mục, tổng số tiền của danh mục đó và list các khoản chi thuộc nó
-            var listExpenseWithCategory: MutableList<Triple<Category, Long, List<Expense>>> =
-                mapExpenseByIdCategory.mapNotNull { item ->
-                    val key: Category? = mapCategory[item.key]
-                    val value: List<Expense>? = mapExpenseByIdCategory[item.key]
-                    if (key != null && value != null)
-                        Triple(key, value.sumOf { itemExpense -> itemExpense.expense ?: 0 },value)
-                    else null
-                }.sortedByDescending { triple ->
-                    triple.second
-                }.toMutableList()
-            // chuẩn bị dữ liệu cho biểu đồ
-            val listPieEntry = mutableListOf<PieEntry>()
-            for (i in 0..4) {
-                if (listExpenseWithCategory.size <= i )
-                    break
-                val item = listExpenseWithCategory[i]
-                listPieEntry.add(PieEntry(
-                    item.second.toFloat(),
-                    item.first.title,
-                    item.third
-                ))
-            }
-            if ( listExpenseWithCategory.size > MAX_ITEM_IN_PIE_CHART) {
-                var dataOther = 0L
-                val lExpenseOther = mutableListOf<Expense>()
-                for (i in MAX_ITEM_IN_PIE_CHART until listExpenseWithCategory.size) {
-                    dataOther += listExpenseWithCategory[i].second ?: 0
-                    lExpenseOther.addAll(listExpenseWithCategory[i].third)
-                }
-                listPieEntry.add(
-                    POSITION_ITEM_OTHER,
-                    PieEntry(
-                        dataOther.toFloat(),
-                        applicationContext.getString(R.string.other),
-                        lExpenseOther
-                ))
-            }
-
-            withContext(Dispatchers.Main) {
-                this@ReportViewModel.apply {
-                    listExpenseWithCategoryDec.postValue(listExpenseWithCategory)
-                    listDataExpensePieChar.postValue(listPieEntry)
-                    this.mapCategory = mapCategory
-                }
-            }
-        }
-    }
     fun filterDataIncomeByMonth(month : YearMonth) {
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -257,7 +205,7 @@ class ReportViewModel @Inject constructor(
     }
 
     fun rcvExpensePrepare(yearMonth: YearMonth) {
-        val l = mutableListOf<TotalCategory>()
+        val l = mutableListOf<FinancialSummaryWithCategory>()
         val m = yearMonth.toString()
         for (item in listExpenseWithCategoryDec.value!!) {
             val lExpense = mutableListOf<Expense>()
@@ -267,27 +215,15 @@ class ReportViewModel @Inject constructor(
                 }
             }
             if (lExpense.size != 0) {
-                val lExpenseIncome = mutableListOf<ExpenseIncome>()
+                val lFinancialRecord = mutableListOf<FinancialRecord>()
                 lExpense.forEach { expense ->
-                    lExpenseIncome.add(
-                        ExpenseIncome(
-                            id = expense.idExpense,
-                            idCategory = expense.idCategory,
-                            idUser = expense.idUser,
-                            date = expense.date,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
-                            money = expense.expense,
-                            icon = mapCategory[expense.idCategory]?.icon ?: "",
-                            noteExpenseIncome = expense.note,
-                            titleCategory = mapCategory[expense.idCategory]?.title ?: ""
-                        )
-                    )
+                    lFinancialRecord.add( expense.toExpenseIncome(mapCategory[expense.idCategory]))
                 }
                 l.add(
-                    TotalCategory(
+                    FinancialSummaryWithCategory(
                         total = item.second,
                         category = item.first,
-                        data = lExpenseIncome
+                        listRecord = lFinancialRecord
                     )
                 )
             }
@@ -296,7 +232,7 @@ class ReportViewModel @Inject constructor(
     }
 
     fun rcvIncomePrepare(yearMonth: YearMonth) {
-        val l = mutableListOf<TotalCategory>()
+        val l = mutableListOf<FinancialSummaryWithCategory>()
         val m = yearMonth.toString()
         for (item in listIncomeWithCategoryDec.value!!) {
             val data = item.third
@@ -307,27 +243,15 @@ class ReportViewModel @Inject constructor(
                 }
             }
             if (lIncome.size != 0) {
-                val lExpenseIncome = mutableListOf<ExpenseIncome>()
+                val lFinancialRecord = mutableListOf<FinancialRecord>()
                 lIncome.forEach { income ->
-                    lExpenseIncome.add(
-                        ExpenseIncome(
-                            id = income.idIncome,
-                            idCategory = income.idCategory,
-                            idUser = income.idUser,
-                            date = income.date,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
-                            money = income.income,
-                            icon = mapCategory[income.idCategory]?.icon ?: "",
-                            noteExpenseIncome = income.note,
-                            titleCategory = mapCategory[income.idCategory]?.title ?: ""
-                        )
-                    )
+                    lFinancialRecord.add(income.toExpenseIncome(mapCategory[income.idCategory]))
                 }
                 l.add(
-                    TotalCategory(
+                    FinancialSummaryWithCategory(
                         total = item.second,
                         category = item.first,
-                        data = lExpenseIncome
+                        listRecord = lFinancialRecord
                     )
                 )
             }

@@ -141,7 +141,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding, CalendarViewModel
         }
     }
 
-    override fun onClickItemEI(item: ExpenseIncome) {
+    override fun onClickItemEI(item: FinancialRecord) {
         findNavController().navigateWithAnim(R.id.frg_edit_i_e, bundleOf(
             Constant.KEY_ITEM_IE to item,
             Constant.KEY_LIST_CATEGORY to viewModel.filterListCategory(item.typeExpenseOrIncome)

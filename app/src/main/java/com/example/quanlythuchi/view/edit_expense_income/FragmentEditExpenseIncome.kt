@@ -11,14 +11,12 @@ import com.example.quanlythuchi.AppBindingAdapter.setTimeFormatter
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.base.Constant
-import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentEditBinding
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.toLocalDate
 import com.example.quanlythuchi.view.adapter.AdapterCategory
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
-import com.example.quanlythuchi.view.main.home.category.FragmentCategoryDetail
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
@@ -106,7 +104,7 @@ class FragmentEditExpenseIncome : BaseFragment<FragmentEditBinding, EditExpenseI
         val time = viewModel.date.formatDateTime()
         viewBinding.pickTime.text = time
 
-        if (viewModel.itemData?.typeExpenseOrIncome == ExpenseIncome.TYPE_EXPENSE) {
+        if (viewModel.itemData?.typeExpenseOrIncome == FinancialRecord.TYPE_EXPENSE) {
             viewBinding.typeUpdate.text = getString(R.string.update_expense)
         }
         else {

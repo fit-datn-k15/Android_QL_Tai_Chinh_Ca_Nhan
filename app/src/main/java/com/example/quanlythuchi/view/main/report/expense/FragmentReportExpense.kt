@@ -9,15 +9,12 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.PopupWindow
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.base.TAG
 import com.example.quanlythuchi.databinding.FragmentReportExpenseBinding
 import com.example.quanlythuchi.view.adapter.AdapterExpenseIncomeReport
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
 import com.example.quanlythuchi.view.main.report.PercentFormatter
 import com.example.quanlythuchi.view.main.report.PieChartCustomRendederer
 import com.example.quanlythuchi.view.main.report.ReportViewModel
@@ -159,7 +156,7 @@ class FragmentReportExpense : BaseFragment<FragmentReportExpenseBinding, ReportV
         super.onResume()
         viewModel.rcvExpensePrepare(YearMonth.from(viewModel.date))
     }
-    override fun onClickItemEI(item: ExpenseIncome) {
+    override fun onClickItemEI(item: FinancialRecord) {
         Log.d(TAG, "onClickItemEI: ${item.noteExpenseIncome}")
     }
 }

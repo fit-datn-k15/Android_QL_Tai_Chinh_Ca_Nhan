@@ -8,14 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
-import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.databinding.FragmentAllDataIncomeExpenseBinding
-import com.example.quanlythuchi.databinding.FragmentIncomeBinding
 import com.example.quanlythuchi.view.adapter.AdapterExpenseIncomeReport
 
-import com.example.quanlythuchi.view.adapter.AdapterIncome
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
-import com.example.quanlythuchi.view.main.home.ShareHomeViewModel
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +33,7 @@ class AllIncomeExpenseFragment : BaseFragment<FragmentAllDataIncomeExpenseBindin
         }
     }
 
-    override fun onClickItemEI(item: ExpenseIncome) {
+    override fun onClickItemEI(item: FinancialRecord) {
 
     }
 

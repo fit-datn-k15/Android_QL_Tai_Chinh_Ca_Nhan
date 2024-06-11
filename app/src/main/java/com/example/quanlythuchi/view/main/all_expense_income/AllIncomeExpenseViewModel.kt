@@ -9,7 +9,7 @@ import com.example.quanlythuchi.data.entity.Income
 import com.example.quanlythuchi.data.repository.local.category.CategoryRepository
 import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +27,7 @@ class AllIncomeExpenseViewModel @Inject constructor(
     var listCategory = mutableListOf<Category>()
     private var mapCategory : Map<String, Category> = mutableMapOf()
 
-    var dataRcv = MutableLiveData(mutableListOf<ExpenseIncome>())
+    var dataRcv = MutableLiveData(mutableListOf<FinancialRecord>())
     fun getAll() {
         viewModelScope.launch(Dispatchers.IO) {
             val lExpense = expenseRepository.getAllExpense()
@@ -44,17 +44,17 @@ class AllIncomeExpenseViewModel @Inject constructor(
     }
     fun prepareData( ){
         viewModelScope.launch(Dispatchers.IO) {
-            val list: MutableList<ExpenseIncome> = mutableListOf()
+            val list: MutableList<FinancialRecord> = mutableListOf()
             for (item in listExpense) {
                     list.add(
-                        ExpenseIncome(
+                        FinancialRecord(
                             idCategory = item.idCategory,
                             id = item.idExpense,
                             idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.expense,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_EXPENSE,
+                            typeExpenseOrIncome = FinancialRecord.TYPE_EXPENSE,
                             titleCategory = mapCategory[item.idCategory]?.title,
                             icon = mapCategory[item.idCategory]?.icon
                         )
@@ -62,14 +62,14 @@ class AllIncomeExpenseViewModel @Inject constructor(
             }
             for (item in listIncome) {
                     list.add(
-                        ExpenseIncome(
+                        FinancialRecord(
                             idCategory = item.idCategory,
                             id = item.idIncome,
                             idUser = item.idUser,
                             noteExpenseIncome = item.note,
                             date = item.date,
                             money = item.income,
-                            typeExpenseOrIncome = ExpenseIncome.TYPE_INCOME,
+                            typeExpenseOrIncome = FinancialRecord.TYPE_INCOME,
                             titleCategory = mapCategory[item.idCategory]?.title,
                             icon = mapCategory[item.idCategory]?.icon
                         )

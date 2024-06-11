@@ -5,14 +5,11 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.databinding.FragmentReportIncomeBinding
 import com.example.quanlythuchi.view.adapter.AdapterExpenseIncomeReport
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
 import com.example.quanlythuchi.view.main.report.PercentFormatter
 import com.example.quanlythuchi.view.main.report.PieChartCustomRendederer
 import com.example.quanlythuchi.view.main.report.ReportViewModel
@@ -129,7 +126,7 @@ class FragmentReportInCome : BaseFragment<FragmentReportIncomeBinding, ReportVie
         }
     }
 
-    override fun onClickItemEI(item: ExpenseIncome) {
+    override fun onClickItemEI(item: FinancialRecord) {
 
     }
     private fun getDescriptionPieChart() : Description {

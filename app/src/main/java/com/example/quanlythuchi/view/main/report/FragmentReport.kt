@@ -10,16 +10,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.quanlythuchi.AppBindingAdapter.setTimeFormatter
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseFragment
 import com.example.quanlythuchi.base.Constant
-import com.example.quanlythuchi.data.entity.TotalCategory
+import com.example.quanlythuchi.data.entity.FinancialSummaryWithCategory
 import com.example.quanlythuchi.databinding.FagmentReportBinding
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.formatMonthVN
 import com.example.quanlythuchi.extension.navigateWithAnim
-import com.example.quanlythuchi.extension.toMonthYearString
 import com.example.quanlythuchi.view.adapter.AdapterTotalCategory
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -130,10 +128,10 @@ class FragmentReport : BaseFragment<FagmentReportBinding, ReportViewModel>(), Re
 
     }
 
-    override fun onClickItemEI(item: TotalCategory) {
+    override fun onClickItemEI(item: FinancialSummaryWithCategory) {
         findNavController().navigateWithAnim(R.id.frg_list_data, bundleOf(
             Constant.KEY_ITEM_CATEGORY_OF_DATA to item.category.idCategory,
-            Constant.DATA to item.data,
+            Constant.DATA to item.listRecord,
             Constant.TITLE_CATEGORY to item.category.title
         ))
     }

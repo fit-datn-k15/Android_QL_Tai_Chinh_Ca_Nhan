@@ -5,14 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.base.BaseViewModel
-import com.example.quanlythuchi.base.SingleLiveData
 import com.example.quanlythuchi.data.entity.Category
 import com.example.quanlythuchi.data.entity.Expense
 import com.example.quanlythuchi.data.entity.Income
 import com.example.quanlythuchi.data.repository.local.expense.ExpenseRepository
 import com.example.quanlythuchi.data.repository.local.income.InComeRepository
 import com.example.quanlythuchi.extension.isNotNullAndNotEmpty
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +19,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import javax.inject.Inject
-import kotlin.math.E
 
 @HiltViewModel
 class EditExpenseIncomeViewModel @Inject constructor(
@@ -28,7 +26,7 @@ class EditExpenseIncomeViewModel @Inject constructor(
     private val expenseRepository: ExpenseRepository,
     private val incomeRepository: InComeRepository
 ) : BaseViewModel() {
-    var itemData : ExpenseIncome? = null
+    var itemData : FinancialRecord? = null
     var isEnableButtonAdd = MutableLiveData(false)
     var listCategory : MutableList<Category>? = null
     var itemCategorySelected = -1
@@ -73,7 +71,7 @@ class EditExpenseIncomeViewModel @Inject constructor(
         isEnableButtonAdd.postValue(false)
     }
     fun updateItemData(typeUpdate: Int, callBack : (String) -> Unit) {
-        if (typeUpdate == ExpenseIncome.TYPE_EXPENSE)
+        if (typeUpdate == FinancialRecord.TYPE_EXPENSE)
             updateExpense(callBack)
         else
             updateIncome(callBack)

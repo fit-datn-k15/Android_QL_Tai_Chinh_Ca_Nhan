@@ -48,10 +48,6 @@ fun String.isValidEmail() : Boolean {
 }
 fun CharSequence?.isNotNullAndNotEmpty() = !this.isNullOrEmpty()
 
-//fun String.toLocalDate() : LocalDate {
-//    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-//    return LocalDate.parse(this, formatter)
-//}
 fun String?.toLocalDate() : LocalDate {
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     try {
@@ -71,8 +67,6 @@ internal fun Context.getColorCompat(@ColorRes color: Int) =
 internal fun TextView.setTextColorRes(@ColorRes color: Int) =
     setTextColor(context.getColorCompat(color))
 
-
-// kiểm tra xem ngườid dùng có chọn ngày nào ko. nếu ko chọn ngày nào thì hiển thị tên tháng đó
 fun TextView.setTimeSelected(time : LocalDate?, yearMonth: YearMonth?, isSelectedDay : Boolean) {
     when(true) {
         (isSelectedDay && time != null) -> {

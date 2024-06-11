@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlythuchi.R
 import com.example.quanlythuchi.databinding.ItemTotalCalendarBinding
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
 
 
 class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
-    ListAdapter<ExpenseIncome, AdapterExpenseIncomeReport.CategoryViewHolder>(Callback()) {
+    ListAdapter<FinancialRecord, AdapterExpenseIncomeReport.CategoryViewHolder>(Callback()) {
     class CategoryViewHolder(var viewBinding: ItemTotalCalendarBinding) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun bind(item: ExpenseIncome) {
+        fun bind(item: FinancialRecord) {
             viewBinding.item = item
         }
     }
@@ -35,17 +35,17 @@ class AdapterExpenseIncomeReport(private var onClickListener: OnClickListener) :
         }
     }
 
-    class Callback : DiffUtil.ItemCallback<ExpenseIncome>() {
-        override fun areItemsTheSame(oldItem: ExpenseIncome, newItem: ExpenseIncome): Boolean {
+    class Callback : DiffUtil.ItemCallback<FinancialRecord>() {
+        override fun areItemsTheSame(oldItem: FinancialRecord, newItem: FinancialRecord): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: ExpenseIncome, newItem: ExpenseIncome): Boolean {
+        override fun areContentsTheSame(oldItem: FinancialRecord, newItem: FinancialRecord): Boolean {
             return oldItem == newItem
         }
 
     }
     interface OnClickListener {
-        fun onClickItemEI(item : ExpenseIncome)
+        fun onClickItemEI(item : FinancialRecord)
     }
 }

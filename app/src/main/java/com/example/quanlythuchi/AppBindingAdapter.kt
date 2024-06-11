@@ -6,12 +6,12 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.quanlythuchi.data.Fb
 import com.example.quanlythuchi.data.entity.Icon
-import com.example.quanlythuchi.data.entity.TotalCategory
+import com.example.quanlythuchi.data.entity.FinancialSummaryWithCategory
 import com.example.quanlythuchi.extension.formatDateTime
 import com.example.quanlythuchi.extension.formatMoney
 import com.example.quanlythuchi.extension.setTextColorRes
 import com.example.quanlythuchi.extension.toLocalDate
-import com.example.quanlythuchi.view.main.calendar.ExpenseIncome
+import com.example.quanlythuchi.view.main.calendar.FinancialRecord
 import com.google.android.material.imageview.ShapeableImageView
 import java.text.NumberFormat
 import java.time.LocalDate
@@ -65,12 +65,12 @@ object AppBindingAdapter {
     }
     @JvmStatic
     @BindingAdapter("setMoney")
-    fun TextView.setMoney(item : ExpenseIncome) {
+    fun TextView.setMoney(item : FinancialRecord) {
         val numberFormat = NumberFormat.getInstance(Locale("vi", "VN"))
         var moneyBuilder : String = ""
         try {
             var money: String = numberFormat.format(item.money)
-            if (item.typeExpenseOrIncome == ExpenseIncome.TYPE_EXPENSE) {
+            if (item.typeExpenseOrIncome == FinancialRecord.TYPE_EXPENSE) {
                 moneyBuilder += "- $money đ"
                 this.text = moneyBuilder
                 this.setTextColorRes(R.color.red_d61c1c)
@@ -87,7 +87,7 @@ object AppBindingAdapter {
     }
     @JvmStatic
     @BindingAdapter("setMoney")
-    fun TextView.setMoney(item : TotalCategory) {
+    fun TextView.setMoney(item : FinancialSummaryWithCategory) {
         val numberFormat = NumberFormat.getInstance(Locale("vi", "VN"))
         var moneyBuilder : String = ""
         try {
