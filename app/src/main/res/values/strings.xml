@@ -2,6 +2,7 @@
     <string name="client_id" translatable="false">853324556328-lnj0mf9bftcm4dpqh9la28ims2oioh4d.apps.googleusercontent.com</string>-->
     <string name="app_name">QuanLyThuChi</string>
     <string name="date">Thời gian</string>
+    <string name="month">Tháng </string>
     <string name="note_entered">Nhập ghi chú</string>
     <string name="note">Ghi chú</string>
     <string name="expense">Khoản chi</string>

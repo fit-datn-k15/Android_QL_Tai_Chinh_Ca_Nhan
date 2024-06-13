@@ -3,7 +3,7 @@
     <data>
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.main.list_data_form_category.ListDataListener" />
+            type="com.qltc.finace.view.main.list_data_form_category.ListDataListener" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

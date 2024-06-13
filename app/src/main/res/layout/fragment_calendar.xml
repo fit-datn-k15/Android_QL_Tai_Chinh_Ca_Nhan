@@ -5,10 +5,10 @@
     <data>
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.main.calendar.CalendarListener" />
+            type="com.qltc.finace.view.main.calendar.CalendarListener" />
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.main.calendar.CalendarViewModel" />
+            type="com.qltc.finace.view.main.calendar.CalendarViewModel" />
     </data>
 <LinearLayout
     android:layout_width="match_parent"

@@ -7,8 +7,8 @@
 
         <variable
             name="item"
-            type="com.example.quanlythuchi.view.main.calendar.FinancialRecord" />
-        <import type="com.example.quanlythuchi.view.main.calendar.FinancialRecord"/>
+            type="com.qltc.finace.view.main.calendar.FinancialRecord" />
+        <import type="com.qltc.finace.view.main.calendar.FinancialRecord"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,7 +94,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="start|center"
                 android:text="100.000"
-                android:textColor="@{ item.typeExpenseOrIncome == ExpenseIncome.TYPE_EXPENSE ? @color/red_d61c1c : @color/green_2D9849}"
+
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/category"
                 app:layout_constraintEnd_toEndOf="parent"

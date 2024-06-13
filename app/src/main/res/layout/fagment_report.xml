@@ -7,11 +7,11 @@
 
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.main.report.ReportListener" />
+            type="com.qltc.finace.view.main.report.ReportListener" />
 
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.main.report.ReportViewModel" />
+            type="com.qltc.finace.view.main.report.ReportViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -226,10 +226,12 @@
 
         </com.google.android.material.tabs.TabLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vpg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <com.qltc.finace.view.main.report.chart.PieChartReport
+            android:id="@+id/m_chart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:0.55"
+            app:layout_constraintWidth_percent="1"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -267,7 +269,7 @@
             app:iconSize="@dimen/dp24"
             app:iconTint="@color/orange"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vpg" />
+            app:layout_constraintTop_toBottomOf="@+id/m_chart" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv"
             android:layout_width="match_parent"

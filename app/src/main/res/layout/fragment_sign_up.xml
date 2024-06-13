@@ -5,10 +5,10 @@
     <data>
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.authentication.sign_up.SignUpListener" />
+            type="com.qltc.finace.view.authentication.sign_up.SignUpListener" />
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.authentication.sign_up.SignUpViewModel" />
+            type="com.qltc.finace.view.authentication.sign_up.SignUpViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

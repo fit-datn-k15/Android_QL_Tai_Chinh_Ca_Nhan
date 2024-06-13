@@ -5,10 +5,10 @@
     <data>
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.main.profile.ProfileListener" />
+            type="com.qltc.finace.view.main.profile.ProfileListener" />
         <variable
             name="user"
-            type="com.example.quanlythuchi.data.entity.User" />
+            type="com.qltc.finace.data.entity.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

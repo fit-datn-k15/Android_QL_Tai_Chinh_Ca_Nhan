@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 
     }
 }
-rootProject.name = "QuanLyThuChi"
+rootProject.name = "finace"
 include ':app'

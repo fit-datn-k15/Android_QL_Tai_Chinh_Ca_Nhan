@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:853324556328:android:0d817d5d47aa6c15d96d1d",
+        "mobilesdk_app_id": "1:853324556328:android:4b0e6da3e215c1c3d96d1d",
         "android_client_info": {
-          "package_name": "com.example.quanlythuchi"
+          "package_name": "com.qltc.finace"
         }
       },
       "oauth_client": [
         {
-          "client_id": "853324556328-39e95bpcu2tn9c7ehluq7klbbf2nnvac.apps.googleusercontent.com",
+          "client_id": "853324556328-1macgua9rvooh26t4k6fjhjdba90ue0h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.quanlythuchi",
-            "certificate_hash": "196bed9bb2b29fbe2b3edcd71e7c41f771c11582"
+            "package_name": "com.qltc.finace",
+            "certificate_hash": "2bf8191076bf17cb03d8ed01dbbb0d689a7ac89b"
           }
         },
         {

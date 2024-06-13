@@ -5,10 +5,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.edit_expense_income.EditExpenseIncomeViewModel" />
+            type="com.qltc.finace.view.edit_expense_income.EditExpenseIncomeViewModel" />
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.edit_expense_income.EditExpenseIncomeListener" />
+            type="com.qltc.finace.view.edit_expense_income.EditExpenseIncomeListener" />
     </data>
     <ScrollView
         android:layout_width="match_parent"

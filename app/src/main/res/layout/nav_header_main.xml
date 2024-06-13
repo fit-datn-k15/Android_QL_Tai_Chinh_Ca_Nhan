@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.activity.home.HomeActivityViewModel" />
+            type="com.qltc.finace.view.activity.home.HomeActivityViewModel" />
     </data>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

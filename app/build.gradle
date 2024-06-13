@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.quanlythuchi'
+    namespace 'com.qltc.finace'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.quanlythuchi"
+        applicationId "com.qltc.finace"
         minSdk 26
         targetSdk 34
         versionCode 1

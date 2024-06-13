@@ -7,8 +7,8 @@
 
         <variable
             name="item"
-            type="com.example.quanlythuchi.data.entity.FinancialSummaryWithCategory" />
-        <import type="com.example.quanlythuchi.data.entity.FinancialSummaryWithCategory"/>
+            type="com.qltc.finace.data.entity.CategoryOverView" />
+        <import type="com.qltc.finace.data.entity.CategoryOverView"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

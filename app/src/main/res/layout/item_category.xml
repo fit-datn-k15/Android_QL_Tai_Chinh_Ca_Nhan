@@ -3,7 +3,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.quanlythuchi.data.entity.Category" />
+            type="com.qltc.finace.data.entity.Category" />
     </data>
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

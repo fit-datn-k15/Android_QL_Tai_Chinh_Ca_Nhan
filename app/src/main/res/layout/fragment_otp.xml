@@ -5,7 +5,7 @@
     <data>
         <variable
             name="listener"
-            type="com.example.quanlythuchi.view.authentication.otp.OtpListener" />
+            type="com.qltc.finace.view.authentication.otp.OtpListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

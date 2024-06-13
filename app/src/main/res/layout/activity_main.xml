@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.quanlythuchi.view.activity.home.HomeActivityViewModel" />
+            type="com.qltc.finace.view.activity.home.HomeActivityViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
