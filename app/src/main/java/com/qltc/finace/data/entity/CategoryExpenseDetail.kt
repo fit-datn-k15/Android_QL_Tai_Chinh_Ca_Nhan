@@ -9,3 +9,6 @@ data class CategoryExpenseDetail (
 )
 
 fun CategoryExpenseDetail.toPieEntry() = PieEntry(totalAmount.toFloat(), category?.title, this)
+fun CategoryExpenseDetail.getExpenseOfMonth() ={
+
+}

@@ -45,7 +45,7 @@ class ReportViewModel @Inject constructor(
     var listCategory = mutableListOf<Category>()
     var total = MutableLiveData(0L)
 
-    private var listExpenseWithCategoryDec:
+    private var listCategoryExpenseDetailDec:
             MutableList<CategoryExpenseDetail> = mutableListOf()
     var listIncomeWithCategoryDec:
             MutableLiveData<MutableList<Triple<Category, Long, List<Income>>>> = MutableLiveData(mutableListOf())
@@ -66,17 +66,17 @@ class ReportViewModel @Inject constructor(
             }
         }
     }
-    fun filterExpenseByCategory() {
-        val l = listCategory.map { item ->
-            val l = getExpenseByCategory(item)
-            CategoryExpenseDetail(
-                category = item,
-                totalAmount = l.sumMoney(),
-                listExpense = l
-            )
-        }.toMutableList()
-        listExpenseWithCategoryDec.sortedByDescending { it.totalAmount }.toMutableList()
-    }
+//    fun filterExpenseByCategory() {
+//        val l = listCategory.map { item ->
+//            val l = getExpenseByCategory(item)
+//            CategoryExpenseDetail(
+//                category = item,
+//                totalAmount = l.sumMoney(),
+//                listExpense = l
+//            )
+//        }.toMutableList()
+//        listExpenseWithCategoryDec.sortedByDescending { it.totalAmount }.toMutableList()
+//    }
     private fun getExpenseByCategory(category: Category): List<Expense> {
         return listExpense.filter { it.idCategory == category.idCategory }
     }
@@ -86,21 +86,28 @@ class ReportViewModel @Inject constructor(
 
     fun prepareDataPieChartExpenseByMonth(month: YearMonth) {
         viewModelScope.launch(Dispatchers.IO) {
-            val listExpenseWithCategoryOfMonth: MutableList<CategoryExpenseDetail> = getExpenseWithCategoryOfMonth(month)
-            val listPieEntry = mutableListOf<PieEntry>()
-            for (i in 0..ITEM_PIE_CHART) {
-                if (listExpenseWithCategoryOfMonth.size <= i)
-                    break
-                val item = listExpenseWithCategoryOfMonth[i]
-                listPieEntry.add( item.toPieEntry())
+            val listCategoryExpenseDetailOfMonthDec: MutableList<CategoryExpenseDetail> =
+                getExpenseWithCategoryOfMonth(month)
+            listCategoryExpenseDetailOfMonthDec.sortByDescending { it.totalAmount }
+
+            val listPieEntry = addItemEntry(listCategoryExpenseDetailOfMonthDec)
+            addItemEntryOther(listCategoryExpenseDetailOfMonthDec)?.let {
+                listPieEntry.add(it)
             }
-            addItemOther(listExpenseWithCategoryOfMonth)?.let { listPieEntry.add(it) }
+
             withContext(Dispatchers.Main) {
+                this@ReportViewModel.listCategoryExpenseDetailDec = listCategoryExpenseDetailOfMonthDec
                 this@ReportViewModel.dataPieChar.value = listPieEntry
             }
         }
     }
-
+    private fun addItemEntry(listCategoryExpenseDetail: MutableList<CategoryExpenseDetail>) : MutableList<PieEntry> {
+        val listPieEntry = listCategoryExpenseDetail
+            .take(COUNT_ITEM_PIE_CHART + 1)
+            .map { it.toPieEntry() }
+            .toMutableList()
+        return listPieEntry
+    }
     private fun getExpenseWithCategoryOfMonth(month: YearMonth): MutableList<CategoryExpenseDetail> {
         val listExpenseOfMonth = getExpenseByMonth(month)
         return listExpenseOfMonth.groupBy { it.idCategory }.map { (idCategory, listExpense) ->
@@ -113,13 +120,13 @@ class ReportViewModel @Inject constructor(
     }
 
     private fun getCategoryObject(idCategory: String?) = listCategory.first { it.idCategory == idCategory }
-    private fun addItemOther(listExpenseWithCategory: MutableList<CategoryExpenseDetail>) : PieEntry? {
-        if (listExpenseWithCategory.size > MAX_ITEM_IN_PIE_CHART) {
+    private fun addItemEntryOther(list: MutableList<CategoryExpenseDetail>) : PieEntry? {
+        if (list.size > MAX_ITEM_IN_PIE_CHART) {
             var total = 0L
             val lExpenseOther = mutableListOf<Expense>()
-            for (i in MAX_ITEM_IN_PIE_CHART until listExpenseWithCategory.size) {
-                total += listExpenseWithCategory[i].totalAmount
-                lExpenseOther.addAll(listExpenseWithCategory[i].listExpense?: mutableListOf())
+            for (i in MAX_ITEM_IN_PIE_CHART until list.size) {
+                total += list[i].totalAmount
+                lExpenseOther.addAll(list[i].listExpense?: mutableListOf())
             }
             return PieEntry(
                     total.toFloat(),
@@ -131,7 +138,7 @@ class ReportViewModel @Inject constructor(
     }
     fun prepareRecyclerViewExpense(yearMonth: YearMonth) {
         val l = mutableListOf<CategoryOverView>()
-        for (item in listExpenseWithCategoryDec) {
+        for (item in listCategoryExpenseDetailDec) {
             val lExpense = item.listExpense?.filter { expense ->
                 yearMonth.toString() == expense.getYearMonth()
             }
@@ -167,7 +174,7 @@ class ReportViewModel @Inject constructor(
     companion object {
         const val MAX_ITEM_IN_PIE_CHART = 6
         const val POSITION_ITEM_OTHER = 2
-        const val ITEM_PIE_CHART = 4
+        const val COUNT_ITEM_PIE_CHART = 4
     }
     fun test() {
         TODO()
