@@ -45,7 +45,7 @@ class ReportViewModel @Inject constructor(
     var listCategory = mutableListOf<Category>()
     var total = MutableLiveData(0L)
 
-    private var listExpenseWithCategoryDec:
+    private var listCategoryExpenseDetailDec:
             MutableList<CategoryExpenseDetail> = mutableListOf()
     var listIncomeWithCategoryDec:
             MutableLiveData<MutableList<Triple<Category, Long, List<Income>>>> = MutableLiveData(mutableListOf())
@@ -94,7 +94,6 @@ class ReportViewModel @Inject constructor(
             addItemEntryOther(listCategoryExpenseDetailOfMonthDec)?.let {
                 listPieEntry.add(POSITION_ITEM_OTHER,it)
             }
-
             withContext(Dispatchers.Main) {
                 this@ReportViewModel.listCategoryExpenseDetailDec = listCategoryExpenseDetailOfMonthDec
                 this@ReportViewModel.dataPieChar.value = listPieEntry
